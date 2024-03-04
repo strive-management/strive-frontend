@@ -1,1 +1,1 @@
-# strive-frontend
+# Strive 
