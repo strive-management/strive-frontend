@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard'
+import Layout from './pages/Layout'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
