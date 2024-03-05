@@ -9,7 +9,7 @@ export default function Login() {
         <div>
           <img className="w-40" src={logo} alt="" />
         </div>
-        <form className="w-screen flex flex-col lg:w-1/3">
+        <form className="w-11/12 flex flex-col lg:w-1/3">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Login
           </h3>

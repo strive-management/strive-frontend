@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
+import Label from '../components/ui/Label';
 
 export default function Register() {
   return (
@@ -9,38 +10,28 @@ export default function Register() {
         <div>
           <img className="w-40" src={logo} alt="" />
         </div>
-        <form className="w-screen flex flex-col lg:w-1/3">
+        <form className="w-11/12 flex flex-col lg:w-1/3">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Register
           </h3>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              First Name
-            </label>
+            <Label text={'First Name'} />
             <Input type={'text'} placeholder="First Name" />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Last Name
-            </label>
+            <Label text={'Last Name'} />
             <Input type={'text'} placeholder="Last Name" />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Email
-            </label>
+            <Label text={'Email'} />
             <Input type={'email'} placeholder="email" />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Password
-            </label>
+            <Label text={'Password'} />
             <Input type={'password'} placeholder="password" />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Confirm password
-            </label>
+            <Label text={'Confirm password'} />
             <Input type={'password'} placeholder="Confirm password" />
           </div>
           <button
@@ -49,6 +40,12 @@ export default function Register() {
           >
             Login
           </button>
+          <Link
+            className="text-sm font-light text-gray-500 dark:text-gray-400"
+            to="/login"
+          >
+            Already have a account ?
+          </Link>
           <div className="my-12 border-b text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
               Or
@@ -89,13 +86,6 @@ export default function Register() {
               </div>
             </button>
           </div>
-
-          <Link
-            className="text-sm font-light text-gray-500 dark:text-gray-400"
-            to="/register"
-          >
-            Not register yet ?
-          </Link>
         </form>
       </div>
     </>
