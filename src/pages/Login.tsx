@@ -102,6 +102,7 @@ export default function Login() {
               placeholder="password"
             />
           </div>
+
           <button
             type="submit"
             onClick={(e) => {
@@ -121,6 +122,7 @@ export default function Login() {
           {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
+
 
           <div className="my-12 border-b text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
@@ -172,7 +174,7 @@ export default function Login() {
             className="text-sm font-light text-gray-500 dark:text-gray-400"
             to="/register"
           >
-            Not register yet ?
+            Not registered yet ?
           </Link>
         </form>
       </div>
