@@ -1,8 +1,18 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
+import auth from '../firebase/firebase';
+import { ChangeEvent, useState } from 'react';
 
 export default function Login() {
+  const [userCredentials, setUserCredentials] = useState({});
+
+  function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
+    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    console.log(userCredentials);
+  }
+
+  console.log(auth);
   return (
     <>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -17,13 +27,27 @@ export default function Login() {
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Email
             </label>
-            <Input type={'email'} placeholder="email" />
+            <Input
+              type={'email'}
+              name="email"
+              onChange={(e) => {
+                handleCredentials(e);
+              }}
+              placeholder="email"
+            />
           </div>
           <div className="mb-5">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Password
             </label>
-            <Input type={'password'} placeholder="password" />
+            <Input
+              type={'password'}
+              name="password"
+              onChange={(e) => {
+                handleCredentials(e);
+              }}
+              placeholder="password"
+            />
           </div>
           <button
             type="submit"
