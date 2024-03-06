@@ -2,17 +2,47 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
 import auth from '../firebase/firebase';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+interface UserCredentials {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
-  const [userCredentials, setUserCredentials] = useState({});
+  const [error, setError] = useState('');
+  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+    email: '',
+    password: '',
+  });
 
   function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     console.log(userCredentials);
   }
 
-  console.log(auth);
+  function handleLogin(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    setError('');
+    signInWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -51,10 +81,17 @@ export default function Login() {
           </div>
           <button
             type="submit"
+            onClick={(e) => {
+              handleLogin(e);
+            }}
             className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
             Login
           </button>
+          {/* firebase error handling */}
+
+          {error && <div className="text-red-500">{error}</div>}
+
           <div className="my-12 border-b text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
               Or
