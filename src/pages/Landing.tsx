@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../assets/strive1-cropped.svg'
 import heroImage from '../assets/hex-bg.svg'
 
