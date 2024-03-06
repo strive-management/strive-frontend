@@ -3,7 +3,10 @@ import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
 import auth from '../firebase/firebase';
 import { ChangeEvent, MouseEvent, useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 
 interface UserCredentials {
   email: string;
@@ -41,6 +44,17 @@ export default function Login() {
         const errorMessage = error.message;
         setError(errorMessage);
       });
+  }
+
+  function handlePwdReset() {
+    const email = prompt('Please enter your email ');
+
+    if (email !== null) {
+      sendPasswordResetEmail(auth, email);
+      alert('Email sent! Check your inbox for reset instructions');
+    } else {
+      alert('Invalid email');
+    }
   }
 
   return (
@@ -88,6 +102,13 @@ export default function Login() {
           >
             Login
           </button>
+          <a
+            onClick={handlePwdReset}
+            className="text-xs pt-6 text-end"
+            href="#"
+          >
+            Forgot Password?
+          </a>
           {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
