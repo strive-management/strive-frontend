@@ -52,7 +52,6 @@ export default function Landing() {
               </div>
             </div>
           </nav>
-        <Outlet />
       </header>
       <main className='max-w-full w-full overflow-hidden'>
       <section id='hero' className='relative'>
