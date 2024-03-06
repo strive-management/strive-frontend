@@ -2,8 +2,47 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
+import { ChangeEvent, MouseEvent, useState } from 'react';
+import auth from '../firebase/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
+interface UserCredentials {
+  email: string;
+  password: string;
+}
 
 export default function Register() {
+  const [error, setError] = useState('');
+  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+    email: '',
+    password: '',
+  });
+  function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
+    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    console.log(userCredentials);
+  }
+
+  function handleSignup(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    setError('');
+
+    createUserWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
+  }
+
   return (
     <>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -24,17 +63,34 @@ export default function Register() {
           </div>
           <div className="mb-5">
             <Label text={'Email'} />
-            <Input type={'email'} placeholder="email" />
+            <Input
+              type={'email'}
+              name="email"
+              onChange={(e) => {
+                handleCredentials(e);
+              }}
+              placeholder="email"
+            />
           </div>
           <div className="mb-5">
             <Label text={'Password'} />
-            <Input type={'password'} placeholder="password" />
+            <Input
+              type={'password'}
+              name="password"
+              onChange={(e) => {
+                handleCredentials(e);
+              }}
+              placeholder="password"
+            />
           </div>
           <div className="mb-5">
             <Label text={'Confirm password'} />
             <Input type={'password'} placeholder="Confirm password" />
           </div>
           <button
+            onClick={(e) => {
+              handleSignup(e);
+            }}
             type="submit"
             className="text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
@@ -46,6 +102,11 @@ export default function Register() {
           >
             Already have a account ?
           </Link>
+
+          {/* firebase error handling */}
+
+          {error && <div className="text-red-500">{error}</div>}
+
           <div className="my-12 border-b text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
               Or
