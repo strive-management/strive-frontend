@@ -1,31 +1,30 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
-import auth from '../firebase/firebase';
+import Label from '../components/ui/Label';
 import { ChangeEvent, MouseEvent, useState } from 'react';
+import auth from '../firebase/firebase';
 import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
 } from 'firebase/auth';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 interface UserCredentials {
   email: string;
   password: string;
 }
 
-export default function Login() {
+export default function Register() {
   const [error, setError] = useState('');
   const [userCredentials, setUserCredentials] = useState<UserCredentials>({
     email: '',
     password: '',
   });
-
   function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
     console.log(userCredentials);
   }
-
   const handleGoogle = async (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
@@ -34,36 +33,25 @@ export default function Login() {
     return signInWithPopup(auth, provider);
   };
 
-  function handleLogin(
+  function handleSignup(
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
     e.preventDefault();
     setError('');
-    signInWithEmailAndPassword(
+
+    createUserWithEmailAndPassword(
       auth,
       userCredentials.email,
       userCredentials.password
     )
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
+      .then((userCredentials) => {
+        const user = userCredentials.user;
         console.log(user);
       })
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage);
       });
-  }
-
-  function handlePwdReset() {
-    const email = prompt('Please enter your email ');
-
-    if (email !== null) {
-      sendPasswordResetEmail(auth, email);
-      alert('Email sent! Check your inbox for reset instructions');
-    } else {
-      alert('Invalid email');
-    }
   }
 
   return (
@@ -74,12 +62,18 @@ export default function Login() {
         </div>
         <form className="w-11/12 flex flex-col lg:w-1/3">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Login
+            Register
           </h3>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Email
-            </label>
+            <Label text={'First Name'} />
+            <Input type={'text'} placeholder="First Name" />
+          </div>
+          <div className="mb-5">
+            <Label text={'Last Name'} />
+            <Input type={'text'} placeholder="Last Name" />
+          </div>
+          <div className="mb-5">
+            <Label text={'Email'} />
             <Input
               type={'email'}
               name="email"
@@ -90,9 +84,7 @@ export default function Login() {
             />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Password
-            </label>
+            <Label text={'Password'} />
             <Input
               type={'password'}
               name="password"
@@ -102,27 +94,29 @@ export default function Login() {
               placeholder="password"
             />
           </div>
-
+          <div className="mb-5">
+            <Label text={'Confirm password'} />
+            <Input type={'password'} placeholder="Confirm password" />
+          </div>
           <button
-            type="submit"
             onClick={(e) => {
-              handleLogin(e);
+              handleSignup(e);
             }}
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+            type="submit"
+            className="text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
           >
             Login
           </button>
-          <a
-            onClick={handlePwdReset}
-            className="text-xs pt-6 text-end"
-            href="#"
+          <Link
+            className="text-sm font-light text-gray-500 dark:text-gray-400"
+            to="/login"
           >
-            Forgot Password?
-          </a>
+            Already have a account ?
+          </Link>
+
           {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
-
 
           <div className="my-12 border-b text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
@@ -169,13 +163,6 @@ export default function Login() {
               </div>
             </button>
           </div>
-
-          <Link
-            className="text-sm font-light text-gray-500 dark:text-gray-400"
-            to="/register"
-          >
-            Not registered yet ?
-          </Link>
         </form>
       </div>
     </>

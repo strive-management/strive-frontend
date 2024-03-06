@@ -15,6 +15,7 @@ WebFont.load({
 export default function Landing() {
   return (
     <>
+
       <header className="bg-blue-50">
           <nav className="bg-gray-300 text-gray-700">
             <div className="flex flex-row justify-between">
@@ -76,6 +77,7 @@ export default function Landing() {
           <p className="text-right">All Rights Reserved</p>
         </div>
       </footer>
+
     </>
   );
 }

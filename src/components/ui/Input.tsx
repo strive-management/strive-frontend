@@ -2,6 +2,7 @@ import { ChangeEventHandler, FC } from 'react';
 
 interface InputProps {
   type: string;
+  name?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
@@ -10,6 +11,7 @@ interface InputProps {
 
 const Input: FC<InputProps> = ({
   type,
+  name,
   value,
   onChange,
   placeholder = '',
@@ -20,6 +22,7 @@ const Input: FC<InputProps> = ({
   return (
     <input
       type={type}
+      name={name}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
