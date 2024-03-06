@@ -25,12 +25,20 @@ export default function Login() {
             </label>
             <Input type={'password'} placeholder="password" />
           </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Login
-          </button>
+          <div className='flex flex-row justify-evenly'>
+            <button
+              type="submit"
+              className="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Login
+            </button>
+            <Link
+              to="/"
+              className="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Go Back
+            </Link>
+          </div>
           <div className="my-12 border-b text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
               Or
@@ -76,7 +84,7 @@ export default function Login() {
             className="text-sm font-light text-gray-500 dark:text-gray-400"
             to="/register"
           >
-            Not register yet ?
+            Not registered yet ?
           </Link>
         </form>
       </div>
