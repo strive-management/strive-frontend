@@ -1,4 +1,6 @@
-export default function Dashboard () {
+import { FC } from 'react';
+
+const Dashboard: FC = () => {
     return (
         <>
         <div>
@@ -7,3 +9,5 @@ export default function Dashboard () {
         </>
     )
 }
+
+export default Dashboard;
