@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function SideAdmin() {
   return (
     <>
-      <div className="w-1/5 h-screen">
+      <div className="flex flex-col items-center justify-around w-1/5 h-screen">
         <div className="">
           <ul>
             <li>
