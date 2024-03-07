@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Layout from './pages/Layout';
 import Register from './pages/Register';
-
+import Admin from './pages/Admin';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +21,20 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <Layout><Dashboard /></Layout>
+    element: (
+      <Layout>
+        <Dashboard />
+      </Layout>
+    ),
   },
   {
     path: '/register',
-    element: <Register/>
-  }
+    element: <Register />,
+  },
+  {
+    path: '/admin',
+    element: <Admin />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
