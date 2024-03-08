@@ -68,6 +68,12 @@ const Landing: React.FC = () => {
       <div className="flex justify-center py-16 bg-gray-50">
         <div className="w-[1400px] border-t border-gray-300 "></div>
       </div>
+      <section className='bg-gray-50 flex justify-center py-16' style={{fontFamily: "'Lato', sans-serif", fontSize: "30px"}}>
+        <h2>Striving to make personnel managament as easy as possible.</h2>
+      </section>
+      <div className="flex justify-center py-16 bg-gray-50">
+        <div className="w-[1400px] border-t border-gray-300 "></div>
+      </div>
       <section className="mx-auto bg-gradient-to-b from-gray-50 to-white text-gray-700 flex w-full max-w-[2000px] relative flex-row justify-center">
         <div className='py-10 w-[1400px] bg-gradient-to-b from-gray-50 to-white'>
           <div className='grid p-10 place-items-center' style={{ gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gridAutoRows: '100px', fontFamily: "'Lato', sans-serif", fontSize: "30px"}}>
