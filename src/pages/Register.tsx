@@ -7,6 +7,7 @@ import auth from '../firebase/firebase';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  getAdditionalUserInfo,
   signInWithPopup,
 } from 'firebase/auth';
 
@@ -26,18 +27,47 @@ export default function Register() {
 
   function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    console.log(userCredentials);
   }
   const handleGoogle = async (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
     const provider = await new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
     console.log(provider);
+    return signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        const userInfo = getAdditionalUserInfo(result);
+        const email = userInfo?.profile.email; // it's not a problem if it's null
+        const lastName = userInfo?.profile.family_name; // it's not a problem if it's null
+        const firstName = userInfo?.profile.given_name; // it's not a problem if it's null
+        const uid = user.uid;
+        const data = {
+          email: email,
+          first_name: firstName,
+          last_name: lastName,
+          UUID: uid,
+        };
+        return fetch('http://localhost:8080/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+      })
+      .catch((error: any) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        const email = error.customData.email;
+        console.log(email);
+      });
   };
 
-  function handleSignup(
+  async function handleSignup(
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
     e.preventDefault();
