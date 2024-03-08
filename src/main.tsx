@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Layout from './pages/Layout';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
+import Clock from './pages/Clock';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <Admin />,
+  },
+  {
+    path: '/clock',
+    element: <Clock />,
   },
 ]);
 
