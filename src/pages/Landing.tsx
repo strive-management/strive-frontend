@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/strive1-cropped.svg'
 import heroImage from '../assets/hex-bg.svg'
@@ -12,7 +13,7 @@ WebFont.load({
 
 
 
-export default function Landing() {
+const Landing: FC = () => {
   return (
     <>
 
@@ -81,3 +82,6 @@ export default function Landing() {
     </>
   );
 }
+
+
+export default Landing;
