@@ -10,6 +10,10 @@ import Layout from './pages/Layout';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
 
+import '@mantine/core/styles.css';
+
+import { MantineProvider } from '@mantine/core';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -39,6 +43,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MantineProvider>
+      <RouterProvider router={router} />
+    </MantineProvider>
   </React.StrictMode>
 );
