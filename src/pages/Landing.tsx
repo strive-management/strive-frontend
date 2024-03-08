@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/strive1-cropped.svg'
 import heroImage from '../assets/hex-bg.svg'
@@ -13,7 +13,7 @@ WebFont.load({
 
 
 
-const Landing: FC = () => {
+const Landing: React.FC = () => {
   return (
     <>
 
@@ -55,8 +55,8 @@ const Landing: FC = () => {
             </div>
           </nav>
       </header>
-      <main className='max-w-full w-full overflow-hidden'>
-      <section id='hero' className='relative'>
+      <main className='flex w-full max-w-[2000px] place-content-center overflow-hidden bg-gray-50'>
+      <section id='hero' className='flex w-[1400px] max-w-[2000px] items-center relative'>
         <div className='hero-section w-full h-800'>
           <img src={heroImage} className="w-full h-full object-cover" alt="Hero"/>
         </div>
@@ -64,19 +64,31 @@ const Landing: FC = () => {
           <p className='text-gray-700 text-3xl'>Strive Management Solutions</p>
         </div>
       </section>
-      <section className="w-full h-600 bg-black"></section>
       </main>
-      <section className="mx-auto bg-gray-100 flex text-gray-700 flex-col p-4 sm:flex-row sm:justify-between">
-        <div className='p-10'>
-          <p>Nunc congue neque sed neque eleifend posuere at accumsan nisi. Phasellus enim tellus, tempor sed mattis sed, pellentesque non velit. Cras aliquet placerat mollis. Integer orci est, convallis vitae leo quis, gravida finibus ligula. Suspendisse finibus eros eget pretium feugiat. Sed blandit risus at sem euismod semper. Nam orci velit, volutpat quis velit eget, suscipit gravida mi. Vestibulum sit amet velit placerat, luctus enim dapibus, hendrerit elit.</p>
+      <div className="flex justify-center py-16 bg-gray-50">
+        <div className="w-[1400px] border-t border-gray-300 "></div>
+      </div>
+      <section className="mx-auto bg-gradient-to-b from-gray-50 to-white text-gray-700 flex w-full max-w-[2000px] relative flex-row justify-center">
+        <div className='py-10 w-[1400px] bg-gradient-to-b from-gray-50 to-white'>
+          <div className='grid p-10 place-items-center' style={{ gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gridAutoRows: '100px', fontFamily: "'Lato', sans-serif", fontSize: "30px"}}>
+          <div style={{ gridColumnStart: 1, gridRowStart: 1 }}><h1>Fast</h1></div>
+          <div style={{ gridColumnStart: 2, gridRowStart: 2 }}><h1>Simple</h1></div>
+          <div style={{ gridColumnStart: 3, gridRowStart: 3 }}><h1>Efficient</h1></div>
+          <div style={{ gridColumnStart: 4, gridRowStart: 4 }}><h1>Secure</h1></div>
+        </div>
         </div>
       </section>
-      <footer style={{ fontFamily: "'Lato', sans-serif" }} id="footer" className="bg-gray-300 mx-auto flex text-gray-700 flex-col p-10 sm:flex-row sm:justify-between text-base h-40">
-          <h2>Strive Management Solutions</h2>
-        <div style={{ fontFamily: "'Lato', sans-serif" }} className="text-gray-700 flex flex-col sm:gap-2">
-          <p className="text-right">Copyright &copy; <span id="year">2024</span></p>
-          <p className="text-right">All Rights Reserved</p>
-        </div>
+      <div className="flex justify-center py-16 bg-white">
+        <div className="w-[1400px] border-t border-gray-300 "></div>
+      </div>
+      <footer style={{ fontFamily: "'Lato', sans-serif" }} id="footer" className="bg-white mx-auto flex w-full max-w-[2000px] items-center relative text-gray-700 p-10 flex-row justify-center text-base h-40">
+          <div className='flex w-[1400px] max-w-[2000px] items-center relative justify-between'>
+            <h2>Strive Management Solutions</h2>
+            <div style={{ fontFamily: "'Lato', sans-serif" }} className="text-gray-700 flex flex-col sm:gap-2">
+            <p className="text-right">Copyright &copy; <span id="year">2024</span></p>
+            <p className="text-right">All Rights Reserved</p>
+            </div>
+          </div>
       </footer>
 
     </>
