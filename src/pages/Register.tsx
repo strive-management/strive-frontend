@@ -80,7 +80,7 @@ export default function Register() {
     )
       .then((userCredentials) => {
         const uid = userCredentials.user.uid;
-        const email = userCredentials.user.email;
+        const email = userCredentials.user.email ?? '';
         const data = {
           email: email,
           first_name: firstName,
