@@ -15,7 +15,7 @@ interface UserCredentials {
   email: string;
   password: string;
 }
-
+const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 export default function Register() {
   const [error, setError] = useState('');
   const [userCredentials, setUserCredentials] = useState<UserCredentials>({
@@ -48,7 +48,7 @@ export default function Register() {
           last_name: lastName,
           UUID: uid,
         };
-        return fetch('http://localhost:8080/users', {
+        return fetch(`${LOCALDB_URL + 'users'}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default function Register() {
           last_name: lastName,
           UUID: uid,
         };
-        return fetch('http://localhost:8080/users', {
+        return fetch(`${LOCALDB_URL + 'users'}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

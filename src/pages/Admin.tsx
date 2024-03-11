@@ -1,20 +1,24 @@
-import { ChangeEvent, useState, MouseEvent } from 'react';
+import { ChangeEvent, useState, MouseEvent, useEffect } from 'react';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
 import Sidebar from './SideBar';
 import axios from 'axios';
 
+const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
+
 interface EmployeeInfo {
-  first_name: String;
-  last_name: String;
-  email: String;
-  phone_number: String;
-  job_title: String;
-  city: String;
-  address_1: String;
-  address_2: String;
-  zipcode: String;
-  country: String;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  job_title: string;
+  department_name: string;
+  city: string;
+  address_1: string;
+  address_2: string;
+  zipcode: string;
+  country: string;
+  location_name: string;
 }
 
 export default function Admin() {
@@ -24,11 +28,13 @@ export default function Admin() {
     email: '',
     phone_number: '',
     job_title: '',
+    department_name: '',
     city: '',
     address_1: '',
     address_2: '',
     zipcode: '',
     country: '',
+    location_name: '',
   });
 
   function handleEmployeeInfo(e: ChangeEvent<HTMLInputElement>) {
@@ -40,7 +46,7 @@ export default function Admin() {
   ) {
     e.preventDefault();
     axios
-      .post('http://localhost:8080/employees', employeeInfo)
+      .post(`${LOCALDB_URL + 'employees'}`, employeeInfo)
       .then(function (response) {
         console.log(response);
       })
@@ -48,6 +54,65 @@ export default function Admin() {
         console.log(error);
       });
   }
+  interface Jobs {
+    id: number;
+    job_title: string;
+  }
+  const [jobData, setJobData] = useState<Jobs[] | null>();
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get(`${LOCALDB_URL + 'jobs'}`);
+        setJobData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchJobs();
+  }, []);
+
+  interface Departments {
+    id: number;
+    department_name: string;
+  }
+
+  const [departments, setDepartments] = useState<Departments[] | null>();
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await axios.get(`${LOCALDB_URL + 'departments'}`);
+        setDepartments(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDepartments();
+  }, []);
+
+  interface Locations {
+    id: number;
+    location_name: string;
+    number_of_staff: number;
+  }
+
+  const [locations, setLocations] = useState<Locations[] | null>();
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await axios.get(`${LOCALDB_URL + 'locations'}`);
+        setLocations(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLocations();
+  }, []);
 
   return (
     <>
@@ -68,6 +133,31 @@ export default function Admin() {
         <main className='ml-64 mt-5 p-5'>
           <h1 className='font-medium text-xl'>Applicants Personal info</h1>
           <div className='flex justify-around mt-5'>
+            <div>
+              <Label text={'Work Location'} />
+              <select
+                onChange={(e) => {
+                  setEmployInfo({
+                    ...employeeInfo,
+                    location_name: e.target.value,
+                  });
+                }}
+              >
+                <option>Select Location</option>
+                {locations
+                  ? locations.map((location) => {
+                      return (
+                        <option
+                          key={location.id as number}
+                          value={location.location_name as string}
+                        >
+                          {location.location_name}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
+            </div>
             <div className=''>
               <Label text={'First Name'} />
               <Input
@@ -106,7 +196,7 @@ export default function Admin() {
                 placeholder='Phone Number'
               />
             </div>
-            <div>
+            {/* <div>
               <Label text={'Job'} />
               <Input
                 type={'job'}
@@ -114,6 +204,65 @@ export default function Admin() {
                 onChange={(e) => handleEmployeeInfo(e)}
                 placeholder='job title'
               />
+            </div> */}
+            <div>
+              <Label text={'Job'} />
+              <select
+                onChange={(e) => {
+                  setEmployInfo({
+                    ...employeeInfo,
+                    job_title: e.target.value,
+                  });
+                }}
+              >
+                <option>Select Job</option>
+                {jobData
+                  ? jobData.map((job) => {
+                      return (
+                        <option
+                          key={job.id as number}
+                          value={job.job_title as string}
+                        >
+                          {job.job_title}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
+            </div>
+            {/* <div>
+              <Label text={'Department'} />
+              <Input
+                type={'Department'}
+                name='department_name'
+                onChange={(e) => handleEmployeeInfo(e)}
+                placeholder='department'
+              />
+            </div> */}
+            <div>
+              <Label text={'Department'} />
+              <select
+                onChange={(e) => {
+                  setEmployInfo({
+                    ...employeeInfo,
+                    department_name: e.target.value,
+                  });
+                }}
+              >
+                <option>Select Department</option>
+                {departments
+                  ? departments.map((department) => {
+                      return (
+                        <option
+                          key={department.id as number}
+                          value={department.department_name as string}
+                        >
+                          {department.department_name}
+                        </option>
+                      );
+                    })
+                  : null}
+              </select>
             </div>
           </div>
           <label className='font-medium text-lg'>Address</label>
@@ -164,9 +313,9 @@ export default function Admin() {
               />
             </div>
           </div>
-          <label className='font-medium text-lg'>Role</label>
+          {/* <label className='font-medium text-lg'>Role</label> */}
           <div className='flex justify-around mt-5'>
-            <div className=''>
+            {/* <div className=''>
               <Label text={'Manager'} />
               <Input
                 type={'text'}
@@ -174,16 +323,16 @@ export default function Admin() {
                 onChange={(e) => handleEmployeeInfo(e)}
                 placeholder='Select manager'
               />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
               <Label text={'Location'} />
               <Input
                 type={'text'}
-                name='location'
+                name='location_name'
                 onChange={(e) => handleEmployeeInfo(e)}
                 placeholder='Select Location'
               />
-            </div>
+            </div> */}
           </div>
           <div className='flex justify-end mx-28 '>
             <button
