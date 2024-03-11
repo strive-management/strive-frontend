@@ -22,8 +22,8 @@ export default function Register() {
     email: '',
     password: '',
   });
-  const [firstName, setFirstName] = useState<String>();
-  const [lastName, setLastname] = useState<String>();
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastname] = useState<string>();
 
   function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
