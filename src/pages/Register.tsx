@@ -33,7 +33,6 @@ export default function Register() {
   ) => {
     e.preventDefault();
     const provider = await new GoogleAuthProvider();
-    console.log(provider);
     return signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
