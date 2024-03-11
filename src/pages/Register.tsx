@@ -32,7 +32,7 @@ export default function Register() {
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
-    const provider = await new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
     console.log(provider);
     return signInWithPopup(auth, provider)
       .then((result) => {
