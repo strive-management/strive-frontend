@@ -3,7 +3,7 @@ import logo from '../assets/strive2.svg';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
 import { ChangeEvent, MouseEvent, useState } from 'react';
-import auth from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
