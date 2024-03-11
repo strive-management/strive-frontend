@@ -39,9 +39,9 @@ export default function Register() {
         // const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
         const userInfo = getAdditionalUserInfo(result);
-        const email = userInfo?.profile.email; // it's not a problem if it's null
-        const lastName = userInfo?.profile.family_name; // it's not a problem if it's null
-        const firstName = userInfo?.profile.given_name; // it's not a problem if it's null
+        const email = userInfo?.profile?.email ?? ''; // it's not a problem if it's null
+        const lastName = userInfo?.profile?.family_name ?? ''; // it's not a problem if it's null
+        const firstName = userInfo?.profile?.given_name ?? ''; // it's not a problem if it's null
         const uid = user.uid;
         const data = {
           email: email,
