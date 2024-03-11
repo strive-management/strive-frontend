@@ -7,6 +7,7 @@ import auth from '../firebase/firebase';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  getAdditionalUserInfo,
   signInWithPopup,
 } from 'firebase/auth';
 
@@ -21,19 +22,52 @@ export default function Register() {
     email: '',
     password: '',
   });
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastname] = useState<string>();
+
   function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    console.log(userCredentials);
   }
   const handleGoogle = async (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
-    const provider = await new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+    const provider = new GoogleAuthProvider();
+    console.log(provider);
+    return signInWithPopup(auth, provider)
+      .then((result) => {
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        const userInfo = getAdditionalUserInfo(result);
+        const email = userInfo?.profile?.email ?? ''; // it's not a problem if it's null
+        const lastName = userInfo?.profile?.family_name ?? ''; // it's not a problem if it's null
+        const firstName = userInfo?.profile?.given_name ?? ''; // it's not a problem if it's null
+        const uid = user.uid;
+        const data = {
+          email: email,
+          first_name: firstName,
+          last_name: lastName,
+          UUID: uid,
+        };
+        return fetch('http://localhost:8080/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+      })
+      .catch((error: any) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        const email = error.customData.email;
+        console.log(email);
+      });
   };
 
-  function handleSignup(
+  async function handleSignup(
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
     e.preventDefault();
@@ -45,8 +79,21 @@ export default function Register() {
       userCredentials.password
     )
       .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log(user);
+        const uid = userCredentials.user.uid;
+        const email = userCredentials.user.email ?? '';
+        const data = {
+          email: email,
+          first_name: firstName,
+          last_name: lastName,
+          UUID: uid,
+        };
+        return fetch('http://localhost:8080/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -66,11 +113,23 @@ export default function Register() {
           </h3>
           <div className="mb-5">
             <Label text={'First Name'} />
-            <Input type={'text'} placeholder="First Name" />
+            <Input
+              type={'text'}
+              placeholder="First Name"
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            />
           </div>
           <div className="mb-5">
             <Label text={'Last Name'} />
-            <Input type={'text'} placeholder="Last Name" />
+            <Input
+              type={'text'}
+              placeholder="Last Name"
+              onChange={(e) => {
+                setLastname(e.target.value);
+              }}
+            />
           </div>
           <div className="mb-5">
             <Label text={'Email'} />
@@ -111,7 +170,7 @@ export default function Register() {
             className="text-sm font-light text-gray-500 dark:text-gray-400"
             to="/login"
           >
-            Already have a account ?
+            Already have an account ?
           </Link>
 
           {/* firebase error handling */}
