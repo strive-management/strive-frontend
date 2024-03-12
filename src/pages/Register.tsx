@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
@@ -25,6 +25,7 @@ export default function Register() {
   });
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastname] = useState<string>();
+  const navigate = useNavigate();
 
   function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -59,6 +60,15 @@ export default function Register() {
           },
           body: JSON.stringify(data),
         });
+      })
+      .then((response) => {
+        if (response.ok) {
+          // Navigate to dashboard after successful registration
+          navigate('/dashboard');
+        } else {
+          // Handle server errors or invalid responses here
+          console.log('Failed to register user');
+        }
       })
       .catch((error: any) => {
         const errorCode = error.code;
@@ -102,14 +112,15 @@ export default function Register() {
         const errorMessage = error.message;
         setError(errorMessage);
       });
+    navigate('/dashboard');
   }
 
   return (
     <>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
         <div>
-        <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
-        <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
+          <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
+          <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
         </div>
         <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-[#c0f2fc] bg-white dark:bg-[#1a0429] dark:border-[#75c479] rounded-xl">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-300">
@@ -161,7 +172,7 @@ export default function Register() {
             <Label text={'Confirm password'} />
             <Input type={'password'} placeholder="" />
           </div>
-          <br/>
+          <br />
           <button
             onClick={(e) => {
               handleSignup(e);
@@ -169,7 +180,7 @@ export default function Register() {
             type="submit"
             className="text-gray-700 bg-[#d3ebf9] hover:bg-[#92c9f9] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-gray-700 dark:bg-[#c982f9] dark:hover:bg-[#905593] dark:focus:ring-gray-800"
           >
-            Login
+            Register
           </button>
           <Link
             className="text-sm font-light text-gray-500 dark:text-gray-400"
