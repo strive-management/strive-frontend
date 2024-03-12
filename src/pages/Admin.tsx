@@ -21,6 +21,18 @@ interface EmployeeInfo {
   location_name: string;
 }
 
+interface LocationInfo {
+  location_name: string;
+}
+
+interface JobInfo {
+  job_title: string;
+}
+
+interface DepartmentInfo {
+  department_name: string;
+}
+
 export default function Admin() {
   const [employeeInfo, setEmployInfo] = useState<EmployeeInfo>({
     first_name: '',
@@ -36,6 +48,72 @@ export default function Admin() {
     country: '',
     location_name: '',
   });
+
+  const [locationName, setLocationName] = useState<LocationInfo>({
+    location_name: '',
+  });
+
+  function handleLocationData(e: ChangeEvent<HTMLInputElement>) {
+    setLocationName({ ['location_name']: e.target.value });
+  }
+
+  async function postLocationData(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    axios
+      .post(`${LOCALDB_URL + 'locations'}`, locationName)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const [jobName, setJobName] = useState<JobInfo>({
+    job_title: '',
+  });
+
+  function handleJobData(e: ChangeEvent<HTMLInputElement>) {
+    setJobName({ ['job_title']: e.target.value });
+  }
+
+  async function postJobData(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    axios
+      .post(`${LOCALDB_URL + 'jobs'}`, jobName)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const [departmentName, setDepartmentName] = useState<DepartmentInfo>({
+    department_name: '',
+  });
+
+  function handleDepartmentData(e: ChangeEvent<HTMLInputElement>) {
+    setDepartmentName({ ['department_name']: e.target.value });
+  }
+
+  async function postDepartmentData(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    axios
+      .post(`${LOCALDB_URL + 'departments'}`, departmentName)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   function handleEmployeeInfo(e: ChangeEvent<HTMLInputElement>) {
     setEmployInfo({ ...employeeInfo, [e.target.name]: e.target.value });
@@ -196,15 +274,6 @@ export default function Admin() {
                 placeholder='Phone Number'
               />
             </div>
-            {/* <div>
-              <Label text={'Job'} />
-              <Input
-                type={'job'}
-                name='job_title'
-                onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='job title'
-              />
-            </div> */}
             <div>
               <Label text={'Job'} />
               <select
@@ -230,15 +299,6 @@ export default function Admin() {
                   : null}
               </select>
             </div>
-            {/* <div>
-              <Label text={'Department'} />
-              <Input
-                type={'Department'}
-                name='department_name'
-                onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='department'
-              />
-            </div> */}
             <div>
               <Label text={'Department'} />
               <select
@@ -324,16 +384,61 @@ export default function Admin() {
                 placeholder="Input your manager's id number here"
               />
             </div>
-            {/* <div>
-              <Label text={'Location'} />
-              <Input
-                type={'text'}
-                name='location_name'
-                onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Select Location'
-              />
-            </div> */}
+            <label className='font-medium text-lg'>
+              Add Locations, Departments, & Job Titles to your DB
+            </label>
+            <div className='flex justify-around mt-5'>
+              <div>
+                <Label text={'Location'} />
+                <Input
+                  type={'text'}
+                  name='location_name'
+                  onChange={(e) => handleLocationData(e)}
+                  placeholder='Select Location'
+                />
+              </div>
+              <button
+                type='submit'
+                onClick={(e) => postLocationData(e)}
+                className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              >
+                add location
+              </button>
+              <div>
+                <Label text={'Job'} />
+                <Input
+                  type={'job'}
+                  name='job_title'
+                  onChange={(e) => handleJobData(e)}
+                  placeholder='job title'
+                />
+              </div>
+              <button
+                type='submit'
+                onClick={(e) => postJobData(e)}
+                className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              >
+                add job
+              </button>
+              <div>
+                <Label text={'Department'} />
+                <Input
+                  type={'Department'}
+                  name='department_name'
+                  onChange={(e) => handleDepartmentData(e)}
+                  placeholder='department'
+                />
+              </div>
+              <button
+                type='submit'
+                onClick={(e) => postDepartmentData(e)}
+                className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              >
+                add department
+              </button>
+            </div>
           </div>
+
           <div className='flex justify-end mx-28 '>
             <button
               type='submit'
