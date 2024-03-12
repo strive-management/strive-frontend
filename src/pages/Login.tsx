@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/strive2.svg';
+import logoLightMode from '../assets/strive2.svg';
+import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import auth from '../firebase/firebase';
 import { ChangeEvent, MouseEvent, useState } from 'react';
@@ -68,16 +69,17 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
         <div>
-          <img className="w-40" src={logo} alt="" />
+          <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
+          <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
         </div>
-        <form className="w-11/12 flex flex-col lg:w-1/3">
-          <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-[#c0f2fc] bg-white dark:bg-[#1a0429] dark:border-[#75c479] rounded-xl">
+          <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-gray-300">
             Login
           </h3>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
               Email
             </label>
             <Input
@@ -86,11 +88,11 @@ export default function Login() {
               onChange={(e) => {
                 handleCredentials(e);
               }}
-              placeholder="email"
+              placeholder=""
             />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
               Password
             </label>
             <Input
@@ -99,30 +101,30 @@ export default function Login() {
               onChange={(e) => {
                 handleCredentials(e);
               }}
-              placeholder="password"
+              placeholder=""
             />
           </div>
 
-          <div className="justify-evenly">
+          <div className="flex flex-row justify-center gap-8 items-center h-full">
           <button
             type="submit"
             onClick={(e) => {
               handleLogin(e);
             }}
-            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+            className="text-gray-700 bg-[#d3ebf9] hover:bg-[#92c9f9] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center dark:bg-[#c982f9] dark:hover:bg-[#905593] dark:focus:ring-gray-800"
           >
             Login
           </button>
           <Link
             to="/"
-            className="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-gray-700 bg-[#d3ebf9] hover:bg-[#92c9f9] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-8 py-2.5 text-center dark:bg-[#c982f9] dark:hover:bg-[#905593] dark:focus:ring-blue-800"
           >
             Go Back
           </Link>
           </div>
           <a
             onClick={handlePwdReset}
-            className="text-xs pt-6 text-end"
+            className="text-xs pt-6 text-center"
             href="#"
           >
             Forgot Password?
@@ -131,9 +133,9 @@ export default function Login() {
 
           {error && <div className="text-red-500">{error}</div>}
 
-
-          <div className="my-12 border-b text-center">
-            <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+          
+          <div className="my-12 border-t text-center">
+          <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium transform translate-y-1/2">
               Or
             </div>
           </div>
@@ -142,7 +144,7 @@ export default function Login() {
               onClick={(e) => {
                 handleGoogle(e);
               }}
-              className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
             >
               <div className="bg-white p-2 rounded-full">
                 <svg className="w-4" viewBox="0 0 533.5 544.3">
@@ -166,7 +168,7 @@ export default function Login() {
               </div>
             </button>
 
-            <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
+            <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
               <div className="bg-white p-1 rounded-full">
                 <svg className="w-6" viewBox="0 0 32 32">
                   <path
