@@ -2,6 +2,7 @@ import { FC } from 'react';
 import WebFont from 'webfontloader';
 import DateAndTime from './DateAndTime';
 import LineChart from '../components/LineChart';
+import DonutCharts from '../components/DonutChart';
 
 WebFont.load({
   google: {
@@ -25,7 +26,7 @@ const Dashboard: FC = () => {
             </h1>
           </div>
         </nav>
-        <div className="grid grid-cols-4 gap-4 m-6 pl-[300px] pr-[100px] fixed top-20 w-full">
+        <div className="grid grid-cols-5 gap-4 m-6 pl-[300px] pr-[100px] fixed top-20 w-full">
           <div className="bg-gray-400 p-6 place-items-center rounded-xl">
             <h1 className="">
               <DateAndTime />
@@ -37,12 +38,13 @@ const Dashboard: FC = () => {
           <div className="bg-gray-400 p-6 place-items-center rounded-xl">
             <h1 className="">Off Duty Staff</h1>
           </div>
-          <div className="bg-gray-400 p-6 place-items-center rounded-xl row-span-2">
-            <h1 className="">Weather</h1>
+          <div className="bg-gray-400 p-6 place-items-center rounded-xl row-span-1 col-span-2">
+            <DonutCharts />
           </div>
           <div className="bg-gray-200 p-6 place-items-center rounded-xl col-span-3">
             <LineChart />
           </div>
+          <DonutCharts />
         </div>
       </div>
     </>
