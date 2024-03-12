@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../images/strive1.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faUser, faCheckCircle, faChartBar, faCalendar, faBuilding, faClipboard  } from '@fortawesome/free-regular-svg-icons';
@@ -12,13 +13,13 @@ const Sidebar: React.FC = () => {
           <img src={logo} alt="Logo" className="h-16 w-16"/>
         </div>
       <ul className="space-y-4 p-4">
-        <li><FontAwesomeIcon icon={faChartBar} />  <a href="#" className="hover:text-blue-200">Dashboard</a></li>
-        <li><FontAwesomeIcon icon={faEnvelope} />  <a href="#" className="hover:text-blue-200">Alerts</a></li>
-        <li><FontAwesomeIcon icon={faCheckCircle} /> <a href="#" className="hover:text-blue-200">Roster</a></li>
+        <li><FontAwesomeIcon icon={faChartBar} />  <Link to="/Dashboard" className="hover:text-blue-200">Dashboard</Link></li>
+        <li><FontAwesomeIcon icon={faEnvelope} />  <a href="#" className=" hover:text-blue-200">Alerts</a></li>
+        <li><FontAwesomeIcon icon={faCheckCircle} /> <Link to="/roster" className="hover:text-blue-200">Roster</Link></li>
         <li><FontAwesomeIcon icon={faCalendar} />  <a href="#" className="hover:text-blue-200">Schedules</a></li>
         <li><FontAwesomeIcon icon={faBuilding} />  <a href="#" className="hover:text-blue-200">Booking</a></li>
-        <li><FontAwesomeIcon icon={faUser} />  <a href="#" className="hover:text-blue-200">Users</a></li>
-        <li><FontAwesomeIcon icon={faClipboard} />  <a href="#" className="hover:text-blue-200">Resoruces</a></li>
+        <li><FontAwesomeIcon icon={faUser} />  <Link to="/admin" className="hover:text-blue-200">Admin</Link></li>
+        <li><FontAwesomeIcon icon={faClipboard} />  <a href="#" className="hover:text-blue-200">Resources</a></li>
 
       </ul>
     </div>
@@ -33,6 +34,7 @@ const Sidebar: React.FC = () => {
       </div>
     </div>
   </aside>
+  
   );
 };
 

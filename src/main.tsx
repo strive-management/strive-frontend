@@ -39,7 +39,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: (
+      <Layout>
+        <Admin/>
+      </Layout>
+    ),
   },
   {
     path: '/clock',
@@ -47,7 +51,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/roster',
-    element: <Roster />,
+    element: (
+      <Layout>
+        <Roster />
+      </Layout>
+    )
   },
 ]);
 
