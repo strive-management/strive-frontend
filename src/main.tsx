@@ -10,6 +10,7 @@ import Layout from './pages/Layout';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
 import Clock from './pages/Clock';
+import Roster from './pages/Roster';
 
 import '@mantine/core/styles.css';
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: '/clock',
     element: <Clock />,
+  },
+  {
+    path: '/roster',
+    element: <Roster />,
   },
 ]);
 

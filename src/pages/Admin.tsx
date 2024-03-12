@@ -315,15 +315,15 @@ export default function Admin() {
           </div>
           {/* <label className='font-medium text-lg'>Role</label> */}
           <div className='flex justify-around mt-5'>
-            {/* <div className=''>
+            <div className=''>
               <Label text={'Manager'} />
               <Input
                 type={'text'}
                 name='manager'
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Select manager'
+                placeholder="Input your manager's id number here"
               />
-            </div> */}
+            </div>
             {/* <div>
               <Label text={'Location'} />
               <Input
