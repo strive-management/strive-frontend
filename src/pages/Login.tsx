@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
@@ -16,6 +16,7 @@ interface UserCredentials {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
   const [error, setError] = useState('');
   const [userCredentials, setUserCredentials] = useState<UserCredentials>({
     email: '',
@@ -31,8 +32,20 @@ export default function Login() {
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) => {
     e.preventDefault();
-    const provider = await new GoogleAuthProvider();
-    return signInWithPopup(auth, provider);
+    const provider = new GoogleAuthProvider();
+    // return signInWithPopup(auth, provider);
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate('/dashboard');
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+
+        console.error(errorMessage);
+        setError(errorMessage);
+      });
   };
 
   function handleLogin(
@@ -49,6 +62,7 @@ export default function Login() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        navigate('/dashboard');
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -105,7 +119,6 @@ export default function Login() {
             />
           </div>
 
-
           <div className="flex flex-row justify-evenly">
             <button
               type="submit"
@@ -122,7 +135,6 @@ export default function Login() {
             >
               Go Back
             </Link>
-
           </div>
           <a
             onClick={handlePwdReset}
@@ -135,10 +147,8 @@ export default function Login() {
 
           {error && <div className="text-red-500">{error}</div>}
 
-
           <div className="my-12 border-t text-center">
             <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium transform translate-y-1/2">
-
               Or
             </div>
           </div>
