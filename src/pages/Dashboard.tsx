@@ -15,12 +15,12 @@ WebFont.load({
 const Dashboard: FC = () => {
   return (
     <>
-      <div>
+      <div className='h-screen w-full dark:bg-[#503270]'>
         <nav>
-          <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
-            <h1
+          <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 dark:bg-[#1a0429]/80 w-full h-20">
+          <h1
               style={{ fontFamily: "'Lato', sans-serif" }}
-              className="text-gray-700 text-xl place-content-center"
+              className="text-gray-300 text-xl place-content-center"
             >
               Dashboard
             </h1>
