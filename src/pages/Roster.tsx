@@ -1,4 +1,3 @@
-import Sidebar from './SideBar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import EditModal from '../components/EditModal';
@@ -104,7 +103,6 @@ export default function Roster() {
 
   return (
     <>
-      <Sidebar />
       <div style={containerStyle}>
         <h1 style={h1Style}>All Employees</h1>
         <div style={containerStyle}>
