@@ -12,6 +12,15 @@ const Sidebar: React.FC = () => {
     <div className="flex items-center space-x-2 p-4">
           <img src={logo} alt="Logo" className="h-16 w-16"/>
         </div>
+    </div>
+    <div className="p-4 w-10/12 mb-4 bg-blue-200 rounded-xl">
+      <div className="flex items-center space-x-3">
+        <div className="flex-shrink-0">
+          <img src={logo} alt="User Name" className="h-10 w-10 rounded-full" />
+        </div>
+        <div>
+          <div className="text-sm font-medium">Jimithy Bramuels</div>
+        </div>
       <ul className="space-y-4 p-4">
         <li><FontAwesomeIcon icon={faChartBar} />  <Link to="/Dashboard" className="hover:text-blue-200">Dashboard</Link></li>
         <li><FontAwesomeIcon icon={faEnvelope} />  <a href="#" className=" hover:text-blue-200">Alerts</a></li>
@@ -22,15 +31,6 @@ const Sidebar: React.FC = () => {
         <li><FontAwesomeIcon icon={faClipboard} />  <a href="#" className="hover:text-blue-200">Resources</a></li>
 
       </ul>
-    </div>
-    <div className="p-4 w-10/12 mb-4 bg-blue-200 rounded-xl">
-      <div className="flex items-center space-x-3">
-        <div className="flex-shrink-0">
-          <img src={logo} alt="User Name" className="h-10 w-10 rounded-full" />
-        </div>
-        <div>
-          <div className="text-sm font-medium">Jimithy Bramuels</div>
-        </div>
       </div>
     </div>
   </aside>
