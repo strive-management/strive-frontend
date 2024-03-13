@@ -195,6 +195,14 @@ export default function Admin() {
   return (
     <>
       <SideNavBar />
+      <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 dark:bg-[#503270] w-full h-20">
+            <h1
+              style={{ fontFamily: "'Lato', sans-serif" }}
+              className="text-gray-700 text-xl place-content-center"
+            >
+              Admin
+            </h1>
+          </div>
       <div className=''>
         <div className='flex items-center justify-around ml-64 h-min mt-5 pb-2 gap-20 border-b-2 '>
           <div className=''>

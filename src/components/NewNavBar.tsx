@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "../images/strive1.svg";
+import logoLight from "../assets/2-white.svg";
+import logoDark from "../images/strive1.svg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,14 +13,15 @@ import {
 const SideNavBar: React.FC = () => {
   return (
     <>
-      <div className="bg-blue-50 text-gray-700 w-64 min-h-screen flex flex-col fixed items-center inset-y-0 left-0 z-0">
+      <div className="bg-blue-50 text-gray-700 w-64 min-h-screen flex flex-col fixed items-center inset-y-0 left-0 z-0 dark:bg-[#1a0429]/80">
         <div className="flex items-center space-x-2 p-4">
-          <img src={logo} alt="Logo" className="h-20 w-20" />
+          <img src={logoDark} alt="Logo" className="h-20 w-20 block dark:hidden" />
+          <img src={logoLight} alt="Logo" className="h-20 w-20 hidden dark:block" />
         </div>
       </div>
       <div
         id="links"
-        className="fixed top-[150px] content-center pl-20 justify-center gap-6 flex flex-col z-10"
+        className="fixed top-[150px] content-center pl-20 justify-center gap-6 flex flex-col z-10 dark:text-gray-300"
       >
         <Link to="/dashboard">
           <FontAwesomeIcon icon={faChartBar} /> Dashboard
@@ -33,9 +35,6 @@ const SideNavBar: React.FC = () => {
         <Link to="/clock">
           <FontAwesomeIcon icon={faClock} /> Clock
         </Link>
-      </div>
-      <div id="user" className="flex h-[50px] w-40 bottom-10 left-10 place-content-center rounded-xl fixed bg-blue-300">
-        <h3>Jimmithy B</h3>
       </div>
     </>
   );

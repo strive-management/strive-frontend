@@ -108,6 +108,14 @@ export default function Roster() {
   return (
     <>
       <SideNavBar />
+      <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
+            <h1
+              style={{ fontFamily: "'Lato', sans-serif" }}
+              className="text-gray-700 text-xl place-content-center"
+            >
+              Roster
+            </h1>
+          </div>
       <div style={containerStyle}>
         <h1 style={h1Style}>All Employees</h1>
         <div style={containerStyle}>
