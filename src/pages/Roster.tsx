@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
+import SideNavBar from '../components/NewNavBar';
+
 import EditModal from '../components/EditModal';
+
 
 interface EmployeeInfo {
   id: number;
@@ -103,6 +107,7 @@ export default function Roster() {
 
   return (
     <>
+      <SideNavBar />
       <div style={containerStyle}>
         <h1 style={h1Style}>All Employees</h1>
         <div style={containerStyle}>
