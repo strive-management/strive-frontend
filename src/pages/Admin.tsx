@@ -2,6 +2,7 @@ import { ChangeEvent, useState, MouseEvent, useEffect } from 'react';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
 import axios from 'axios';
+import SideNavBar from '../components/NewNavBar';
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -193,6 +194,7 @@ export default function Admin() {
 
   return (
     <>
+      <SideNavBar />
       <div className=''>
         <div className='flex items-center justify-around ml-64 h-min mt-5 pb-2 gap-20 border-b-2 '>
           <div className=''>

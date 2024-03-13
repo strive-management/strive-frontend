@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SideNavBar from '../components/NewNavBar';
+
 interface EmployeeInfo {
   id: number;
   first_name: string;
@@ -96,6 +98,7 @@ export default function Roster() {
   }
   return (
     <>
+      <SideNavBar />
       <div style={containerStyle}>
         <h1 style={h1Style}>Recently Added Employees</h1>
         <div style={containerStyle}>

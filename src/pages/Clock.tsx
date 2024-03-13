@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import SideNavBar from '../components/NewNavBar'
 
 import axios from 'axios'
 
@@ -69,6 +70,7 @@ const Clock = () => {
 
   return (
     <>
+    <SideNavBar />
     <div>
      <div className=' flex flex-col pl-[260px] items-center' >
       <div>
