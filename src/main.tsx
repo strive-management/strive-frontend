@@ -40,15 +40,21 @@ const router = createBrowserRouter([
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: <Layout>
+      <Admin />
+    </Layout>,
   },
   {
     path: '/clock',
-    element: <Clock />,
+    element: <Layout>
+      <Clock />
+    </Layout>,
   },
   {
     path: '/roster',
-    element: <Roster />,
+    element: <Layout>
+      <Roster />
+    </Layout>,
     children: [
       {
         path: '/roster/EditModal',

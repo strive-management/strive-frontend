@@ -31,7 +31,7 @@ const SideNavBar: React.FC = () => {
           <FontAwesomeIcon icon={faClipboard} /> Roster
         </Link>
         <Link to="/clock">
-          <FontAwesomeIcon icon={faClock} /> Roster
+          <FontAwesomeIcon icon={faClock} /> Clock
         </Link>
       </div>
       <div id="user" className="flex h-[50px] w-40 bottom-10 left-10 place-content-center rounded-xl fixed bg-blue-300">
