@@ -3,8 +3,6 @@ import WebFont from 'webfontloader';
 import DateAndTime from './DateAndTime';
 import LineChart from '../components/LineChart';
 import DonutCharts from '../components/DonutChart';
-import Sidebar from './SideBar';
-
 
 WebFont.load({
   google: {
@@ -17,7 +15,6 @@ WebFont.load({
 const Dashboard: FC = () => {
   return (
     <>
-    <Sidebar />
       <div>
         <nav>
           <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
