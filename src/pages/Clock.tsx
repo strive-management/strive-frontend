@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Sidebar from './SideBar'
+
 import axios from 'axios'
 
 
@@ -70,7 +70,6 @@ const Clock = () => {
   return (
     <>
     <div>
-     <Sidebar/>
      <div className=' flex flex-col pl-[260px] items-center' >
       <div>
         {click ? <h1 className=' text-center font-bold py-3 border-5 border-black'>Time-IN</h1> :
@@ -89,7 +88,7 @@ const Clock = () => {
          { click ? <button className='  p-4 border-collapse rounded-full hover:opacity-50 text-white bg-black active:bg-slate-400 ' onClick={handleCheckIn} >Check-IN</button> :
                    <button className='  p-4 border-collapse rounded-full hover:opacity-50 text-white bg-black active:bg-slate-400'  onClick={handleCheckOut}>Check-OUT</button> }
         </div>
-      </div> 
+      </div>
     </div>
     </>
   )
