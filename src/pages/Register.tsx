@@ -117,12 +117,12 @@ export default function Register() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
+      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-full lg:py-0">
         <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
         </div>
-        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-[#c0f2fc] bg-white dark:bg-[#1a0429] dark:border-[#75c479] rounded-xl">
+        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 mb-10 order-solid border-2 border-[#c0f2fc] bg-white dark:bg-[#1a0429] dark:border-[#75c479] rounded-xl">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-300">
             Register
           </h3>
@@ -183,7 +183,7 @@ export default function Register() {
             Register
           </button>
           <Link
-            className="text-sm font-light text-gray-500 dark:text-gray-400"
+            className="text-sm font-light text-gray-500 dark:text-gray-300"
             to="/login"
           >
             Already have an account ?
@@ -194,7 +194,7 @@ export default function Register() {
           {error && <div className="text-red-500">{error}</div>}
 
           <div className="my-12 border-t text-center">
-            <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium transform translate-y-1/2">
+            <div className="leading-none px-2 inline-block text-sm text-gray-300 tracking-wide font-medium transform translate-y-1/2">
               Or
             </div>
           </div>
