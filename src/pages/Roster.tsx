@@ -1,4 +1,3 @@
-import Sidebar from './SideBar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 interface EmployeeInfo {
@@ -97,7 +96,6 @@ export default function Roster() {
   }
   return (
     <>
-      <Sidebar />
       <div style={containerStyle}>
         <h1 style={h1Style}>Recently Added Employees</h1>
         <div style={containerStyle}>
