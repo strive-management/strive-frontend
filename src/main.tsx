@@ -15,6 +15,7 @@ import Roster from './pages/Roster';
 import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
+import EditModal from './components/EditModal';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,12 @@ const router = createBrowserRouter([
   {
     path: '/roster',
     element: <Roster />,
+    children: [
+      {
+        path: '/roster/EditModal',
+        element: <EditModal />,
+      },
+    ],
   },
 ]);
 

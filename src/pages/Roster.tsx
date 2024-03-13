@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+
 import SideNavBar from '../components/NewNavBar';
+
+import EditModal from '../components/EditModal';
+
 
 interface EmployeeInfo {
   id: number;
@@ -73,10 +77,14 @@ export default function Roster() {
   };
 
   const deleteButton: React.CSSProperties = {
-    border: '1px solid #dddddd',
-    padding: '8px 16px',
+    margin: '2px',
+    padding: '7px 14px',
     textAlign: 'left',
     backgroundColor: 'red',
+    borderRadius: '4px',
+    fontSize: '14px',
+    fontWeight: '500',
+    color: 'white',
   };
 
   async function handleDelete(
@@ -96,11 +104,12 @@ export default function Roster() {
         console.log(error);
       });
   }
+
   return (
     <>
       <SideNavBar />
       <div style={containerStyle}>
-        <h1 style={h1Style}>Recently Added Employees</h1>
+        <h1 style={h1Style}>All Employees</h1>
         <div style={containerStyle}>
           <table style={tableStyle}>
             <thead>
@@ -120,8 +129,14 @@ export default function Roster() {
                       {cell}
                     </td>
                   ))}
-                  <td style={deleteButton}>
-                    <button onClick={(e) => handleDelete(e, row[0])}>
+                  <td>
+                    <EditModal id={row[0]} />
+                  </td>
+                  <td>
+                    <button
+                      style={deleteButton}
+                      onClick={(e) => handleDelete(e, row[0])}
+                    >
                       Delete
                     </button>
                   </td>
