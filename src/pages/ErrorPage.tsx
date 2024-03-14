@@ -9,9 +9,11 @@ export default function ErrorPage() {
   }
 
   return (
-    <div className="error">
-      <h1>Sorry!</h1>
-      <p>An error has occured, come back tomorrow !</p>
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+      <h1 className="text-5xl leading-tight font-semibold mb-12">Sorry!</h1>
+      <p className="leading-tight font-medium">
+        An error has occured, come back tomorrow !
+      </p>
       <br />
       <p>
         <i>{error.statusText || error.message}</i>
