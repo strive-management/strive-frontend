@@ -70,7 +70,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/roster',
-        element: <Roster />,
+        element: (
+          <LazyWrap>
+            <Roster />
+          </LazyWrap>
+        ),
         errorElement: <ErrorPage />,
         children: [
           {
@@ -82,7 +86,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/clock',
-        element: <Clock />,
+        element: (
+          <LazyWrap>
+            <Clock />
+          </LazyWrap>
+        ),
         errorElement: <ErrorPage />,
       },
     ],
