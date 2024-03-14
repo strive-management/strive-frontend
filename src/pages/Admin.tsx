@@ -2,7 +2,7 @@ import { ChangeEvent, useState, MouseEvent, useEffect } from 'react';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
 import axios from 'axios';
-import SideNavBar from '../components/NewNavBar';
+import SideNavBar from '../components/SideNavBar';
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -196,29 +196,29 @@ export default function Admin() {
     <>
       <SideNavBar />
       <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 dark:bg-[#503270] w-full h-20">
-            <h1
-              style={{ fontFamily: "'Lato', sans-serif" }}
-              className="text-gray-700 text-xl place-content-center"
-            >
-              Admin
-            </h1>
+        <h1
+          style={{ fontFamily: "'Lato', sans-serif" }}
+          className="text-gray-700 text-xl place-content-center"
+        >
+          Admin
+        </h1>
+      </div>
+      <div className="">
+        <div className="flex items-center justify-around ml-64 h-min mt-5 pb-2 gap-20 border-b-2 ">
+          <div className="">
+            <h1 className="font-medium">ADMIN</h1>
           </div>
-      <div className=''>
-        <div className='flex items-center justify-around ml-64 h-min mt-5 pb-2 gap-20 border-b-2 '>
-          <div className=''>
-            <h1 className='font-medium'>ADMIN</h1>
-          </div>
-          <div className='flex items-center'>
+          <div className="flex items-center">
             <input
-              type='text'
-              placeholder='Search'
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full  block w-full p-1.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white '
+              type="text"
+              placeholder="Search"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full  block w-full p-1.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white "
             />
           </div>
         </div>
-        <main className='ml-64 mt-5 p-5'>
-          <h1 className='font-medium text-xl'>Applicants Personal info</h1>
-          <div className='flex justify-around mt-5'>
+        <main className="ml-64 mt-5 p-5">
+          <h1 className="font-medium text-xl">Applicants Personal info</h1>
+          <div className="flex justify-around mt-5">
             <div>
               <Label text={'Work Location'} />
               <select
@@ -244,42 +244,42 @@ export default function Admin() {
                   : null}
               </select>
             </div>
-            <div className=''>
+            <div className="">
               <Label text={'First Name'} />
               <Input
                 type={'text'}
-                name='first_name'
+                name="first_name"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='First Name'
+                placeholder="First Name"
               />
             </div>
             <div>
               <Label text={'Last Name'} />
               <Input
                 type={'text'}
-                name='last_name'
+                name="last_name"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Last Name'
+                placeholder="Last Name"
               />
             </div>
           </div>
-          <div className='flex justify-around mt-5'>
-            <div className=''>
+          <div className="flex justify-around mt-5">
+            <div className="">
               <Label text={'Email'} />
               <Input
                 type={'email'}
-                name='email'
+                name="email"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Email'
+                placeholder="Email"
               />
             </div>
             <div>
               <Label text={'Phone Number'} />
               <Input
                 type={'phone'}
-                name='phone_number'
+                name="phone_number"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Phone Number'
+                placeholder="Phone Number"
               />
             </div>
             <div>
@@ -333,82 +333,82 @@ export default function Admin() {
               </select>
             </div>
           </div>
-          <label className='font-medium text-lg'>Address</label>
-          <div className=' w-1/5 mt-5 ml-28'>
+          <label className="font-medium text-lg">Address</label>
+          <div className=" w-1/5 mt-5 ml-28">
             <Label text={'Zip Code'} />
             <Input
               type={'number'}
-              name='zipcode'
+              name="zipcode"
               onChange={(e) => handleEmployeeInfo(e)}
-              placeholder='Zip Code'
+              placeholder="Zip Code"
             />
           </div>
-          <div className='flex justify-around mt-5'>
-            <div className=''>
+          <div className="flex justify-around mt-5">
+            <div className="">
               <Label text={'Country'} />
               <Input
                 type={'text'}
-                name='country'
+                name="country"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='City'
+                placeholder="City"
               />
             </div>
             <div>
               <Label text={'City'} />
               <Input
                 type={'text'}
-                name='city'
+                name="city"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='City'
+                placeholder="City"
               />
             </div>
           </div>
-          <div className='flex flex-col gap-5 mt-10 ml-28'>
-            <div className='w-1/2'>
+          <div className="flex flex-col gap-5 mt-10 ml-28">
+            <div className="w-1/2">
               <Input
                 type={'text'}
-                name='address_1'
+                name="address_1"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Address line 1'
+                placeholder="Address line 1"
               />
             </div>
-            <div className='w-1/2'>
+            <div className="w-1/2">
               <Input
                 type={'text'}
-                name='address_2'
+                name="address_2"
                 onChange={(e) => handleEmployeeInfo(e)}
-                placeholder='Address line 2'
+                placeholder="Address line 2"
               />
             </div>
           </div>
           {/* <label className='font-medium text-lg'>Role</label> */}
-          <div className='flex justify-around mt-5'>
-            <div className=''>
+          <div className="flex justify-around mt-5">
+            <div className="">
               <Label text={'Manager'} />
               <Input
                 type={'text'}
-                name='manager'
+                name="manager"
                 onChange={(e) => handleEmployeeInfo(e)}
                 placeholder="Input your manager's id number here"
               />
             </div>
-            <label className='font-medium text-lg'>
+            <label className="font-medium text-lg">
               Add Locations, Departments, & Job Titles to your DB
             </label>
-            <div className='flex justify-around mt-5'>
+            <div className="flex justify-around mt-5">
               <div>
                 <Label text={'Location'} />
                 <Input
                   type={'text'}
-                  name='location_name'
+                  name="location_name"
                   onChange={(e) => handleLocationData(e)}
-                  placeholder='Select Location'
+                  placeholder="Select Location"
                 />
               </div>
               <button
-                type='submit'
+                type="submit"
                 onClick={(e) => postLocationData(e)}
-                className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+                className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
               >
                 add location
               </button>
@@ -416,15 +416,15 @@ export default function Admin() {
                 <Label text={'Job'} />
                 <Input
                   type={'job'}
-                  name='job_title'
+                  name="job_title"
                   onChange={(e) => handleJobData(e)}
-                  placeholder='job title'
+                  placeholder="job title"
                 />
               </div>
               <button
-                type='submit'
+                type="submit"
                 onClick={(e) => postJobData(e)}
-                className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+                className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
               >
                 add job
               </button>
@@ -432,28 +432,28 @@ export default function Admin() {
                 <Label text={'Department'} />
                 <Input
                   type={'Department'}
-                  name='department_name'
+                  name="department_name"
                   onChange={(e) => handleDepartmentData(e)}
-                  placeholder='department'
+                  placeholder="department"
                 />
               </div>
               <button
-                type='submit'
+                type="submit"
                 onClick={(e) => postDepartmentData(e)}
-                className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+                className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
               >
                 add department
               </button>
             </div>
           </div>
 
-          <div className='flex justify-end mx-28 '>
+          <div className="flex justify-end mx-28 ">
             <button
-              type='submit'
+              type="submit"
               onClick={(e) => {
                 handleAddEmployeeData(e);
               }}
-              className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
             >
               send
             </button>
