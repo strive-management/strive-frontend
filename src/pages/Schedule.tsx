@@ -7,7 +7,7 @@ interface ScheduleInfo {
   id: number;
   employee_id: number;
   date: string;
-  available:boolean;
+  available:string;
   schedule_start: string;
   schedule_end: string;
   clock_in: string;
@@ -28,6 +28,10 @@ export default function Schedule(){
     []
   );
   const [employeeInfo, setEmployInfo] = useState<EmployeeInfo[] >();
+
+  const [employeeScheduleInfo, setEmployeeScheduleInfo] = useState<ScheduleInfo[]| any >();
+
+  
 
   const headers = Object.keys(scheduleInformation[0] || {});
   const rows = scheduleInformation.map((item) => Object.values(item));
@@ -63,6 +67,14 @@ export default function Schedule(){
 
   }, []);
 
+
+  
+
+
+  console.log(employeeScheduleInfo)
+
+
+
     return (
         <>
         <SideNavBar />
@@ -75,7 +87,7 @@ export default function Schedule(){
               Schedule
             </h1>
           </div>
-      <div style={containerStyle} className=" pl-[250px]">
+      <div style={containerStyle} className=" pl-[250px] flex ">
         <h1 style={h1Style}>Schedule</h1>
         <div style={containerStyle}>
           <table style={tableStyle}>
@@ -103,21 +115,22 @@ export default function Schedule(){
           </table>
           <Label text={'Select Employee'} />
               <select
-                // onChange={(e) => {
-                //   setEmployeeInfo({
-                //     ...employeeInfo,
-                //     location_name: e.target.value,
-                //   });
-                // }}
+                onChange={(e) => {
+                  setEmployeeScheduleInfo({
+                    ...employeeScheduleInfo,
+                    employee_id: parseInt(e.target.value),
+                  });
+                }}
               >
-                <option className=" border-1"
+                <option className=" p-2 border"
                 >Select Employee</option>
                 {employeeInfo
                   ? employeeInfo.map((employee) => {
                       return (
                         <option
                           key={employee.id as number}
-                          value={employee.first_name as string}
+                          value={employee.id as number}
+                         
                         >
                           {employee.id}
                           {" "}
@@ -129,7 +142,43 @@ export default function Schedule(){
                         })
                       : null}
                         </select>
-          
+                <div>
+                    <h4>Select a Date</h4>
+                    <input type="date" className=" px-6 py-2 border rounded-full" name="date"onChange={(e) => setEmployeeScheduleInfo({...employeeScheduleInfo,
+                    schedule_end: e.target.value,
+                  })}/>
+                </div>
+                <div>
+                    <h4>Select a shift start time</h4>
+                    <input type="time" onChange={(e) => {
+                  setEmployeeScheduleInfo({
+                    ...employeeScheduleInfo,
+                    schedule_start: e.target.value,
+                  });
+                }} className=" px-6 py-2 border rounded-full"/>
+                </div>
+                <div>
+                    <h4>Select a shift end time</h4>
+                    <input type="time" onChange={(e) => {
+                  setEmployeeScheduleInfo({
+                    ...employeeScheduleInfo,
+                    schedule_end: e.target.value,
+                  });
+                }} className= "px-6 py-2 border rounded-full"/>
+                </div>
+                <select name="" id="" onChange={(e) => {
+                  setEmployeeScheduleInfo({
+                    ...employeeScheduleInfo,
+                    available: e.target.value,
+                  });
+                }}>
+                  <div>Availability</div>
+                  <option value="true">available</option>
+                  <option value="false">not available</option>
+                </select>
+<div>
+  <button>Click here to update schedules</button>
+</div>
         </div>
       </div>
 
