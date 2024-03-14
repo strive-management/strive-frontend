@@ -3,7 +3,7 @@ import { ChangeEventHandler, FC } from 'react';
 interface InputProps {
   type: string;
   name?: string;
-  value?: string;
+  value?: string | [];
   onChange?: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   additionalClasses?: string;
