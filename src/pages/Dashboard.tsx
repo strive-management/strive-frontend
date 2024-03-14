@@ -36,7 +36,7 @@ const Dashboard: FC = () => {
           <h1>Off Duty Staff</h1>
         </div>
         <div className='flex flex-col items-center content-center p-6 w-11/12 h-60 top-20 border-2 border-gray-300 rounded-xl text-2xl text-gray-600 bg-white'>
-          <h1>Off Duty Staff</h1>
+          <DonutCharts/>
         </div>
       </div>
       
