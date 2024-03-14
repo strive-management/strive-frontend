@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Layout from './pages/Layout';
+
 import Register from './pages/Register';
 import Admin from './pages/Admin';
 import Clock from './pages/Clock';
@@ -16,49 +16,45 @@ import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
 import EditModal from './components/EditModal';
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Landing />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+      },
+    ],
   },
   {
     path: '/dashboard',
-    element: (
-      <Layout>
-        <Dashboard />
-      </Layout>
-    ),
-  },
-  {
-    path: '/register',
-    element: <Register />,
-  },
-  {
-    path: '/admin',
-    element: <Layout>
-      <Admin />
-    </Layout>,
-  },
-  {
-    path: '/clock',
-    element: <Layout>
-      <Clock />
-    </Layout>,
-  },
-  {
-    path: '/roster',
-    element: <Layout>
-      <Roster />
-    </Layout>,
+    element: <Dashboard />,
     children: [
       {
-        path: '/roster/EditModal',
-        element: <EditModal />,
+        path: '/dashboard/admin',
+        element: <Admin />,
+      },
+      {
+        path: '/dashboard/roster',
+        element: <Roster />,
+        children: [
+          {
+            path: '/dashboard/roster/EditModal',
+            element: <EditModal />,
+          },
+        ],
+      },
+      {
+        path: '/dashboard/clock',
+        element: <Clock />,
       },
     ],
   },
