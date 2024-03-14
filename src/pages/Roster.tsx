@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import SideNavBar from '../components/NewNavBar';
+import SideNavBar from '../components/SideNavBar';
 
 import EditModal from '../components/EditModal';
-
 
 interface EmployeeInfo {
   id: number;
@@ -109,13 +108,13 @@ export default function Roster() {
     <>
       <SideNavBar />
       <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
-            <h1
-              style={{ fontFamily: "'Lato', sans-serif" }}
-              className="text-gray-700 text-xl place-content-center"
-            >
-              Roster
-            </h1>
-          </div>
+        <h1
+          style={{ fontFamily: "'Lato', sans-serif" }}
+          className="text-gray-700 text-xl place-content-center"
+        >
+          Roster
+        </h1>
+      </div>
       <div style={containerStyle}>
         <h1 style={h1Style}>All Employees</h1>
         <div style={containerStyle}>
