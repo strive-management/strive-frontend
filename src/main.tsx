@@ -1,22 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
 import './index.css';
+
+import React, { ReactNode, Suspense, lazy } from 'react';
+import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import Landing from './pages/Landing';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-
 import Register from './pages/Register';
-import Admin from './pages/Admin';
-import Clock from './pages/Clock';
-import Roster from './pages/Roster';
+
+import Dashboard from './pages/Dashboard';
 
 import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
 import EditModal from './components/EditModal';
 import ErrorPage from './pages/ErrorPage';
+
+const Admin = lazy(() => import('./pages/Admin'));
+const Clock = lazy(() => import('./pages/Clock'));
+const Roster = lazy(() => import('./pages/Roster'));
+
+interface LazyWrapProps {
+  children: ReactNode;
+}
+
+const LazyWrap: React.FC<LazyWrapProps> = ({ children }) => (
+  <Suspense
+    fallback={
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      </div>
+    }
+  >
+    {children}
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -43,7 +61,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard/admin',
-        element: <Admin />,
+        element: (
+          <LazyWrap>
+            <Admin />
+          </LazyWrap>
+        ),
         errorElement: <ErrorPage />,
       },
       {
