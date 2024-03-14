@@ -27,34 +27,41 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />,
+        errorElement: <ErrorPage />,
       },
       {
         path: '/register',
         element: <Register />,
+        errorElement: <ErrorPage />,
       },
     ],
   },
   {
     path: '/dashboard',
     element: <Dashboard />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/dashboard/admin',
         element: <Admin />,
+        errorElement: <ErrorPage />,
       },
       {
         path: '/dashboard/roster',
         element: <Roster />,
+        errorElement: <ErrorPage />,
         children: [
           {
             path: '/dashboard/roster/EditModal',
             element: <EditModal />,
+            errorElement: <ErrorPage />,
           },
         ],
       },
       {
         path: '/dashboard/clock',
         element: <Clock />,
+        errorElement: <ErrorPage />,
       },
     ],
   },
