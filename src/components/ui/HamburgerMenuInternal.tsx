@@ -12,25 +12,25 @@ const BurgerMenuInternal: React.FC = () => {
     <>
         <Burger className="fixed top-6 right-10 z-20 block sm:hidden" opened={opened} onClick={toggle} aria-label="Toggle navigation" color={colorScheme === 'dark' ? 'white' : 'black'}/>
         { opened && (
-                <div className='absolute backdrop-blur-md top-20 z-20 border-b-2 border-gray-300 left-0 right-0 bg-white dark:bg-[#1a0429] p-5 sm:hidden'>
+                <div className='absolute backdrop-blur-md top-20 z-20 border-b-2 border-gray-300 left-0 right-0 bg-white dark:bg-[#212020] p-5 sm:hidden'>
                 <ul className="gap-8 flex flex-col place-items-center justify-items-center sm:hidden">
                   <li>
-                    <a href="#" className="hover:text-blue-200">
+                    <a href="#" className="text-gray-300 hover:text-blue-200">
                       Dashboard
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-blue-200">
+                    <a href="#" className="text-gray-300 hover:text-blue-200">
                       Admin
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-blue-200">
+                    <a href="#" className="text-gray-300 hover:text-blue-200">
                       Roster
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-blue-200">
+                    <a href="#" className="text-gray-300 hover:text-blue-200">
                       Clock
                     </a>
                   </li>

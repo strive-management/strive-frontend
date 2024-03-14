@@ -15,7 +15,7 @@ const SideNavBar: React.FC = () => {
   return (
     <>
       <HamburgerMenuInternal />
-      <div className="hidden fixed z-10 min-h-screen border-r-2 border-gray-400 sm:bg-white sm:border-r-2 sm:border-gray-400 sm:flex sm:flex-col sm:w-20 md:w-40 md:border-r-2">
+      <div className="hidden fixed z-10 min-h-screen border-r-2 border-gray-400 sm:bg-white sm:border-r-2 sm:border-gray-400 sm:flex sm:flex-col sm:w-20 md:w-40 md:border-r-2 dark:bg-[#212020]">
         
         <div className="absolute flex items-center sm:left-2 md:left-8 top-0">
           <img src={logoDark} alt="Logo" className="h-20 w-20 block dark:hidden" />
