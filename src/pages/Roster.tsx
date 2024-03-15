@@ -118,11 +118,11 @@ export default function Roster() {
       <div style={containerStyle}>
         <h1 style={h1Style}>All Employees</h1>
         <div style={containerStyle}>
-          <table style={tableStyle}>
-            <thead>
+          <table className='table-auto w-full mt-4 border-collapse border border-gray-200' style={tableStyle}>
+            <thead className='bg-gray-700 dark:bggray-300'>
               <tr>
                 {headers.map((header) => (
-                  <th key={header} style={thStyle}>
+                  <th className='border px-4 py-2 text-left text-gray-600' key={header} style={thStyle}>
                     {header}
                   </th>
                 ))}
@@ -132,7 +132,7 @@ export default function Roster() {
               {rows.map((row) => (
                 <tr key={row[0]}>
                   {row.map((cell, index) => (
-                    <td key={index} style={tdStyle}>
+                    <td key={index} style={tdStyle} className='border px-4 py-2'>
                       {cell}
                     </td>
                   ))}
