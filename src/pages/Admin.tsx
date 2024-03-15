@@ -166,7 +166,7 @@ export default function Admin() {
             <div className="flex justify-around mt-5">
               <div>
                 <Label text={'Work Location'} />
-                <Select
+                {/* <Select
                   name="location_name"
                   value={employeeInfo.location_name}
                   onChange={handleChange}
@@ -177,7 +177,7 @@ export default function Admin() {
                   defaultOption="Select Location"
                   includeAddNew={true}
                   onAddNew={() => handleAddNew('locations')}
-                />
+                /> */}
               </div>
               <div className="">
                 <Label text={'First Name'} />
@@ -223,7 +223,7 @@ export default function Admin() {
               </div>
               <div>
                 <Label text={'Job'} />
-                <Select
+                {/* <Select
                   name="job_title"
                   value={employeeInfo.job_title}
                   onChange={handleChange}
@@ -234,11 +234,11 @@ export default function Admin() {
                   defaultOption="Select Job"
                   includeAddNew={true}
                   onAddNew={() => handleAddNew('jobs')}
-                />
+                /> */}
               </div>
               <div>
                 <Label text={'Department'} />
-                <Select
+                {/* <Select
                   name="department_name"
                   value={employeeInfo.department_name}
                   onChange={handleChange}
@@ -249,7 +249,7 @@ export default function Admin() {
                   defaultOption="Select Department"
                   includeAddNew={true}
                   onAddNew={() => handleAddNew('departments')}
-                />
+                /> */}
               </div>
             </div>
             <label className="font-medium text-lg">Address</label>
