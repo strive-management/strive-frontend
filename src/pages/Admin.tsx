@@ -151,13 +151,10 @@ export default function Admin() {
           <img src={logoLight} alt="logo-light" className='sm:w-10 sm:h-10 w-20 h-20 hidden dark:block'/>
         </div>
 
-        <div>
-          <h1>Employee Basic Info</h1>
-        </div>
-
         <form onSubmit={handleSubmit} className='absolute flex flex-col items-center top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto bg-white dark:bg-[#212020]'>
         
         <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
+        <label className="font-medium text-lg dark:text-gray-300">Basic Information</label>
           <div>
           <Label text={''} />
                 <Input
