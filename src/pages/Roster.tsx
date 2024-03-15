@@ -48,19 +48,19 @@ export default function Roster() {
   const rows = employeeInformation.map((item) => Object.values(item));
   // because the table creates the content using the object.values method you have to use zero to access the id number.Then you can delete the specific entry.
 
-  const containerStyle: React.CSSProperties = {
-    margin: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 'auto',
-  };
+  // const containerStyle: React.CSSProperties = {
+  //   margin: 0,
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: 'auto',
+  // };
 
-  const tableStyle: React.CSSProperties = {
-    borderCollapse: 'collapse',
-    width: 'auto',
-  };
+  // const tableStyle: React.CSSProperties = {
+  //   borderCollapse: 'collapse',
+  //   width: 'auto',
+  // };
 
   const thStyle: React.CSSProperties = {
     border: '1px solid #dddddd',
@@ -69,11 +69,11 @@ export default function Roster() {
     backgroundColor: '#f2f2f2',
   };
 
-  const tdStyle: React.CSSProperties = {
-    border: '1px solid #dddddd',
-    padding: '8px',
-    textAlign: 'left',
-  };
+  // const tdStyle: React.CSSProperties = {
+  //   border: '1px solid #dddddd',
+  //   padding: '8px',
+  //   textAlign: 'left',
+  // };
 
   const deleteButton: React.CSSProperties = {
     margin: '2px',
