@@ -155,54 +155,105 @@ export default function Admin() {
           <h1>Employee Basic Info</h1>
         </div>
 
-        <form className='absolute flex flex-col items-center top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto bg-white dark:bg-[#212020]'>
+        <form onSubmit={handleSubmit} className='absolute flex flex-col items-center top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto bg-white dark:bg-[#212020]'>
         
-        <div className='flex flex-col border-2 p-10 rounded-2xl'>
+        <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
           <div>
-            <label htmlFor="first-name" className="block text-xl font-medium text-gray700 dark:text-gray-300">First Name</label>
-            <input type="text" id="first-name" name="first-name" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+          <Label text={''} />
+                <Input
+                  type={'text'}
+                  name="first_name"
+                  value={employeeInfo.first_name}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                />
           </div>
           <div>
-            <label htmlFor="last-name" className="block text-xl font-medium text-gray700 dark:text-gray-300">Last Name</label>
-            <input type="text" id="last-name" name="last-name" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+            <Label text={''} />
+                <Input
+                  type={'text'}
+                  name="last_name"
+                  value={employeeInfo.last_name}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                />
           </div>
           <div>
-            <label htmlFor="email" className="block text-xl font-medium text-gray700 dark:text-gray-300">Email</label>
-            <input type="email" id="email" name="email" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+          <Label text={''} />
+                <Input
+                  type={'email'}
+                  name="email"
+                  value={employeeInfo.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                />
           </div>
           <div>
-            <label htmlFor="phone" className="block text-xl font-medium text-gray700 dark:text-gray-300">Phone Number</label>
-            <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+          <Label text={''} />
+                <Input
+                  type={'tel'}
+                  name="phone_number"
+                  value={employeeInfo.phone_number}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                />
           </div>
         </div>
 
-      
-        <div className='flex flex-col border-2 p-10 rounded-2xl'>
+        <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
+        <label className="font-medium text-lg dark:text-gray-300">Address Information</label>
+
+              <Label text={''} />
+              <Input
+                type={'number'}
+                name="zipcode"
+                value={employeeInfo.zipcode}
+                onChange={handleChange}
+                placeholder="Zip Code"
+              />
         <div>
-          <label htmlFor="postal-code" className="block text-xl font-medium text-gray700 dark:text-gray-300">Postal Code</label>
-          <input type="text" id="postal-code" name="postal-code" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+        <Input
+                  type={'text'}
+                  name="address_1"
+                  value={employeeInfo.address_1}
+                  onChange={handleChange}
+                  placeholder="Address line 1"
+                />
         </div>
         <div>
-          <label htmlFor="address-line-one" className="block text-xl font-medium text-gray700 dark:text-gray-300">Address Line 1</label>
-          <input type="text" id="address-line-one" name="address-line-one" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+        <Input
+                  type={'text'}
+                  name="address_2"
+                  value={employeeInfo.address_2}
+                  onChange={handleChange}
+                  placeholder="Address line 2"
+                />
         </div>
         <div>
-          <label htmlFor="address-line-one" className="block text-xl font-medium text-gray700 dark:text-gray-300">Address Line 2</label>
-          <input type="text" id="address-line-one" name="address-line-one" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+        <Label text={''} />
+                <Input
+                  type={'text'}
+                  name="city"
+                  value={employeeInfo.city}
+                  onChange={handleChange}
+                  placeholder="City"
+                />
         </div>
         <div>
-          <label htmlFor="city" className="block text-xl font-medium text-gray700 dark:text-gray-300">City</label>
-          <input type="text" id="city" name="city" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
-        </div>
-        <div>
-          <label htmlFor="Country" className="block text-xl font-medium text-gray700 dark:text-gray-300">Country</label>
-          <input type="text" id="Country" name="Country" required className="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500"/>
+        <Label text={''} />
+                <Input
+                  type={'text'}
+                  name="country"
+                  value={employeeInfo.country}
+                  onChange={handleChange}
+                  placeholder="Country"
+                />
         </div>
         </div>
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
           <Label text={'Work Location'} />
-            {/* <Select
+            <Select
                     name="location_name"
                     value={employeeInfo.location_name}
                     onChange={handleChange}
@@ -213,10 +264,10 @@ export default function Admin() {
                     defaultOption="Select Location"
                     includeAddNew={true}
                     onAddNew={() => handleAddNew('locations')}
-                  /> */}
+                  />
 
           <Label text={'Job'} />
-            {/* <Select
+            <Select
               name="job_title"
               value={employeeInfo.job_title}
               onChange={handleChange}
@@ -227,10 +278,10 @@ export default function Admin() {
               defaultOption="Select Job"
               includeAddNew={true}
               onAddNew={() => handleAddNew('jobs')}
-            /> */}
+            />
 
           <Label text={'Department'} />
-            {/* <Select
+            <Select
               name="department_name"
               value={employeeInfo.department_name}
               onChange={handleChange}
@@ -241,18 +292,18 @@ export default function Admin() {
               defaultOption="Select Department"
               includeAddNew={true}
               onAddNew={() => handleAddNew('departments')}
-            /> */}
+            />
         </div>
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
           <div className="">
-            <Label text={'Manager ID'} />
+            <Label text={''} />
               <Input
               type={'number'}
               name="manager"
               value={employeeInfo.manager_id || ''}
               onChange={handleChange}
-              placeholder=""
+              placeholder="Manager ID"
             />
           </div>
         </div>
@@ -264,6 +315,13 @@ export default function Admin() {
           >
             Send
           </button>
+          {showModal && (
+              <InputModal
+                type={modalType}
+                onSubmit={handleModalSubmit}
+                onClose={() => setShowModal(false)}
+              />
+            )}
           <button
             type="button"
             className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
@@ -282,204 +340,3 @@ export default function Admin() {
     </>
   );
 }
-
-
-
-
-{/* <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 dark:bg-[#212020] w-full h-20">
-        <h1
-          style={{ fontFamily: "'Lato', sans-serif" }}
-          className="text-gray-700 text-xl place-content-center"
-        >
-          Admin
-        </h1>
-      </div>
-      <div className="">
-        <div className="flex items-center justify-around ml-64 h-min mt-5 pb-2 gap-20 border-b-2 ">
-          <div className="">
-            <h1 className="font-medium">ADMIN</h1>
-          </div>
-          <div className="flex items-center">
-            <input
-              type="text"
-              placeholder="Search"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full  block w-full p-1.5 dark:bg-gray-600 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white "
-            />
-          </div>
-        </div>
-        <main className="ml-64 mt-5 p-5">
-          <h1 className="font-medium text-xl">Applicants Personal info</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="flex justify-around mt-5">
-              <div>
-                <Label text={'Work Location'} />
-                <Select
-                  name="location_name"
-                  value={employeeInfo.location_name}
-                  onChange={handleChange}
-                  options={options.locations.map((option) => ({
-                    id: option.id,
-                    name: option.location_name,
-                  }))}
-                  defaultOption="Select Location"
-                  includeAddNew={true}
-                  onAddNew={() => handleAddNew('locations')}
-                />
-              </div>
-              <div className="">
-                <Label text={'First Name'} />
-                <Input
-                  type={'text'}
-                  name="first_name"
-                  value={employeeInfo.first_name}
-                  onChange={handleChange}
-                  placeholder="First Name"
-                />
-              </div>
-              <div>
-                <Label text={'Last Name'} />
-                <Input
-                  type={'text'}
-                  name="last_name"
-                  value={employeeInfo.last_name}
-                  onChange={handleChange}
-                  placeholder="Last Name"
-                />
-              </div>
-            </div>
-            <div className="flex justify-around mt-5">
-              <div className="">
-                <Label text={'Email'} />
-                <Input
-                  type={'email'}
-                  name="email"
-                  value={employeeInfo.email}
-                  onChange={handleChange}
-                  placeholder="Email"
-                />
-              </div>
-              <div>
-                <Label text={'Phone Number'} />
-                <Input
-                  type={'tel'}
-                  name="phone_number"
-                  value={employeeInfo.phone_number}
-                  onChange={handleChange}
-                  placeholder="Phone Number"
-                />
-              </div>
-              <div>
-                <Label text={'Job'} />
-                <Select
-                  name="job_title"
-                  value={employeeInfo.job_title}
-                  onChange={handleChange}
-                  options={options.jobs.map((option) => ({
-                    id: option.id,
-                    name: option.job_title, // Assuming your data source has 'department_name'
-                  }))}
-                  defaultOption="Select Job"
-                  includeAddNew={true}
-                  onAddNew={() => handleAddNew('jobs')}
-                />
-              </div>
-              <div>
-                <Label text={'Department'} />
-                <Select
-                  name="department_name"
-                  value={employeeInfo.department_name}
-                  onChange={handleChange}
-                  options={options.departments.map((option) => ({
-                    id: option.id,
-                    name: option.department_name, // Assuming your data source has 'department_name'
-                  }))}
-                  defaultOption="Select Department"
-                  includeAddNew={true}
-                  onAddNew={() => handleAddNew('departments')}
-                />
-              </div>
-            </div>
-            <label className="font-medium text-lg">Address</label>
-            <div className=" w-1/5 mt-5 ml-28">
-              <Label text={'Zip Code'} />
-              <Input
-                type={'number'}
-                name="zipcode"
-                value={employeeInfo.zipcode}
-                onChange={handleChange}
-                placeholder="Zip Code"
-              />
-            </div>
-            <div className="flex justify-around mt-5">
-              <div className="">
-                <Label text={'Country'} />
-                <Input
-                  type={'text'}
-                  name="country"
-                  value={employeeInfo.country}
-                  onChange={handleChange}
-                  placeholder="City"
-                />
-              </div>
-              <div>
-                <Label text={'City'} />
-                <Input
-                  type={'text'}
-                  name="city"
-                  value={employeeInfo.city}
-                  onChange={handleChange}
-                  placeholder="City"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-5 mt-10 ml-28">
-              <div className="w-1/2">
-                <Input
-                  type={'text'}
-                  name="address_1"
-                  value={employeeInfo.address_1}
-                  onChange={handleChange}
-                  placeholder="Address line 1"
-                />
-              </div>
-              <div className="w-1/2">
-                <Input
-                  type={'text'}
-                  name="address_2"
-                  value={employeeInfo.address_2}
-                  onChange={handleChange}
-                  placeholder="Address line 2"
-                />
-              </div>
-            </div>
-            {showModal && (
-              <InputModal
-                type={modalType}
-                onSubmit={handleModalSubmit}
-                onClose={() => setShowModal(false)}
-              />
-            )}
-            {/* <label className='font-medium text-lg'>Role</label> */}
-      //       <div className="flex justify-around mt-5">
-      //         <div className="">
-      //           <Label text={'Manager'} />
-      //           <Input
-      //             type={'number'}
-      //             name="manager"
-      //             value={employeeInfo.manager_id || ''}
-      //             onChange={handleChange}
-      //             placeholder="Input your manager's id number here"
-      //           />
-      //         </div>
-      //       </div>
-      //       <div className="flex justify-end mx-28 ">
-      //         <button
-      //           type="submit"
-      //           className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
-      //         >
-      //           Send
-      //         </button>
-      //       </div>
-      //     </form>
-      //   </main>
-      // </div> */}
