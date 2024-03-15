@@ -27,13 +27,13 @@ const SideNavBar: React.FC = () => {
         <Link to="/dashboard">
           <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faChartBar} /> <h4 className="hidden sm:hidden md:block">Dashboard</h4></div>
         </Link>
-        <Link to="/admin">
+        <Link to="/dashboard/admin">
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faUser} /> <h4 className="hidden sm:hidden md:block">Admin</h4></div>
         </Link>
-        <Link to="/roster">
+        <Link to="/dashboard/roster">
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faClipboard} /> <h4 className="hidden sm:hidden md:block">Roster</h4></div>
         </Link>
-        <Link to="/clock">
+        <Link to="/dashboard/clock">
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faClock} /> <h4 className="hidden sm:hidden md:block">Clock</h4></div>
         </Link>
       </div>

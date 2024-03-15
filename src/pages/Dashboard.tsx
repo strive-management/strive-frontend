@@ -20,7 +20,7 @@ const Dashboard: FC = () => {
 
   return (
     <>
-      <div className="h-screen w-full dark:bg-[#503270]">
+      <div className="h-screen w-full dark:bg-[#212020]">
         <Header />
         <SideNavBar />
         {isOutletActive ? (
