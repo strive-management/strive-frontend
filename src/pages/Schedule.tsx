@@ -26,7 +26,7 @@ export default function Schedule() {
   const [scheduleInformation, setScheduleInformation] = useState<
     ScheduleInfo[]
   >([]);
-  const [employeeInfo, setEmployInfo] = useState<EmployeeInfo[]>();
+  const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo[]>();
 
   const [employeeScheduleInfo, setEmployeeScheduleInfo] = useState<
     ScheduleInfo[] | any
@@ -42,7 +42,7 @@ export default function Schedule() {
     const fetchNames = async () => {
       try {
         const response = await axios.get(`${LOCALDB_URL}employees`);
-        setEmployInfo(response.data);
+        setEmployeeInfo(response.data);
         console.log(response.data);
       } catch (error) {
         console.error(error);
@@ -84,6 +84,23 @@ export default function Schedule() {
       console.error(err.message);
     }
   };
+
+  useEffect(() => {
+    const selectedDate = scheduleInformation.filter((schedule) => {
+      console.log(schedule.date);
+      console.log(employeeScheduleInfo.date);
+
+      return schedule.date === employeeScheduleInfo.date;
+    });
+    const unavailableEmployees = selectedDate.map((date) => date.employee_id);
+    console.log(unavailableEmployees);
+    const availableEmployees = employeeInfo?.filter(
+      (employee) => !unavailableEmployees.includes(employee.id)
+    );
+    setEmployeeInfo(availableEmployees);
+
+    console.log(selectedDate);
+  }, [employeeScheduleInfo]);
 
   console.log(employeeScheduleInfo);
 
