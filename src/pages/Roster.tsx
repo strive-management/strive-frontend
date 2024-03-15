@@ -115,14 +115,16 @@ export default function Roster() {
           Roster
         </h1>
       </div>
-      <div style={containerStyle}>
+      <div className="flex flex-col">
         <h1 style={h1Style}>All Employees</h1>
-        <div style={containerStyle}>
-          <table className='table-auto w-full mt-4 border-collapse border border-gray-200' style={tableStyle}>
-            <thead className='bg-gray-700 dark:bggray-300'>
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div className="overflow-hidden">
+            <table className="min-w-full text-left text-sm font-light text-surface dark:text-white">
+            <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
               <tr>
                 {headers.map((header) => (
-                  <th className='border px-4 py-2 text-left text-gray-600' key={header} style={thStyle}>
+                  <th className='px-6 py-4' scope='col' key={header} style={thStyle}>
                     {header}
                   </th>
                 ))}
@@ -132,7 +134,7 @@ export default function Roster() {
               {rows.map((row) => (
                 <tr key={row[0]}>
                   {row.map((cell, index) => (
-                    <td key={index} style={tdStyle} className='border px-4 py-2'>
+                    <td key={index} className='border-b border-neutral-200 dark:border-white/10'>
                       {cell}
                     </td>
                   ))}
@@ -151,6 +153,8 @@ export default function Roster() {
               ))}
             </tbody>
           </table>
+            </div>
+          </div>
         </div>
       </div>
     </>
