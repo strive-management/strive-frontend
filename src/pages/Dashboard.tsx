@@ -26,7 +26,7 @@ const Dashboard: FC = () => {
         {isOutletActive ? (
           <Outlet />
         ) : (
-          <div className="grid grid-cols-5 gap-4 m-6 pl-[300px] pr-[100px] fixed top-20 w-full">
+          <div className="flex flex-col sm:grid sm:grid-cols-5 sm:gap-4 m-6 sm:pl-[300px] pr-[100px] fixed top-20 w-full">
             <div className="bg-gray-400 p-6 place-items-center rounded-xl">
               <h1 className="">
                 <DateAndTime />

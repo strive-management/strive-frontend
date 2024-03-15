@@ -13,7 +13,7 @@ import {
 const SideNavBar: React.FC = () => {
   return (
     <>
-      <div className="bg-blue-50 text-gray-700 w-64 min-h-screen flex flex-col fixed items-center inset-y-0 left-0 z-0 dark:bg-[#1a0429]/80">
+      <div className="hidden bg-blue-50 text-gray-700 sm:w-20 md:w-64 min-h-screen sm:flex sm:flex-col fixed items-center inset-y-0 left-0 z-0 dark:bg-[#1a0429]/80">
         <div className="flex items-center space-x-2 p-4">
           <img
             src={logoDark}
@@ -29,7 +29,7 @@ const SideNavBar: React.FC = () => {
       </div>
       <div
         id="links"
-        className="fixed top-[150px] content-center pl-20 justify-center gap-6 flex flex-col z-10 dark:text-gray-300"
+        className="fixed hidden top-[150px] content-center sm:pl-20 justify-center gap-6 sm:flex flex-col z-10 dark:text-gray-300"
       >
         <Link to="/dashboard">
           <FontAwesomeIcon icon={faChartBar} /> Dashboard
