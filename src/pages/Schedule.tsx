@@ -8,8 +8,8 @@ interface ScheduleInfo {
   employee_id: number;
   date: string;
   available: boolean;
-  schedule_start: string;
-  schedule_end: string;
+  scheduled_start: string;
+  scheduled_end: string;
   clock_in: string;
   clock_out: string;
 }
@@ -36,6 +36,8 @@ export default function Schedule() {
     useState<EmployeeInfo[]>();
 
   const [click, setClick] = useState<boolean>(false);
+
+  const [date, setDate] = useState<string>('');
 
   const headers = Object.keys(scheduleInformation[0] || {});
   const rows = scheduleInformation.map((item) => Object.values(item));
@@ -67,6 +69,21 @@ export default function Schedule() {
     fetchScheduleData();
   }, []);
 
+  // this useEffect is responsible for updating the drop down menu based on the date selected in the calendar input.
+  useEffect(() => {
+    setUpdatedEmployeeInfo(employeeInfo);
+    const selectedDate = scheduleInformation.filter((schedule) => {
+      return schedule.date === employeeScheduleInfo.date;
+    });
+
+    const unavailableEmployees = selectedDate.map((date) => date.employee_id);
+
+    const availableEmployees = employeeInfo?.filter(
+      (employee) => !unavailableEmployees.includes(employee.id)
+    );
+    setUpdatedEmployeeInfo(availableEmployees);
+  }, [employeeScheduleInfo]);
+
   const handleAvailable = () => {
     setClick(!click);
     console.log(click);
@@ -87,21 +104,8 @@ export default function Schedule() {
       console.error(err.message);
     }
   };
-
-  useEffect(() => {
-    setUpdatedEmployeeInfo(employeeInfo);
-    const selectedDate = scheduleInformation.filter((schedule) => {
-      return schedule.date === employeeScheduleInfo.date;
-    });
-
-    const unavailableEmployees = selectedDate.map((date) => date.employee_id);
-
-    const availableEmployees = employeeInfo?.filter(
-      (employee) => !unavailableEmployees.includes(employee.id)
-    );
-    setUpdatedEmployeeInfo(availableEmployees);
-  }, [employeeScheduleInfo]);
-
+  console.log(employeeScheduleInfo);
+  console.log(date.slice(0, 11) + '   ' + date.slice(16, date.length));
   return (
     <>
       <SideNavBar />
@@ -168,12 +172,13 @@ export default function Schedule() {
               type='date'
               className=' px-6 py-2 border rounded-full'
               name='date'
-              onChange={(e) =>
+              onChange={(e) => {
+                setDate(new Date(e.target.value).toISOString());
                 setEmployeeScheduleInfo({
                   ...employeeScheduleInfo,
                   date: new Date(e.target.value).toISOString(),
-                })
-              }
+                });
+              }}
             />
           </div>
           <div>
@@ -183,7 +188,10 @@ export default function Schedule() {
               onChange={(e) => {
                 setEmployeeScheduleInfo({
                   ...employeeScheduleInfo,
-                  schedule_start: e.target.value,
+                  scheduled_start:
+                    date.slice(0, 11) +
+                    e.target.value +
+                    date.slice(16, date.length),
                 });
               }}
               className=' px-6 py-2 border rounded-full'
@@ -196,7 +204,10 @@ export default function Schedule() {
               onChange={(e) => {
                 setEmployeeScheduleInfo({
                   ...employeeScheduleInfo,
-                  schedule_end: e.target.value,
+                  scheduled_end:
+                    date.slice(0, 11) +
+                    e.target.value +
+                    date.slice(16, date.length),
                 });
               }}
               className='px-6 py-2 border rounded-full'
