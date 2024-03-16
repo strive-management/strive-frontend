@@ -3,72 +3,49 @@ import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import { auth } from '../firebase/firebase';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useState } from 'react';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-
-interface UserCredentials {
-  email: string;
-  password: string;
-}
+  loginWithEmailAndPassword,
+  signInWithGoogle,
+} from '../services/authService';
 
 export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
-  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+  const [credentials, setCredentials] = useState({
     email: '',
     password: '',
   });
 
-  function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
-    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    console.log(userCredentials);
-  }
-
-  const handleGoogle = async (
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    e.preventDefault();
-    const provider = new GoogleAuthProvider();
-    // return signInWithPopup(auth, provider);
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-
-        console.error(errorMessage);
-        setError(errorMessage);
-      });
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
   };
 
-  function handleLogin(
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
+  const handleGoogleSignIn = async (e: { preventDefault: () => void }) => {
+    try {
+      e.preventDefault();
+      await signInWithGoogle();
+      navigate('/dashboard');
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setError('');
-    signInWithEmailAndPassword(
-      auth,
-      userCredentials.email,
-      userCredentials.password
-    )
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-  }
+    try {
+      await loginWithEmailAndPassword(credentials.email, credentials.password);
+      navigate('/dashboard');
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
 
   function handlePwdReset() {
     const email = prompt('Please enter your email ');
@@ -99,10 +76,9 @@ export default function Login() {
             <Input
               type={'email'}
               name="email"
-              onChange={(e) => {
-                handleCredentials(e);
-              }}
               placeholder=""
+              value={credentials.email}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-5">
@@ -112,9 +88,8 @@ export default function Login() {
             <Input
               type={'password'}
               name="password"
-              onChange={(e) => {
-                handleCredentials(e);
-              }}
+              value={credentials.password}
+              onChange={handleChange}
               placeholder=""
             />
           </div>
@@ -122,9 +97,7 @@ export default function Login() {
           <div className="flex flex-row justify-evenly">
             <button
               type="submit"
-              onClick={(e) => {
-                handleLogin(e);
-              }}
+              onClick={handleLogin}
               className="text-gray-700 bg-[#c0f2fc] hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-[#75c479] dark:hover:bg-[#58945b] dark:focus:ring-gray-800"
             >
               Login
@@ -160,9 +133,7 @@ export default function Login() {
           </div>
           <div className="flex gap-10 items-center justify-center">
             <button
-              onClick={(e) => {
-                handleGoogle(e);
-              }}
+              onClick={handleGoogleSignIn}
               className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
             >
               <div className="bg-white p-2 rounded-full">
