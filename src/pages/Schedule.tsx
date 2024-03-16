@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import SideNavBar from '../components/SideNavBar';
-import Label from "../components/ui/Label";
-import axios from "axios";
-
+import Label from '../components/ui/Label';
+import axios from 'axios';
 
 interface ScheduleInfo {
   id: number;

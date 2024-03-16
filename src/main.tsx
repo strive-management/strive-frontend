@@ -20,6 +20,7 @@ const Admin = lazy(() => import('./pages/Admin'));
 const Clock = lazy(() => import('./pages/Clock'));
 const Roster = lazy(() => import('./pages/Roster'));
 const Schedule = lazy(() => import('./pages/Schedule'));
+const ScheduleView = lazy(() => import('./pages/ScheduleView'));
 
 interface LazyWrapProps {
   children: ReactNode;
@@ -99,6 +100,15 @@ const router = createBrowserRouter([
         element: (
           <LazyWrap>
             <Schedule />
+          </LazyWrap>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/dashboard/scheduleview',
+        element: (
+          <LazyWrap>
+            <ScheduleView />
           </LazyWrap>
         ),
         errorElement: <ErrorPage />,
