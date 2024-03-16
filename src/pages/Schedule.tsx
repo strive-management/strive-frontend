@@ -32,6 +32,9 @@ export default function Schedule() {
     ScheduleInfo[] | any
   >();
 
+  const [updatedEmployeeInfo, setUpdatedEmployeeInfo] =
+    useState<EmployeeInfo[]>();
+
   const [click, setClick] = useState<boolean>(false);
 
   const headers = Object.keys(scheduleInformation[0] || {});
@@ -43,7 +46,7 @@ export default function Schedule() {
       try {
         const response = await axios.get(`${LOCALDB_URL}employees`);
         setEmployeeInfo(response.data);
-        console.log(response.data);
+        setUpdatedEmployeeInfo(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -86,23 +89,18 @@ export default function Schedule() {
   };
 
   useEffect(() => {
+    setUpdatedEmployeeInfo(employeeInfo);
     const selectedDate = scheduleInformation.filter((schedule) => {
-      console.log(schedule.date);
-      console.log(employeeScheduleInfo.date);
-
       return schedule.date === employeeScheduleInfo.date;
     });
+
     const unavailableEmployees = selectedDate.map((date) => date.employee_id);
-    console.log(unavailableEmployees);
+
     const availableEmployees = employeeInfo?.filter(
       (employee) => !unavailableEmployees.includes(employee.id)
     );
-    setEmployeeInfo(availableEmployees);
-
-    console.log(selectedDate);
+    setUpdatedEmployeeInfo(availableEmployees);
   }, [employeeScheduleInfo]);
-
-  console.log(employeeScheduleInfo);
 
   return (
     <>
@@ -151,8 +149,8 @@ export default function Schedule() {
             }}
           >
             <option className=' p-2 border'>Select Employee</option>
-            {employeeInfo
-              ? employeeInfo.map((employee) => {
+            {updatedEmployeeInfo
+              ? updatedEmployeeInfo.map((employee) => {
                   return (
                     <option
                       key={employee.id as number}
