@@ -3,15 +3,17 @@ import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import { auth } from '../firebase/firebase';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import {
   loginWithEmailAndPassword,
   signInWithGoogle,
 } from '../services/authService';
+import useOutsideClick from '../hook/useOutsideClick';
 
 export default function Login() {
   const navigate = useNavigate();
+  const signinRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState('');
   const [credentials, setCredentials] = useState({
     email: '',
@@ -57,10 +59,16 @@ export default function Login() {
       alert('Invalid email');
     }
   }
+  useOutsideClick(signinRef, () => {
+    navigate('/');
+  });
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
+      <div
+        ref={signinRef}
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+      >
         <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />

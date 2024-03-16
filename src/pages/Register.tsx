@@ -3,7 +3,7 @@ import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { auth } from '../firebase/firebase';
 import {
   GoogleAuthProvider,
@@ -12,6 +12,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import axios from 'axios';
+import useOutsideClick from '../hook/useOutsideClick';
 
 interface RegistrationData {
   email: string;
@@ -24,6 +25,7 @@ const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 export default function Register() {
   const navigate = useNavigate();
+  const registerRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState('');
   const [registrationData, setRegistrationData] = useState<RegistrationData>({
     email: '',
@@ -91,10 +93,16 @@ export default function Register() {
       }
     }
   };
+  useOutsideClick(registerRef, () => {
+    navigate('/');
+  });
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
+      <div
+        ref={registerRef}
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+      >
         <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
