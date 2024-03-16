@@ -143,6 +143,7 @@ export default function Admin() {
     <>
 
 
+
 <div className='fixed flex flex-row items-center place-content-center text-3xl top-0 md:left-40 z-10 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300'>
           <div>Admin</div>
         </div>
@@ -160,42 +161,44 @@ export default function Admin() {
         <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
           <div>
           <Label text={''} />
+
                 <Input
                   type={'text'}
-                  name="first_name"
+                  name='first_name'
                   value={employeeInfo.first_name}
                   onChange={handleChange}
-                  placeholder="First Name"
+                  placeholder='First Name'
                 />
           </div>
           <div>
             <Label text={''} />
                 <Input
                   type={'text'}
-                  name="last_name"
+                  name='last_name'
                   value={employeeInfo.last_name}
                   onChange={handleChange}
-                  placeholder="Last Name"
+                  placeholder='Last Name'
                 />
+
           </div>
           <div>
           <Label text={''} />
                 <Input
                   type={'email'}
-                  name="email"
+                  name='email'
                   value={employeeInfo.email}
                   onChange={handleChange}
-                  placeholder="Email"
+                  placeholder='Email'
                 />
           </div>
           <div>
           <Label text={''} />
                 <Input
                   type={'tel'}
-                  name="phone_number"
+                  name='phone_number'
                   value={employeeInfo.phone_number}
                   onChange={handleChange}
-                  placeholder="Phone Number"
+                  placeholder='Phone Number'
                 />
           </div>
         </div>
@@ -204,12 +207,13 @@ export default function Admin() {
         <label className="font-medium text-lg dark:text-gray-300">Address Information</label>
 
               <Label text={''} />
+
               <Input
                 type={'number'}
-                name="zipcode"
+                name='zipcode'
                 value={employeeInfo.zipcode}
                 onChange={handleChange}
-                placeholder="Zip Code"
+                placeholder='Zip Code'
               />
         <div>
         <Input
@@ -329,14 +333,7 @@ export default function Admin() {
             Cancel
           </button>
         </div>
-
         </form>
-
-
-
-
-
-
     </>
   );
 }
