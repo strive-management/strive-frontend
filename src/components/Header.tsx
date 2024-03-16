@@ -1,14 +1,18 @@
+import HamburgerMenuInt from './ui/HamburgerMenuInt';
+
+
 export default function Header() {
   return (
     <>
       <nav>
-        <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 dark:bg-[#1a0429]/80 w-full h-20">
-          <h1
+        <div className="fixed flex flex-row items-center place-content-center text-3xl top-0 md:left-40 z-10 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300">
+          {/* <h1
             style={{ fontFamily: "'Lato', sans-serif" }}
             className="text-gray-300 text-xl place-content-center"
           >
             Dashboard
-          </h1>
+          </h1> */}
+          <HamburgerMenuInt />
         </div>
       </nav>
     </>

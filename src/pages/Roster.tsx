@@ -48,19 +48,19 @@ export default function Roster() {
   const rows = employeeInformation.map((item) => Object.values(item));
   // because the table creates the content using the object.values method you have to use zero to access the id number.Then you can delete the specific entry.
 
-  const containerStyle: React.CSSProperties = {
-    margin: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 'auto',
-  };
+  // const containerStyle: React.CSSProperties = {
+  //   margin: 0,
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   width: 'auto',
+  // };
 
-  const tableStyle: React.CSSProperties = {
-    borderCollapse: 'collapse',
-    width: 'auto',
-  };
+  // const tableStyle: React.CSSProperties = {
+  //   borderCollapse: 'collapse',
+  //   width: 'auto',
+  // };
 
   const thStyle: React.CSSProperties = {
     border: '1px solid #dddddd',
@@ -69,11 +69,11 @@ export default function Roster() {
     backgroundColor: '#f2f2f2',
   };
 
-  const tdStyle: React.CSSProperties = {
-    border: '1px solid #dddddd',
-    padding: '8px',
-    textAlign: 'left',
-  };
+  // const tdStyle: React.CSSProperties = {
+  //   border: '1px solid #dddddd',
+  //   padding: '8px',
+  //   textAlign: 'left',
+  // };
 
   const deleteButton: React.CSSProperties = {
     margin: '2px',
@@ -115,14 +115,16 @@ export default function Roster() {
           Roster
         </h1>
       </div>
-      <div style={containerStyle}>
+      <div className="flex flex-col">
         <h1 style={h1Style}>All Employees</h1>
-        <div style={containerStyle}>
-          <table style={tableStyle}>
-            <thead>
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div className="overflow-hidden">
+            <table className="min-w-full text-left text-sm font-light text-surface dark:text-white">
+            <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
               <tr>
                 {headers.map((header) => (
-                  <th key={header} style={thStyle}>
+                  <th className='px-6 py-4' scope='col' key={header} style={thStyle}>
                     {header}
                   </th>
                 ))}
@@ -132,7 +134,7 @@ export default function Roster() {
               {rows.map((row) => (
                 <tr key={row[0]}>
                   {row.map((cell, index) => (
-                    <td key={index} style={tdStyle}>
+                    <td key={index} className='border-b border-neutral-200 dark:border-white/10'>
                       {cell}
                     </td>
                   ))}
@@ -151,6 +153,8 @@ export default function Roster() {
               ))}
             </tbody>
           </table>
+            </div>
+          </div>
         </div>
       </div>
     </>
