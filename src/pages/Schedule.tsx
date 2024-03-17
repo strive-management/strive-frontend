@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import SideNavBar from '../components/SideNavBar';
-import Label from '../components/ui/Label';
+// import Label from '../components/ui/Label';
 import axios from 'axios';
 
 interface ScheduleInfo {
@@ -160,8 +160,11 @@ export default function Schedule() {
           </div>
           </div>
           </div>
-          <Label text={'Select Employee'} />
-          <select
+          <div id='options-container' className='flex flex-col top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto bg-white dark:bg-[#212020]'>
+          
+          <div className='w-[200px] text-gray-700 dark:text-gray-300'>
+          <h4>Select Employee</h4>
+          <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
             onChange={(e) => {
               setEmployeeScheduleInfo({
                 ...employeeScheduleInfo,
@@ -183,11 +186,12 @@ export default function Schedule() {
                 })
               : null}
           </select>
-          <div className='text-gray-300'>
-            <h4>Select a Date</h4>
+          </div>
+          <div className='text-gray-700 dark:text-gray-300'>
+            <h4>Date</h4>
             <input
               type='date'
-              className=' px-6 py-2 border rounded-full'
+              className='px-6 py-2 border rounded-lg bg-gray-300 dark:bg-gray-700'
               name='date'
               onChange={(e) => {
                 setDate(new Date(e.target.value).toISOString());
@@ -199,7 +203,7 @@ export default function Schedule() {
             />
           </div>
           <div className='text-gray-300'>
-            <h4>Select a shift start time</h4>
+            <h4>Shift Start Time</h4>
             <input
               type='time'
               onChange={(e) => {
@@ -211,11 +215,11 @@ export default function Schedule() {
                     date.slice(16, date.length),
                 });
               }}
-              className=' px-6 py-2 border rounded-full'
+              className='px-6 py-2 border rounded-lg bg-gray-300 dark:bg-gray-700'
             />
           </div>
           <div className='text-gray-300'>
-            <h4>Select a shift end time</h4>
+            <h4>Shift End Time</h4>
             <input
               type='time'
               onChange={(e) => {
@@ -227,18 +231,21 @@ export default function Schedule() {
                     date.slice(16, date.length),
                 });
               }}
-              className='px-6 py-2 border rounded-full'
+              className='px-6 py-2 border rounded-lg bg-gray-300 dark:bg-gray-700'
             />
           </div>
+          <div id='avail-button' className=''>
           {click ? (
-            <button className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 motion-reduce:transition-none dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400" onClick={handleAvailable}>Not Available</button>
+            <button className="inline-block rounded bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Not Available</button>
           ) : (
-            <button className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 motion-reduce:transition-none dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400" onClick={handleAvailable}>Available</button>
+            <button className="inline-block rounded bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Available</button>
           )}
+          </div>
           <div className='text-gray-300'>
-            <button onClick={postSchedule} className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 motion-reduce:transition-none dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400">
+            <button onClick={postSchedule} className="inline-block rounded bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
               Click here to update schedules
             </button>
+          </div>
           </div>
         </div>
       </div>
