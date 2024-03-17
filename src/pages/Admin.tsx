@@ -255,7 +255,7 @@ export default function Admin() {
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
           <Label text={'Work Location'} />
-            {/* <Select
+            <Select
                     name="location_name"
                     value={employeeInfo.location_name}
                     onChange={handleChange}
@@ -266,10 +266,10 @@ export default function Admin() {
                     defaultOption="Select Location"
                     includeAddNew={true}
                     onAddNew={() => handleAddNew('locations')}
-                  /> */}
+                  />
 
           <Label text={'Job'} />
-            {/* <Select
+            <Select
               name="job_title"
               value={employeeInfo.job_title}
               onChange={handleChange}
@@ -280,10 +280,10 @@ export default function Admin() {
               defaultOption="Select Job"
               includeAddNew={true}
               onAddNew={() => handleAddNew('jobs')}
-            /> */}
+            />
 
           <Label text={'Department'} />
-            {/* <Select
+            <Select
               name="department_name"
               value={employeeInfo.department_name}
               onChange={handleChange}
@@ -294,7 +294,7 @@ export default function Admin() {
               defaultOption="Select Department"
               includeAddNew={true}
               onAddNew={() => handleAddNew('departments')}
-            /> */}
+            />
         </div>
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>

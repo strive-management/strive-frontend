@@ -9,6 +9,7 @@ import {
   faChartBar,
   faClipboard,
   faClock,
+  faCalendar,
 } from '@fortawesome/free-regular-svg-icons';
 
 const SideNavBar: React.FC = () => {
@@ -34,7 +35,10 @@ const SideNavBar: React.FC = () => {
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faClipboard} /> <h4 className="hidden sm:hidden md:block">Roster</h4></div>
         </Link>
         <Link to="/dashboard/clock">
-        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faClock} /> <h4 className="hidden sm:hidden md:block">Clock</h4></div>
+        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faClock} /> <h4 className="hidden sm:hidden md:block">Clock In / Out</h4></div>
+        </Link>
+        <Link to="/dashboard/schedule">
+        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendar} /> <h4 className="hidden sm:hidden md:block">Schedule</h4></div>
         </Link>
       </div>
       </div>
