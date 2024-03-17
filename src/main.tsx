@@ -19,6 +19,8 @@ import ErrorPage from './pages/ErrorPage';
 const Admin = lazy(() => import('./pages/Admin'));
 const Clock = lazy(() => import('./pages/Clock'));
 const Roster = lazy(() => import('./pages/Roster'));
+const Schedule = lazy(() => import('./pages/Schedule'));
+const ScheduleView = lazy(() => import('./pages/ScheduleView'));
 
 interface LazyWrapProps {
   children: ReactNode;
@@ -27,8 +29,8 @@ interface LazyWrapProps {
 const LazyWrap: React.FC<LazyWrapProps> = ({ children }) => (
   <Suspense
     fallback={
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      <div className='flex justify-center items-center h-screen'>
+        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900'></div>
       </div>
     }
   >
@@ -89,6 +91,24 @@ const router = createBrowserRouter([
         element: (
           <LazyWrap>
             <Clock />
+          </LazyWrap>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/dashboard/schedule',
+        element: (
+          <LazyWrap>
+            <Schedule />
+          </LazyWrap>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/dashboard/scheduleview',
+        element: (
+          <LazyWrap>
+            <ScheduleView />
           </LazyWrap>
         ),
         errorElement: <ErrorPage />,
