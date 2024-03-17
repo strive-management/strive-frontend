@@ -145,6 +145,7 @@ export default function Admin() {
 
 
 <div className='fixed flex flex-row items-center place-content-center text-3xl top-0 md:left-40 z-10 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300'>
+
           <div>Admin</div>
         </div>
         <div className='md:fixed flex flex-row border-b-2 border-gray-400 justify-center h-20 top-0 z-20 bg-white md:hidden dark:bg-[#212020]'>
@@ -152,13 +153,10 @@ export default function Admin() {
           <img src={logoLight} alt="logo-light" className='sm:w-10 sm:h-10 w-20 h-20 hidden dark:block'/>
         </div>
 
-        <div>
-          <h1>Employee Basic Info</h1>
-        </div>
-
         <form onSubmit={handleSubmit} className='absolute flex flex-col items-center top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto bg-white dark:bg-[#212020]'>
         
         <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
+        <label className="font-medium text-lg dark:text-gray-300">Basic Information</label>
           <div>
           <Label text={''} />
 
@@ -257,7 +255,7 @@ export default function Admin() {
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
           <Label text={'Work Location'} />
-            <Select
+            {/* <Select
                     name="location_name"
                     value={employeeInfo.location_name}
                     onChange={handleChange}
@@ -268,10 +266,10 @@ export default function Admin() {
                     defaultOption="Select Location"
                     includeAddNew={true}
                     onAddNew={() => handleAddNew('locations')}
-                  />
+                  /> */}
 
           <Label text={'Job'} />
-            <Select
+            {/* <Select
               name="job_title"
               value={employeeInfo.job_title}
               onChange={handleChange}
@@ -282,10 +280,10 @@ export default function Admin() {
               defaultOption="Select Job"
               includeAddNew={true}
               onAddNew={() => handleAddNew('jobs')}
-            />
+            /> */}
 
           <Label text={'Department'} />
-            <Select
+            {/* <Select
               name="department_name"
               value={employeeInfo.department_name}
               onChange={handleChange}
@@ -296,7 +294,7 @@ export default function Admin() {
               defaultOption="Select Department"
               includeAddNew={true}
               onAddNew={() => handleAddNew('departments')}
-            />
+            /> */}
         </div>
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>

@@ -31,7 +31,7 @@ export default function Roster() {
   useEffect(() => {
     const fetchBasicEmployeeData = async () => {
       try {
-        const response = await axios.get(`${LOCALDB_URL + 'someEmployees'}`);
+        const response = await axios.get(`${LOCALDB_URL}someEmployees`);
         setEmpoyeeInformation(response.data);
       } catch (error) {
         console.log(error);
