@@ -118,7 +118,7 @@ export default function Schedule() {
           Schedule
         </h1>
       </div>
-      <div className='flex flex-col items-center absolute p-10 sm:left-40'>
+      <div className='flex flex-col items-center absolute p-10 sm:left-[200px]'>
         <h1 className='text-xl text-gray-300 mb-10'>Schedule</h1>
         <div className='flex flex-col p-10 border-2 border-gray-300 dark:border-[#9fe0de] rounded-xl'>
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">

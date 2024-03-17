@@ -20,18 +20,28 @@ const BurgerMenuInternal: React.FC = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-blue-200">
+                    <a href="/dashboard/admin" className="text-gray-300 hover:text-blue-200">
                       Admin
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-blue-200">
+                    <a href="/dashboard/roster/" className="text-gray-300 hover:text-blue-200">
                       Roster
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-gray-300 hover:text-blue-200">
+                    <a href="/dashboard/clock" className="text-gray-300 hover:text-blue-200">
                       Clock
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/dashboard/schedule" className="text-gray-300 hover:text-blue-200">
+                      Schedule
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/dashboard/scheduleview" className="text-gray-300 hover:text-blue-200">
+                    Schedule View
                     </a>
                   </li>
                   <li>
