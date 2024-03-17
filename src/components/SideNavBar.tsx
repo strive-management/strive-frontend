@@ -39,10 +39,10 @@ const SideNavBar: React.FC = () => {
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faClock} /> <h4 className="hidden sm:hidden md:block">Clock In / Out</h4></div>
         </Link>
         <Link to="/dashboard/schedule">
-        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendar} /> <h4 className="hidden sm:hidden md:block">Schedule</h4></div>
+        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendar} /> <h4 className="hidden sm:hidden md:block">Set Schedule</h4></div>
         </Link>
         <Link to="/dashboard/scheduleview">
-        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendarCheck} /> <h4 className="hidden sm:hidden md:block">Schedule View</h4></div>
+        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendarCheck} /> <h4 className="hidden sm:hidden md:block">View Schedule</h4></div>
         </Link>
       </div>
       </div>

@@ -1,5 +1,5 @@
-import { useEffect, useState, ChangeEvent } from 'react';
-import axios from 'axios';
+import { useEffect, useState, ChangeEvent } from "react";
+import axios from "axios";
 
 interface ScheduleInfo {
   id: number;
@@ -24,11 +24,11 @@ const ScheduleView = () => {
   >([]);
 
   const [range, setRange] = useState<range>({
-    from: '',
-    until: '',
+    from: "",
+    until: "",
   });
 
-  const headers = Object.keys(scheduleInformation[0] || {});
+  // const headers = Object.keys(scheduleInformation[0] || {});
   const rows = scheduleInformation.map((item) => {
     return Object.values(item);
   });
@@ -53,38 +53,92 @@ const ScheduleView = () => {
 
   return (
     <>
-      <div style={containerStyle}>
-        <h1 style={h1Style}>Schedule</h1>
-        <div style={containerStyle}>
-          <table style={tableStyle}>
-            <thead>
-              <tr>
-                {headers.map((header) => (
-                  <th key={header} style={thStyle}>
+      <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
+        <h1
+          style={{ fontFamily: "'Lato', sans-serif" }}
+          className="text-gray-700 text-xl place-content-center"
+        >
+          View Schedule
+        </h1>
+      </div>
+
+      <div className="flex flex-col items-center absolute p-10 sm:left-[200px]">
+        <h1 className="text-xl text-gray-700 dark:text-gray-300 mb-10">
+          View Schedule
+        </h1>
+
+        <div className="flex flex-col p-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl">
+          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+              <div className="overflow-hidden mb-20">
+                <table className="min-w-full text-left text-sm font-light text-surface dark:text-white">
+                  <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
+                    <tr>
+                      {/* {headers.map((header) => (
+                  <th key={header} >
                     {header}
                   </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows
-                .filter((row) => row[2] >= range.from && row[2] <= range.until) // Filter rows based on condition
-                .map((row) => (
-                  <tr key={row[0]}>
-                    {row.map((cell, index) => (
-                      <td key={index} style={tdStyle}>
-                        {cell}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+                ))} */}
+                      <th scope="col" className="px-6 py-4">
+                        ID
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Employee ID
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Date
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Available
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Scheduled Start
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Scheduled End
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Clock In
+                      </th>
+                      <th scope="col" className="px-6 py-4">
+                        Clock Out
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows
+                      .filter(
+                        (row) => row[2] >= range.from && row[2] <= range.until
+                      ) // Filter rows based on condition
+                      .map((row) => (
+                        <tr key={row[0]}>
+                          {row.map((cell, index) => (
+                            <td key={index}>{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="flex flex-row gap-6 text-gray-700 dark:text-gray-300">
+                <h4>From</h4>
+                <input
+                  type="date"
+                  className="px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700"
+                  name="from"
+                  onChange={handleRange}
+                />
+                <h4>To</h4>
+                <input
+                  type="date"
+                  className="px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700"
+                  name="until"
+                  onChange={handleRange}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <h4>from</h4>
-        <input type='date' name='from' onChange={handleRange} />
-        <h4>Until</h4>
-        <input type='date' name='until' onChange={handleRange} />
       </div>
     </>
   );
@@ -92,7 +146,8 @@ const ScheduleView = () => {
 
 export default ScheduleView;
 
-const h1Style: React.CSSProperties = {
+{
+  /* const h1Style: React.CSSProperties = {
   marginTop: '40px',
   marginBottom: '40px',
 };
@@ -122,4 +177,5 @@ const tdStyle: React.CSSProperties = {
   border: '1px solid #dddddd',
   padding: '8px',
   textAlign: 'left',
-};
+}; */
+}
