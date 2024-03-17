@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import SideNavBar from '../components/SideNavBar';
 // import Label from '../components/ui/Label';
 import axios from 'axios';
+//import moment from 'moment';
 
 interface ScheduleInfo {
   id: number;
@@ -119,7 +120,7 @@ export default function Schedule() {
         </h1>
       </div>
       <div className='flex flex-col items-center absolute p-10 sm:left-[200px]'>
-        <h1 className='text-xl text-gray-300 mb-10'>Schedule</h1>
+        <h1 className='text-xl text-gray-700 dark:text-gray-300 mb-10'>Schedule</h1>
         <div className='flex flex-col p-10 border-2 border-gray-300 dark:border-[#9fe0de] rounded-xl'>
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -191,7 +192,7 @@ export default function Schedule() {
             <h4>Date</h4>
             <input
               type='date'
-              className='px-6 py-2 border rounded-lg bg-gray-300 dark:bg-gray-700'
+              className='px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700'
               name='date'
               onChange={(e) => {
                 setDate(new Date(e.target.value).toISOString());
@@ -202,7 +203,7 @@ export default function Schedule() {
               }}
             />
           </div>
-          <div className='text-gray-300'>
+          <div className='text-gray-700'>
             <h4>Shift Start Time</h4>
             <input
               type='time'
@@ -215,10 +216,10 @@ export default function Schedule() {
                     date.slice(16, date.length),
                 });
               }}
-              className='px-6 py-2 border rounded-lg bg-gray-300 dark:bg-gray-700'
+              className='px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700'
             />
           </div>
-          <div className='text-gray-300'>
+          <div className='text-gray-700'>
             <h4>Shift End Time</h4>
             <input
               type='time'
@@ -231,18 +232,18 @@ export default function Schedule() {
                     date.slice(16, date.length),
                 });
               }}
-              className='px-6 py-2 border rounded-lg bg-gray-300 dark:bg-gray-700'
+              className='px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700'
             />
           </div>
           <div id='avail-button' className=''>
           {click ? (
-            <button className="inline-block rounded bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Not Available</button>
+            <button className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Not Available</button>
           ) : (
-            <button className="inline-block rounded bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Available</button>
+            <button className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Available</button>
           )}
           </div>
           <div className='text-gray-300'>
-            <button onClick={postSchedule} className="inline-block rounded bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
+            <button onClick={postSchedule} className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
               Click here to update schedules
             </button>
           </div>
