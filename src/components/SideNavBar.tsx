@@ -17,7 +17,7 @@ const SideNavBar: React.FC = () => {
   return (
     <>
       <HamburgerMenuInt />
-      <div className="hidden fixed z-10 min-h-screen border-r-2 border-gray-400 sm:bg-white sm:border-r-2 sm:border-gray-400 sm:flex sm:flex-col sm:w-20 md:w-40 md:border-r-2 dark:bg-[#212020]">
+      <div className="hidden fixed z-10 min-h-screen border-r-2 border-gray-400 sm:bg-white sm:border-r-2 sm:border-gray-400 sm:flex sm:flex-col sm:w-20 md:w-[180px] md:border-r-2 dark:bg-[#212020]">
         <div className="absolute flex items-center sm:left-2 md:left-8 top-0">
           <img src={logoDark} alt="Logo" className="h-20 w-20 block dark:hidden" />
           <img src={logoLight} alt="Logo" className="h-20 w-20 hidden dark:block" />
@@ -42,7 +42,7 @@ const SideNavBar: React.FC = () => {
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendar} /> <h4 className="hidden sm:hidden md:block">Schedule</h4></div>
         </Link>
         <Link to="/dashboard/scheduleview">
-        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendarCheck} /> <h4 className="hidden sm:hidden md:block">Schedule</h4></div>
+        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendarCheck} /> <h4 className="hidden sm:hidden md:block">Schedule View</h4></div>
         </Link>
       </div>
       </div>
