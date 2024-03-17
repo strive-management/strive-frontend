@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 import axios from 'axios';
 
 interface ScheduleInfo {
@@ -32,8 +32,6 @@ const ScheduleView = () => {
   const rows = scheduleInformation.map((item) => {
     return Object.values(item);
   });
-  console.log(headers);
-  console.log(rows[0]);
 
   useEffect(() => {
     const fetchScheduleData = async () => {
@@ -47,6 +45,11 @@ const ScheduleView = () => {
     console.log(scheduleInformation);
     fetchScheduleData();
   }, []);
+
+  function handleRange(e: ChangeEvent<HTMLInputElement>) {
+    setRange({ ...range, [e.target.name]: `${e.target.value}T00:00:00.000Z` });
+  }
+  console.log(range);
 
   return (
     <>
@@ -64,22 +67,24 @@ const ScheduleView = () => {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => (
-                <tr key={row[0]}>
-                  {row.map((cell, index) => (
-                    <td key={index} style={tdStyle}>
-                      {typeof cell === 'boolean' ? cell.toString() : cell}
-                    </td>
-                  ))}
-                </tr>
-              ))}
+              {rows
+                .filter((row) => row[2] >= range.from && row[2] <= range.until) // Filter rows based on condition
+                .map((row) => (
+                  <tr key={row[0]}>
+                    {row.map((cell, index) => (
+                      <td key={index} style={tdStyle}>
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
         <h4>from</h4>
-        <input type='date' />
+        <input type='date' name='from' onChange={handleRange} />
         <h4>Until</h4>
-        <input type='date' />
+        <input type='date' name='until' onChange={handleRange} />
       </div>
     </>
   );
