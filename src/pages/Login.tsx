@@ -4,12 +4,15 @@ import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import { auth } from '../firebase/firebase';
 import { useRef, useState } from 'react';
-import { sendPasswordResetEmail } from 'firebase/auth';
 import {
-  loginWithEmailAndPassword,
-  signInWithGoogle,
-} from '../services/authService';
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { signInWithGoogle } from '../services/authService';
 import useOutsideClick from '../hook/useOutsideClick';
+import axios from 'axios';
+
+const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 export default function Login() {
   const navigate = useNavigate();
@@ -31,7 +34,13 @@ export default function Login() {
   const handleGoogleSignIn = async (e: { preventDefault: () => void }) => {
     try {
       e.preventDefault();
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      const token = await result.user.getIdToken();
+
+      axios.defaults.withCredentials = true;
+
+      await axios.post(`${LOCALDB_URL}login`, { token });
+
       navigate('/dashboard');
     } catch (error: any) {
       setError(error.message);
@@ -42,7 +51,19 @@ export default function Login() {
     e.preventDefault();
     setError('');
     try {
-      await loginWithEmailAndPassword(credentials.email, credentials.password);
+      await signInWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      console.log('Email/password sign-in successful');
+
+      const user = auth.currentUser;
+      if (user) {
+        const token = await user.getIdToken();
+        axios.defaults.withCredentials = true;
+        await axios.post(`${LOCALDB_URL}login`, { token });
+      }
       navigate('/dashboard');
     } catch (error: any) {
       setError(error.message);

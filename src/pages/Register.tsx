@@ -8,7 +8,6 @@ import { auth } from '../firebase/firebase';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  getAdditionalUserInfo,
   signInWithPopup,
 } from 'firebase/auth';
 import axios from 'axios';
@@ -44,20 +43,22 @@ export default function Register() {
     setError('');
 
     try {
-      const { user } = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         registrationData.email,
         registrationData.password
       );
+      const idToken = await userCredential.user.getIdToken();
+      console.log('Firebase user created', userCredential.user);
 
       const postData = {
-        email: user.email,
+        token: idToken,
+        email: registrationData.email,
         first_name: registrationData.firstName,
         last_name: registrationData.lastName,
-        UUID: user.uid,
+        UUID: userCredential.user.uid,
       };
-
-      await axios.post(`${LOCALDB_URL}users`, postData);
+      await axios.post(`${LOCALDB_URL}register`, postData);
 
       navigate('/dashboard');
     } catch (error: any) {
@@ -69,19 +70,21 @@ export default function Register() {
   const handleGoogleSignup = async (e: { preventDefault: () => void }) => {
     try {
       e.preventDefault();
+
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
+      const idToken = await result.user.getIdToken();
 
-      const { user } = result;
-      const userInfo = getAdditionalUserInfo(result);
-      const data = {
-        email: userInfo?.profile?.email ?? '',
-        first_name: userInfo?.profile?.given_name ?? '',
-        last_name: userInfo?.profile?.family_name ?? '',
-        UUID: user.uid,
+      const userInfo = result.user;
+      const postData = {
+        token: idToken,
+        email: userInfo.email,
+        first_name: userInfo.displayName?.split(' ')[0],
+        last_name: userInfo.displayName?.split(' ')[1],
+        UUID: userInfo.uid,
       };
 
-      await axios.post(`${LOCALDB_URL}users`, data);
+      await axios.post(`${LOCALDB_URL}register`, postData);
       navigate('/dashboard');
     } catch (error) {
       if (axios.isAxiosError(error)) {
