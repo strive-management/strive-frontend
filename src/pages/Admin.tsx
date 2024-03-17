@@ -65,7 +65,7 @@ export default function Admin() {
     const { name, value } = e.target;
 
     const updatedValue =
-      name === 'manager_id' ? (value === '' ? '' : Number(value)) : value;
+      name === 'manager_id' ? (value === '' ? null : Number(value)) : value;
 
     setEmployeeInfo((prevState) => ({
       ...prevState,
@@ -301,11 +301,11 @@ export default function Admin() {
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
           <div className="">
-            <Label text={''} />
+            <Label text={'Manager'} />
               <Input
-              type={'number'}
-              name="manager"
-              value={employeeInfo.manager_id || ''}
+              type='text'
+              name="manager_id"
+              value={employeeInfo.manager_id !== null ? employeeInfo.manager_id.toString() : ''}
               onChange={handleChange}
               placeholder="Manager ID"
             />
