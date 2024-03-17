@@ -21,6 +21,12 @@ export default {
     extend: {
       fontFamily: {
         rubik: ['Rubik', 'sans-serif'],
+      },
+      colors: {
+        primary: {
+          100: '#f0e4d7',
+          700: '#845746',
+        }
       }
     },
   },
