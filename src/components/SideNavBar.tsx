@@ -10,6 +10,7 @@ import {
   faClipboard,
   faClock,
   faCalendar,
+  faCalendarCheck
 } from '@fortawesome/free-regular-svg-icons';
 
 const SideNavBar: React.FC = () => {
@@ -39,6 +40,9 @@ const SideNavBar: React.FC = () => {
         </Link>
         <Link to="/dashboard/schedule">
         <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendar} /> <h4 className="hidden sm:hidden md:block">Schedule</h4></div>
+        </Link>
+        <Link to="/dashboard/scheduleview">
+        <div className="flex flex-row gap-2 items-center"><FontAwesomeIcon icon={faCalendarCheck} /> <h4 className="hidden sm:hidden md:block">Schedule</h4></div>
         </Link>
       </div>
       </div>
