@@ -257,6 +257,7 @@ export default function Admin() {
           <Label text={'Work Location'} />
             <Select
                     name="location_name"
+                    
                     value={employeeInfo.location_name}
                     onChange={handleChange}
                     options={options.locations.map((option) => ({
