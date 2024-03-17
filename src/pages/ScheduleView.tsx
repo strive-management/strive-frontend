@@ -12,10 +12,10 @@ interface ScheduleInfo {
   clock_out: string;
 }
 
-interface range {
-  from: string;
-  until: string;
-}
+// interface range {
+//   from: string;
+//   until: string;
+// }
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 const ScheduleView = () => {
@@ -23,10 +23,10 @@ const ScheduleView = () => {
     ScheduleInfo[]
   >([]);
 
-  const [range, setRange] = useState<range>({
-    from: '',
-    until: '',
-  });
+  // const [range, setRange] = useState<range>({
+  //   from: '',
+  //   until: '',
+  // });
 
   const headers = Object.keys(scheduleInformation[0] || {});
   const rows = scheduleInformation.map((item) => {
