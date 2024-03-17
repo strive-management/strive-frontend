@@ -143,7 +143,7 @@ export default function Admin() {
     <>
 
 
-<div className='fixed flex flex-row items-center place-content-center text-3xl top-0 md:left-40 z-10 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300'>
+<div className='fixed flex flex-row text-3xl top-0 md:left-40 z-10 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300'>
           <div>Admin</div>
         </div>
         <div className='md:fixed flex flex-row border-b-2 border-gray-400 justify-center h-20 top-0 z-20 bg-white md:hidden dark:bg-[#212020]'>
@@ -250,7 +250,7 @@ export default function Admin() {
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
           <Label text={'Work Location'} />
-            <Select
+            {/* <Select
                     name="location_name"
                     value={employeeInfo.location_name}
                     onChange={handleChange}
@@ -261,10 +261,10 @@ export default function Admin() {
                     defaultOption="Select Location"
                     includeAddNew={true}
                     onAddNew={() => handleAddNew('locations')}
-                  />
+                  /> */}
 
           <Label text={'Job'} />
-            <Select
+            {/* <Select
               name="job_title"
               value={employeeInfo.job_title}
               onChange={handleChange}
@@ -275,10 +275,10 @@ export default function Admin() {
               defaultOption="Select Job"
               includeAddNew={true}
               onAddNew={() => handleAddNew('jobs')}
-            />
+            /> */}
 
           <Label text={'Department'} />
-            <Select
+            {/* <Select
               name="department_name"
               value={employeeInfo.department_name}
               onChange={handleChange}
@@ -289,7 +289,7 @@ export default function Admin() {
               defaultOption="Select Department"
               includeAddNew={true}
               onAddNew={() => handleAddNew('departments')}
-            />
+            /> */}
         </div>
 
         <div className='flex flex-col border-2 p-10 rounded-2xl'>
