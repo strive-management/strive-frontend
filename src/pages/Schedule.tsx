@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SideNavBar from '../components/SideNavBar';
 import Label from '../components/ui/Label';
 import axios from 'axios';
@@ -39,7 +39,7 @@ export default function Schedule() {
 
   const [date, setDate] = useState<string>('');
 
-  const headers = Object.keys(scheduleInformation[0] || {});
+  // const headers = Object.keys(scheduleInformation[0] || {});
   const rows = scheduleInformation.map((item) => Object.values(item));
   // because the table creates the content using the object.values method you have to use zero to access the id number.Then you can delete the specific entry.
 
@@ -110,7 +110,7 @@ export default function Schedule() {
     <>
       <SideNavBar />
 
-      <div className='flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20'>
+      <div className='flex flex-row place-content-start pl-[300px] items-center w-full h-20'>
         <h1
           style={{ fontFamily: "'Lato', sans-serif" }}
           className='text-gray-700 text-xl place-content-center'
@@ -118,24 +118,36 @@ export default function Schedule() {
           Schedule
         </h1>
       </div>
-      <div style={containerStyle}>
-        <h1 style={h1Style}>Schedule</h1>
-        <div style={containerStyle}>
-          <table style={tableStyle}>
-            <thead>
+      <div className='flex flex-col items-center absolute p-10 sm:left-40'>
+        <h1 className='text-xl text-gray-300 mb-10'>Schedule</h1>
+        <div className='flex flex-col p-10 border-2 border-gray-300 dark:border-[#9fe0de] rounded-xl'>
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div className="overflow-hidden">
+
+      <table className='min-w-full text-left text-sm font-light text-surface text-gray-700 dark:text-gray-300'>
+            <thead className='font-medium dark:border-gray-300'>
               <tr>
-                {headers.map((header) => (
-                  <th key={header} style={thStyle}>
+                {/* {headers.map((header) => (
+                  <th key={header} className='px-4 py-2' scope='col'>
                     {header}
                   </th>
-                ))}
+                ))} */}
+                <th scope="col" className="px-6 py-4">ID</th>
+                <th scope="col" className="px-6 py-4">Employee ID</th>
+                <th scope="col" className="px-6 py-4">Date</th>
+                <th scope="col" className="px-6 py-4">Available</th>
+                <th scope="col" className="px-6 py-4">Scheduled Start</th>
+                <th scope="col" className="px-6 py-4">Scheduled End</th>
+                <th scope="col" className="px-6 py-4">Clock In</th>
+                <th scope="col" className="px-6 py-4">Clock Out</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row) => (
-                <tr key={row[0]}>
+                <tr className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600 key={row[0]}">
                   {row.map((cell, index) => (
-                    <td key={index} style={tdStyle}>
+                    <td key={index} className="border hover:border-collapse px-4 py-2">
                       {typeof cell === 'boolean' ? cell.toString() : cell}
                     </td>
                   ))}
@@ -143,6 +155,11 @@ export default function Schedule() {
               ))}
             </tbody>
           </table>
+
+
+          </div>
+          </div>
+          </div>
           <Label text={'Select Employee'} />
           <select
             onChange={(e) => {
@@ -166,7 +183,7 @@ export default function Schedule() {
                 })
               : null}
           </select>
-          <div>
+          <div className='text-gray-300'>
             <h4>Select a Date</h4>
             <input
               type='date'
@@ -181,7 +198,7 @@ export default function Schedule() {
               }}
             />
           </div>
-          <div>
+          <div className='text-gray-300'>
             <h4>Select a shift start time</h4>
             <input
               type='time'
@@ -197,7 +214,7 @@ export default function Schedule() {
               className=' px-6 py-2 border rounded-full'
             />
           </div>
-          <div>
+          <div className='text-gray-300'>
             <h4>Select a shift end time</h4>
             <input
               type='time'
@@ -214,12 +231,12 @@ export default function Schedule() {
             />
           </div>
           {click ? (
-            <button onClick={handleAvailable}>Not Available</button>
+            <button className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 motion-reduce:transition-none dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400" onClick={handleAvailable}>Not Available</button>
           ) : (
-            <button onClick={handleAvailable}>Available</button>
+            <button className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 motion-reduce:transition-none dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400" onClick={handleAvailable}>Available</button>
           )}
-          <div>
-            <button onClick={postSchedule}>
+          <div className='text-gray-300'>
+            <button onClick={postSchedule} className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-200 focus:bg-primary-accent-200 focus:outline-none focus:ring-0 active:bg-primary-accent-200 motion-reduce:transition-none dark:bg-primary-300 dark:hover:bg-primary-400 dark:focus:bg-primary-400 dark:active:bg-primary-400">
               Click here to update schedules
             </button>
           </div>
@@ -229,37 +246,37 @@ export default function Schedule() {
   );
 }
 
-const h1Style: React.CSSProperties = {
-  marginTop: '40px',
-  marginBottom: '40px',
-};
+// const h1Style: React.CSSProperties = {
+//   marginTop: '40px',
+//   marginBottom: '40px',
+// };
 
-const containerStyle: React.CSSProperties = {
-  margin: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: 'auto',
-};
+// const containerStyle: React.CSSProperties = {
+//   margin: 0,
+//   display: 'flex',
+//   flexDirection: 'column',
+//   justifyContent: 'center',
+//   alignItems: 'center',
+//   width: 'auto',
+// };
 
-const tableStyle: React.CSSProperties = {
-  borderCollapse: 'collapse',
-  width: 'auto',
-};
+// const tableStyle: React.CSSProperties = {
+//   borderCollapse: 'collapse',
+//   width: 'auto',
+// };
 
-const thStyle: React.CSSProperties = {
-  border: '1px solid #dddddd',
-  padding: '8px 16px',
-  textAlign: 'left',
-  backgroundColor: '#f2f2f2',
-};
+// const thStyle: React.CSSProperties = {
+//   border: '1px solid #dddddd',
+//   padding: '8px 16px',
+//   textAlign: 'left',
+//   backgroundColor: '#f2f2f2',
+// };
 
-const tdStyle: React.CSSProperties = {
-  border: '1px solid #dddddd',
-  padding: '8px',
-  textAlign: 'left',
-};
+// const tdStyle: React.CSSProperties = {
+//   border: '1px solid #dddddd',
+//   padding: '8px',
+//   textAlign: 'left',
+// };
 
 //   const deleteButton: React.CSSProperties = {
 //     margin: '2px',
