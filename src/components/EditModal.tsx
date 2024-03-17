@@ -3,6 +3,8 @@ import { Modal, Button } from '@mantine/core';
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
 
+
+
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 interface EmployeeInfo {
@@ -32,8 +34,8 @@ function EditModal(props: any) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title='Edit Employee Data'>
-        <div>
+      <Modal opened={opened} onClose={close} title='Edit Employee Data' className="">
+        <div className=''>
           <form action='' className='flex flex-col '>
             <h3>Edit Me</h3>
             <h4>The Employee ID you are editing is {props.id}</h4>
@@ -76,7 +78,7 @@ function EditModal(props: any) {
         </div>
       </Modal>
 
-      <Button onClick={open}>Edit</Button>
+      <Button className='inline-block rounded bg-yellow-400 dark:bg-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"' onClick={open}>Edit</Button>
     </>
   );
 }

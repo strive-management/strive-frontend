@@ -114,7 +114,7 @@ export default function Schedule() {
       <div className='flex flex-row place-content-start pl-[300px] items-center w-full h-20'>
         <h1
           style={{ fontFamily: "'Lato', sans-serif" }}
-          className='text-gray-700 text-xl place-content-center'
+          className='text-gray-300 dark:text-gray-700 text-xl place-content-center'
         >
           Schedule
         </h1>
@@ -126,8 +126,8 @@ export default function Schedule() {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
         <div className="overflow-hidden">
 
-      <table className='min-w-full text-left text-sm font-light text-surface text-gray-700 dark:text-gray-300'>
-            <thead className='font-medium dark:border-gray-300'>
+      <table className='min-w-full text-left text-sm font-light text-surface dark:text-white'>
+            <thead className='border-b border-neutral-200 font-medium dark:border-white/10'>
               <tr>
                 {/* {headers.map((header) => (
                   <th key={header} className='px-4 py-2' scope='col'>
@@ -162,7 +162,6 @@ export default function Schedule() {
           </div>
           </div>
           <div id='options-container' className='flex flex-col top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto bg-white dark:bg-[#212020]'>
-          
           <div className='w-[200px] text-gray-700 dark:text-gray-300'>
           <h4>Select Employee</h4>
           <select className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
@@ -203,7 +202,7 @@ export default function Schedule() {
               }}
             />
           </div>
-          <div className='text-gray-700'>
+          <div className='text-gray-700 dark:text-gray-300'>
             <h4>Shift Start Time</h4>
             <input
               type='time'
@@ -219,7 +218,7 @@ export default function Schedule() {
               className='px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700'
             />
           </div>
-          <div className='text-gray-700'>
+          <div className='text-gray-700 dark:text-gray-300'>
             <h4>Shift End Time</h4>
             <input
               type='time'
@@ -235,18 +234,21 @@ export default function Schedule() {
               className='px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700'
             />
           </div>
-          <div id='avail-button' className=''>
+          <div id='avail-button' className='mt-10'>
           {click ? (
             <button className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Not Available</button>
           ) : (
             <button className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" onClick={handleAvailable}>Available</button>
           )}
           </div>
+          <div id='update-button' className='mt-10'>
           <div className='text-gray-300'>
             <button onClick={postSchedule} className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
               Click here to update schedules
             </button>
           </div>
+          </div>
+          
           </div>
         </div>
       </div>
