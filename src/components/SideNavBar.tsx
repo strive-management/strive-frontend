@@ -1,4 +1,5 @@
 import React from "react";
+import LogoutBtn from "./LogoutBtn";
 
 import { Link } from "react-router-dom";
 import HamburgerMenuInt from "./ui/HamburgerMenuInt";
@@ -55,6 +56,7 @@ const SideNavBar: React.FC = () => {
                 <h4 className="hidden sm:hidden md:block">View Schedule</h4>
               </div>
             </Link>
+          <LogoutBtn/>
           </div>
         </div>
       </div>
