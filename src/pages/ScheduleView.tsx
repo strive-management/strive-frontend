@@ -53,21 +53,21 @@ const ScheduleView = () => {
 
   return (
     <>
-      <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
+      <div className="flex flex-col w-full overflow-auto">
+      <div className="top-20 p-5 sm:p-10 mt-20 sm:mt-10">
+
+      {/* <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 w-full h-20">
         <h1
           style={{ fontFamily: "'Lato', sans-serif" }}
           className="text-gray-700 text-xl place-content-center"
         >
           View Schedule
         </h1>
-      </div>
+      </div> */}
 
-      <div className="flex flex-col items-center absolute p-10 sm:left-[200px]">
-        <h1 className="text-xl text-gray-700 dark:text-gray-300 mb-10">
-          View Schedule
-        </h1>
+      
 
-        <div className="flex flex-col p-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl">
+        <div className="flex flex-col p-5 sm:p-10 mt-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div className="overflow-hidden mb-20">
@@ -140,6 +140,9 @@ const ScheduleView = () => {
           </div>
         </div>
       </div>
+      </div>
+      
+      
     </>
   );
 };
