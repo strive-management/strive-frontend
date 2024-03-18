@@ -3,121 +3,109 @@ import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { auth } from '../firebase/firebase';
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  getAdditionalUserInfo,
   signInWithPopup,
 } from 'firebase/auth';
+import axios from 'axios';
+import useOutsideClick from '../hook/useOutsideClick';
 
-interface UserCredentials {
+interface RegistrationData {
   email: string;
   password: string;
+  firstName?: string;
+  lastName?: string;
 }
+
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
+
 export default function Register() {
+  const navigate = useNavigate();
+  const registerRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState('');
-  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+  const [registrationData, setRegistrationData] = useState<RegistrationData>({
     email: '',
     password: '',
+    firstName: '',
+    lastName: '',
   });
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastname] = useState<string>();
-  const navigate = useNavigate();
 
-  function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
-    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-  }
-  const handleGoogle = async (
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    e.preventDefault();
-
-    const provider = new GoogleAuthProvider();
-    console.log(provider);
-
-    return signInWithPopup(auth, provider)
-      .then((result) => {
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        const user = result.user;
-        const userInfo = getAdditionalUserInfo(result);
-        const email = userInfo?.profile?.email ?? ''; // it's not a problem if it's null
-        const lastName = userInfo?.profile?.family_name ?? ''; // it's not a problem if it's null
-        const firstName = userInfo?.profile?.given_name ?? ''; // it's not a problem if it's null
-        const uid = user.uid;
-        const data = {
-          email: email,
-          first_name: firstName,
-          last_name: lastName,
-          UUID: uid,
-        };
-        return fetch(`${LOCALDB_URL + 'users'}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-      })
-      .then((response) => {
-        if (response.ok) {
-          // Navigate to dashboard after successful registration
-          navigate('/dashboard');
-        } else {
-          // Handle server errors or invalid responses here
-          console.log('Failed to register user');
-        }
-      })
-      .catch((error: any) => {
-        const errorCode = error.code;
-        console.log(errorCode);
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        const email = error.customData.email;
-        console.log(email);
-      });
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setRegistrationData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  async function handleSignup(
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setError('');
 
-    createUserWithEmailAndPassword(
-      auth,
-      userCredentials.email,
-      userCredentials.password
-    )
-      .then((userCredentials) => {
-        const uid = userCredentials.user.uid;
-        const email = userCredentials.user.email ?? '';
-        const data = {
-          email: email,
-          first_name: firstName,
-          last_name: lastName,
-          UUID: uid,
-        };
-        return fetch(`${LOCALDB_URL + 'users'}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-    navigate('/dashboard');
-  }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        registrationData.email,
+        registrationData.password
+      );
+      const idToken = await userCredential.user.getIdToken();
+      console.log('Firebase user created', userCredential.user);
+
+      const postData = {
+        token: idToken,
+        email: registrationData.email,
+        first_name: registrationData.firstName,
+        last_name: registrationData.lastName,
+        UUID: userCredential.user.uid,
+      };
+      await axios.post(`${LOCALDB_URL}register`, postData);
+
+      navigate('/dashboard');
+    } catch (error: any) {
+      const errorMessage = error.message;
+      setError(errorMessage);
+    }
+  };
+
+  const handleGoogleSignup = async (e: { preventDefault: () => void }) => {
+    try {
+      e.preventDefault();
+
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const idToken = await result.user.getIdToken();
+
+      const userInfo = result.user;
+      const postData = {
+        token: idToken,
+        email: userInfo.email,
+        first_name: userInfo.displayName?.split(' ')[0],
+        last_name: userInfo.displayName?.split(' ')[1],
+        UUID: userInfo.uid,
+      };
+
+      await axios.post(`${LOCALDB_URL}register`, postData);
+      navigate('/dashboard');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error data:', error.response?.data);
+        setError('Google sign-up failed. Please try again.');
+      } else {
+        console.error('Error during Google sign-up:', error);
+        setError('Unexpected error occurred. Please try again.');
+      }
+    }
+  };
+  useOutsideClick(registerRef, () => {
+    navigate('/');
+  });
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
+      <div
+        ref={registerRef}
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+      >
         <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
@@ -131,9 +119,9 @@ export default function Register() {
             <Input
               type={'text'}
               placeholder=""
-              onChange={(e) => {
-                setFirstName(e.target.value);
-              }}
+              name="firstName"
+              value={registrationData.firstName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-5">
@@ -141,9 +129,9 @@ export default function Register() {
             <Input
               type={'text'}
               placeholder=""
-              onChange={(e) => {
-                setLastname(e.target.value);
-              }}
+              name="lastName"
+              value={registrationData.lastName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-5">
@@ -151,10 +139,9 @@ export default function Register() {
             <Input
               type={'email'}
               name="email"
-              onChange={(e) => {
-                handleCredentials(e);
-              }}
               placeholder=""
+              value={registrationData.email}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-5">
@@ -162,32 +149,29 @@ export default function Register() {
             <Input
               type={'password'}
               name="password"
-              onChange={(e) => {
-                handleCredentials(e);
-              }}
               placeholder=""
+              value={registrationData.password}
+              onChange={handleInputChange}
             />
           </div>
-          <div className="mb-5">
+          {/* <div className="mb-5">
             <Label text={'Confirm password'} />
             <Input type={'password'} placeholder="" />
-          </div>
+          </div> */}
           <br />
           <button
-            onClick={(e) => {
-              handleSignup(e);
-            }}
+            onClick={handleSubmit}
             type="submit"
             className="text-gray-700 bg-[#d3ebf9] hover:bg-[#92c9f9] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-gray-700 dark:bg-[#c982f9] dark:hover:bg-[#905593] dark:focus:ring-gray-800"
           >
             Register
           </button>
-          <Link
-            className="text-sm font-light text-gray-500 dark:text-gray-400"
-            to="/login"
-          >
-            Already have an account ?
-          </Link>
+          <div className="text-sm text-center">
+            Already have an account?{' '}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Log in
+            </Link>
+          </div>
 
           {/* firebase error handling */}
 
@@ -200,9 +184,7 @@ export default function Register() {
           </div>
           <div className="flex gap-10 items-center justify-center">
             <button
-              onClick={(e) => {
-                handleGoogle(e);
-              }}
+              onClick={handleGoogleSignup}
               className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
             >
               <div className="bg-white p-2 rounded-full">
@@ -222,17 +204,6 @@ export default function Register() {
                   <path
                     d="M272.1 107.7c38.8-.6 76.3 14 104.4 40.8l77.7-77.7C405 24.6 339.7-.8 272.1 0 169.2 0 75.1 58 28.9 150l90.4 70.1c21.5-64.5 81.8-112.4 152.8-112.4z"
                     fill="#ea4335"
-                  />
-                </svg>
-              </div>
-            </button>
-
-            <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
-              <div className="bg-white p-1 rounded-full">
-                <svg className="w-6" viewBox="0 0 32 32">
-                  <path
-                    fill-rule="evenodd"
-                    d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
                   />
                 </svg>
               </div>

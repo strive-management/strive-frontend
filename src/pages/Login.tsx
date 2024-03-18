@@ -3,72 +3,72 @@ import logoLightMode from '../assets/strive2.svg';
 import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import { auth } from '../firebase/firebase';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { signInWithGoogle } from '../services/authService';
+import useOutsideClick from '../hook/useOutsideClick';
+import axios from 'axios';
 
-interface UserCredentials {
-  email: string;
-  password: string;
-}
+const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 export default function Login() {
   const navigate = useNavigate();
+  const signinRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState('');
-  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+  const [credentials, setCredentials] = useState({
     email: '',
     password: '',
   });
 
-  function handleCredentials(e: ChangeEvent<HTMLInputElement>) {
-    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    console.log(userCredentials);
-  }
-
-  const handleGoogle = async (
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) => {
-    e.preventDefault();
-    const provider = new GoogleAuthProvider();
-    // return signInWithPopup(auth, provider);
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-
-        console.error(errorMessage);
-        setError(errorMessage);
-      });
+  const handleChange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setCredentials((prevCredentials) => ({
+      ...prevCredentials,
+      [name]: value,
+    }));
   };
 
-  function handleLogin(
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
+  const handleGoogleSignIn = async (e: { preventDefault: () => void }) => {
+    try {
+      e.preventDefault();
+      const result = await signInWithGoogle();
+      const token = await result.user.getIdToken();
+
+      axios.defaults.withCredentials = true;
+
+      await axios.post(`${LOCALDB_URL}login`, { token });
+
+      navigate('/dashboard');
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setError('');
-    signInWithEmailAndPassword(
-      auth,
-      userCredentials.email,
-      userCredentials.password
-    )
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        navigate('/dashboard');
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-  }
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      console.log('Email/password sign-in successful');
+
+      const user = auth.currentUser;
+      if (user) {
+        const token = await user.getIdToken();
+        axios.defaults.withCredentials = true;
+        await axios.post(`${LOCALDB_URL}login`, { token });
+      }
+      navigate('/dashboard');
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
 
   function handlePwdReset() {
     const email = prompt('Please enter your email ');
@@ -80,10 +80,16 @@ export default function Login() {
       alert('Invalid email');
     }
   }
+  useOutsideClick(signinRef, () => {
+    navigate('/');
+  });
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0">
+      <div
+        ref={signinRef}
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+      >
         <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
@@ -99,10 +105,9 @@ export default function Login() {
             <Input
               type={'email'}
               name="email"
-              onChange={(e) => {
-                handleCredentials(e);
-              }}
               placeholder=""
+              value={credentials.email}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-5">
@@ -112,9 +117,8 @@ export default function Login() {
             <Input
               type={'password'}
               name="password"
-              onChange={(e) => {
-                handleCredentials(e);
-              }}
+              value={credentials.password}
+              onChange={handleChange}
               placeholder=""
             />
           </div>
@@ -122,9 +126,7 @@ export default function Login() {
           <div className="flex flex-row justify-evenly">
             <button
               type="submit"
-              onClick={(e) => {
-                handleLogin(e);
-              }}
+              onClick={handleLogin}
               className="text-gray-700 bg-[#c0f2fc] hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-[#75c479] dark:hover:bg-[#58945b] dark:focus:ring-gray-800"
             >
               Login
@@ -143,6 +145,12 @@ export default function Login() {
           >
             Forgot Password?
           </a>
+          <div className="text-sm text-center">
+            Not registered yet ?{' '}
+            <Link to="/register" className="text-blue-600 hover:underline">
+              Sign in
+            </Link>
+          </div>
           {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
@@ -154,9 +162,7 @@ export default function Login() {
           </div>
           <div className="flex gap-10 items-center justify-center">
             <button
-              onClick={(e) => {
-                handleGoogle(e);
-              }}
+              onClick={handleGoogleSignIn}
               className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
             >
               <div className="bg-white p-2 rounded-full">
@@ -180,25 +186,7 @@ export default function Login() {
                 </svg>
               </div>
             </button>
-
-            <button className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline">
-              <div className="bg-white p-1 rounded-full">
-                <svg className="w-6" viewBox="0 0 32 32">
-                  <path
-                    fill-rule="evenodd"
-                    d="M16 4C9.371 4 4 9.371 4 16c0 5.3 3.438 9.8 8.207 11.387.602.11.82-.258.82-.578 0-.286-.011-1.04-.015-2.04-3.34.723-4.043-1.609-4.043-1.609-.547-1.387-1.332-1.758-1.332-1.758-1.09-.742.082-.726.082-.726 1.203.086 1.836 1.234 1.836 1.234 1.07 1.836 2.808 1.305 3.492 1 .11-.777.422-1.305.762-1.605-2.664-.301-5.465-1.332-5.465-5.93 0-1.313.469-2.383 1.234-3.223-.121-.3-.535-1.523.117-3.175 0 0 1.008-.32 3.301 1.23A11.487 11.487 0 0116 9.805c1.02.004 2.047.136 3.004.402 2.293-1.55 3.297-1.23 3.297-1.23.656 1.652.246 2.875.12 3.175.77.84 1.231 1.91 1.231 3.223 0 4.61-2.804 5.621-5.476 5.922.43.367.812 1.101.812 2.219 0 1.605-.011 2.898-.011 3.293 0 .32.214.695.824.578C24.566 25.797 28 21.3 28 16c0-6.629-5.371-12-12-12z"
-                  />
-                </svg>
-              </div>
-            </button>
           </div>
-
-          <Link
-            className="text-sm font-light text-gray-500 dark:text-gray-400"
-            to="/register"
-          >
-            Not registered yet ?
-          </Link>
         </form>
       </div>
     </>

@@ -15,6 +15,8 @@ import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 import EditModal from './components/EditModal';
 import ErrorPage from './pages/ErrorPage';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const Admin = lazy(() => import('./pages/Admin'));
 const Clock = lazy(() => import('./pages/Clock'));
@@ -58,7 +60,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -119,8 +125,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <AuthProvider>
+      <MantineProvider>
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
