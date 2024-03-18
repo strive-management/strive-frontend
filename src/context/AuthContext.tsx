@@ -11,11 +11,13 @@ import { auth } from '../firebase/firebase'; // Adjust the import path as necess
 
 interface AuthContextType {
   currentUser: User | null;
+  loading: boolean;
   logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
   currentUser: null,
+  loading: true,
   logout: async () => {},
 });
 
@@ -29,10 +31,13 @@ interface Props {
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log('User from onAuthStateChanged:', user);
       setCurrentUser(user);
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -44,7 +49,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, logout }}>
+    <AuthContext.Provider value={{ currentUser, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
