@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react';
-import SideNavBar from '../components/SideNavBar';
-
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Clock = () => {
-  const [hour, setHour] = useState<String>('00');
-  const [min, setMin] = useState<String>('00');
-  const [sec, setSec] = useState<String>('00');
+  const [hour, setHour] = useState<String>("00");
+  const [min, setMin] = useState<String>("00");
+  const [sec, setSec] = useState<String>("00");
   const [id, setId] = useState<Number>();
   const [click, setClick] = useState<boolean>(true);
 
   const currentTime = async () => {
     try {
       const time: any = await axios.get(
-        'http://worldtimeapi.org/api/timezone/Asia/Tokyo'
+        "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
       );
       const date = time.data.datetime;
 
       const dateTime = new Date(date);
 
-      setHour(String(dateTime.getHours()).padStart(2, '0'));
-      setMin(String(dateTime.getMinutes()).padStart(2, '0'));
-      setSec(String(dateTime.getSeconds()).padStart(2, '0'));
+      setHour(String(dateTime.getHours()).padStart(2, "0"));
+      setMin(String(dateTime.getMinutes()).padStart(2, "0"));
+      setSec(String(dateTime.getSeconds()).padStart(2, "0"));
     } catch (err: any) {
       console.log(err.meesage);
     }
@@ -29,12 +27,12 @@ const Clock = () => {
 
   const handleCheckIn = async () => {
     const time: any = await axios.get(
-      'http://worldtimeapi.org/api/timezone/Asia/Tokyo'
+      "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
     );
     const date = time.data.datetime;
 
     try {
-      const postTime = await axios.post('http://localhost:8080/clocks/', {
+      const postTime = await axios.post("http://localhost:8080/clocks/", {
         employee_id: 11,
         clock_in: date,
       });
@@ -47,7 +45,7 @@ const Clock = () => {
   };
   const handleCheckOut = async () => {
     const time: any = await axios.get(
-      'http://worldtimeapi.org/api/timezone/Asia/Tokyo'
+      "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
     );
     const date = time.data.datetime;
 
@@ -71,58 +69,61 @@ const Clock = () => {
 
   return (
     <>
-      <div className="h-screen w-full dark:bg-[#503270]">
-        <SideNavBar />
-        <div className="flex flex-row place-content-start pl-[300px] items-center bg-gray-300 dark:bg-[#1a0429]/80 w-full h-20">
-          <h1
-            style={{ fontFamily: "'Lato', sans-serif" }}
-            className="text-gray-300 text-xl place-content-center"
-          >
-            Clock In / Clock Out
-          </h1>
-        </div>
-        <div>
-          <div className=" flex flex-col pl-[260px] items-center">
-            <div>
-              {click ? (
-                <h1 className="text-3xl text-center font-bold py-3 border-5 border-black dark:text-gray-300">
-                  Time-IN
-                </h1>
-              ) : (
-                <h1 className="text-3xl  text-center font-bold py-3 border-5 border-black dark:text-gray-300">
-                  Time-OUT
-                </h1>
-              )}
+      <div className="flex flex-col w-full place-items-center overflow-auto">
+        <div className="flex flex-col place-items-center top-20 p-5 mt-10 sm:p-10 sm:mt-10">
+          
+            <div className="flex flex-row place-content-center mt-10 w-full h-20">
+              <h1
+                style={{ fontFamily: "'Lato', sans-serif" }}
+                className="text-gray-300 text-xl place-content-center"
+              >
+                Clock In / Clock Out
+              </h1>
             </div>
-            <div className=" flex border-1 w-[400px] h-[100px] justify-center items-center opacity-40 bg-slate-400 rounded-full">
-              <p className=" font-extralight text-5xl relative ">
-                <span>{hour}</span>
-                <span>:</span>
-                <span>{min}</span>
-                <span>:</span>
-                <span>{sec}</span>
-              </p>
-            </div>
-            <div className="py-4">
-              {click ? (
-                <button
-                  className="  p-4 border-collapse rounded-full hover:opacity-50 text-gray-300 bg-black active:bg-slate-400 "
-                  onClick={handleCheckIn}
-                >
-                  Check-IN
-                </button>
-              ) : (
-                <button
-                  className="  p-4 border-collapse rounded-full hover:opacity-50 text-gray-300 bg-black active:bg-slate-400"
-                  onClick={handleCheckOut}
-                >
-                  Check-OUT
-                </button>
-              )}
+            <div className="flex flex-col place-items-center">
+              <div className="flex flex-col items-center">
+                <div>
+                  {click ? (
+                    <h1 className="text-md sm:text-3xl text-center font-bold py-3 border-5 border-black dark:text-gray-300">
+                      Time-IN
+                    </h1>
+                  ) : (
+                    <h1 className="text-md sm:text-3xl  text-center font-bold py-3 border-5 border-black dark:text-gray-300">
+                      Time-OUT
+                    </h1>
+                  )}
+                </div>
+                <div className="flex flex-col border-1 w-[200px] h-[100px] sm:w-[400px] sm:h-[100px] justify-center items-center opacity-40 bg-slate-400 rounded-xl">
+                  <p className=" font-extralight text-3xl sm:text-5xl relative dark:text-gray-50">
+                    <span>{hour}</span>
+                    <span>:</span>
+                    <span>{min}</span>
+                    <span>:</span>
+                    <span>{sec}</span>
+                  </p>
+                </div>
+                <div className="py-4">
+                  {click ? (
+                    <button
+                      className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                      onClick={handleCheckIn}
+                    >
+                      Check-IN
+                    </button>
+                  ) : (
+                    <button
+                      className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                      onClick={handleCheckOut}
+                    >
+                      Check-OUT
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      
     </>
   );
 };
