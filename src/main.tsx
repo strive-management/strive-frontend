@@ -17,6 +17,7 @@ import EditModal from './components/EditModal';
 import ErrorPage from './pages/ErrorPage';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import CloudDisplay from './components/CloudDisplay';
 
 const Admin = lazy(() => import('./pages/Admin'));
 const Clock = lazy(() => import('./pages/Clock'));
@@ -31,8 +32,8 @@ interface LazyWrapProps {
 const LazyWrap: React.FC<LazyWrapProps> = ({ children }) => (
   <Suspense
     fallback={
-      <div className='flex justify-center items-center h-screen'>
-        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900'></div>
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
       </div>
     }
   >
@@ -115,6 +116,15 @@ const router = createBrowserRouter([
         element: (
           <LazyWrap>
             <ScheduleView />
+          </LazyWrap>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/dashboard/cloudDisplay',
+        element: (
+          <LazyWrap>
+            <CloudDisplay />
           </LazyWrap>
         ),
         errorElement: <ErrorPage />,
