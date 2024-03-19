@@ -46,26 +46,10 @@ const Landing: React.FC = () => {
               className="sm:flex sm:place-items-center sm:flex-row sm:items-center"
             >
               <ul className="gap-8 hidden sm:flex sm:space-x-20 sm:flex-row flex-col place-items-center">
-                <li>
-                  <a href="#" className="hover:text-blue-200">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-200">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-200">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-blue-200">
-                    Contact
-                  </a>
-                </li>
+                <Link to="/">Home</Link>
+                <Link to="/about">About</Link>
+                <Link to="/team">Team Strive</Link>
+                <Link to="/contact">Contact</Link>
               </ul>
               <div className="place-content-end">
                 <BurgerMenu />

@@ -148,7 +148,7 @@ export default function Login() {
           <div className="text-sm text-center">
             Not registered yet ?{' '}
             <Link to="/register" className="text-blue-600 hover:underline">
-              Sign in
+              Create an Account
             </Link>
           </div>
           {/* firebase error handling */}
