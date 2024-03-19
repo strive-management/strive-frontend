@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
+
 const Clock = () => {
   const [hour, setHour] = useState<String>("00");
   const [min, setMin] = useState<String>("00");
@@ -11,7 +13,7 @@ const Clock = () => {
   const currentTime = async () => {
     try {
       const time: any = await axios.get(
-        "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
+        "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
       );
       const date = time.data.datetime;
 
@@ -27,12 +29,12 @@ const Clock = () => {
 
   const handleCheckIn = async () => {
     const time: any = await axios.get(
-      "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
+      "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
     );
     const date = time.data.datetime;
 
     try {
-      const postTime = await axios.post("http://localhost:8080/clocks/", {
+      const postTime = await axios.post(`${LOCALDB_URL}schedules/`, {
         employee_id: 11,
         clock_in: date,
       });
@@ -45,12 +47,12 @@ const Clock = () => {
   };
   const handleCheckOut = async () => {
     const time: any = await axios.get(
-      "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
+      "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
     );
     const date = time.data.datetime;
 
     try {
-      const postTime = await axios.patch(`http://localhost:8080/clocks/${id}`, {
+      const postTime = await axios.patch(`${LOCALDB_URL}schedules/${id}`, {
         employee_id: 11,
         clock_out: date,
       });
