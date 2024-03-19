@@ -1,6 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Input from './ui/Input';
 
 const FileUpload: React.FC = () => {
