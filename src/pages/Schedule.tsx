@@ -60,7 +60,6 @@ export default function Schedule() {
     await axios
       .delete(`${LOCALDB_URL}schedules/${id}}`)
       .then(function (response) {
-        console.log(response);
         const newData = scheduleInformation.filter((item) => item.id !== id);
         setScheduleInformation(newData);
       })
@@ -91,9 +90,8 @@ export default function Schedule() {
         console.log(error);
       }
     };
-    console.log(scheduleInformation);
     fetchScheduleData();
-  }, [scheduleInformation]);
+  }, [employeeScheduleInfo]);
 
   // this useEffect is responsible for updating the drop down menu based on the date selected in the calendar input.
   useEffect(() => {
@@ -108,11 +106,10 @@ export default function Schedule() {
       (employee) => !unavailableEmployees.includes(employee.id)
     );
     setUpdatedEmployeeInfo(availableEmployees);
-  }, [employeeScheduleInfo]);
+  }, []);
 
   const handleAvailable = () => {
     setClick(!click);
-    console.log(click);
     setEmployeeScheduleInfo({
       ...employeeScheduleInfo,
       available: click,
@@ -125,7 +122,9 @@ export default function Schedule() {
         `${LOCALDB_URL}schedules`,
         employeeScheduleInfo
       );
-      console.log(scheduleInfo);
+      const newData = [...scheduleInformation, employeeScheduleInfo];
+      console.log(newData);
+      setEmployeeScheduleInfo(newData);
     } catch (err: any) {
       console.error(err.message);
     }
@@ -174,8 +173,7 @@ export default function Schedule() {
                         >
                           {row.map(
                             (cell, index) =>
-                              index !== 0 &&
-                              index !== 6 && (
+                              index !== 0 && (
                                 <td
                                   key={index}
                                   className='border hover:border-collapse px-4 py-2'
@@ -185,6 +183,10 @@ export default function Schedule() {
                                     ? dayjs(cell).format('YYYY/MM/DD')
                                     : typeof cell === 'boolean'
                                     ? cell.toString()
+                                    : index === 9 &&
+                                      (typeof cell === 'number' ||
+                                        typeof cell === 'object')
+                                    ? Object.values(row[9])[0]
                                     : cell}
                                 </td>
                               )
