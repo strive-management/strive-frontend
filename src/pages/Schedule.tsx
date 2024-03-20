@@ -62,6 +62,7 @@ export default function Schedule() {
       .then(function (response) {
         const newData = scheduleInformation.filter((item) => item.id !== id);
         setScheduleInformation(newData);
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -125,6 +126,7 @@ export default function Schedule() {
       const newData = [...scheduleInformation, employeeScheduleInfo];
       console.log(newData);
       setEmployeeScheduleInfo(newData);
+      console.log(scheduleInfo);
     } catch (err: any) {
       console.error(err.message);
     }
