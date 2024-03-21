@@ -51,6 +51,8 @@ export default function Login() {
     e.preventDefault();
     setError('');
     try {
+      axios.defaults.withCredentials = true;
+
       await signInWithEmailAndPassword(
         auth,
         credentials.email,

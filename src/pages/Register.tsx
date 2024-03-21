@@ -43,6 +43,8 @@ export default function Register() {
     setError('');
 
     try {
+      axios.defaults.withCredentials = true;
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         registrationData.email,
@@ -70,6 +72,7 @@ export default function Register() {
   const handleGoogleSignup = async (e: { preventDefault: () => void }) => {
     try {
       e.preventDefault();
+      axios.defaults.withCredentials = true;
 
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
