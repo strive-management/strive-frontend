@@ -88,7 +88,7 @@ const ScheduleView = () => {
         </h1>
       </div> */}
 
-          <div className='flex flex-col p-5 sm:p-10 mt-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl'>
+          <div className='flex flex-col p-5 sm:p-10 mt-10 border-2 border-gray-600 dark:border-gray-300 rounded-xl'>
             <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
                 <div className='overflow-hidden mb-20'>
@@ -166,7 +166,10 @@ const ScheduleView = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className='flex flex-row gap-6 text-gray-700 dark:text-gray-300'>
+                
+              </div>
+            </div>
+                <div className='flex flex-col pt-10 px-[120px] sm:flex-row gap-6 text-gray-700 dark:text-gray-300'>
                   <h4>From</h4>
                   <input
                     type='date'
@@ -181,9 +184,8 @@ const ScheduleView = () => {
                     name='until'
                     onChange={handleRange}
                   />
+                
                 </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

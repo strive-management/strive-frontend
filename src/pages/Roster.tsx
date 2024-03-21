@@ -124,7 +124,7 @@ export default function Roster() {
       <div className="top-20 p-5 mt-10 sm:p-10 sm:mt-10">
         {/* <h1 className="text-gray-700 dark:text-gray-300 text-xl place-content-center">All Employees</h1> */}
 
-        <div className="flex flex-col mt-10 border-2 p-2 sm:p-10 border-gray-300 dark:border-gray-300 rounded-xl">
+        <div className="flex flex-col mt-10 border-2 p-2 sm:p-10 border-gray-600 dark:border-gray-300 rounded-xl">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div className="overflow-hidden">
