@@ -79,7 +79,7 @@ const Team: React.FC = () => {
               Meet Team Strive
             </h1>
             <br />
-            <div className="flex flex-col sm:grid sm:grid-cols-2 place-items-center gap-8 auto-rows-[200px] font-rubik text-4xl">
+            <div className="flex flex-col sm:grid sm:grid-cols-2 place-items-center gap-8 font-rubik text-4xl">
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
                 <img src={mattk} className="w-[200px] h-[200px]" />
                 <br />
@@ -89,9 +89,12 @@ const Team: React.FC = () => {
                 <h3 className="dark:text-white text-gray-700 text-2xl sm:text-2xl">
                   Product Owner
                 </h3>
+                <h3 className="dark:text-white text-gray-700 text-2xl sm:text-2xl">
+                  Fullstack Engineer
+                </h3>
                 <br />
                 <div className="flex flex-row gap-6">
-                <img
+                  <img
                     src={github}
                     className="w-10 h-10 block black dark:bg-white"
                   ></img>
@@ -103,11 +106,14 @@ const Team: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
-                <img src={harum} className="w-[200px] h-[200px]" />
+                <img src={kevinh} className="w-[200px] h-[200px]" />
                 <br />
                 <h2 className="dark:text-white text-gray-700 text-3xl sm:text-4xl">
-                  Haru M
+                  Kevin H
                 </h2>
+                <h3 className="dark:text-white text-gray-700 text-2xl sm:text-2xl">
+                  Tech Lead
+                </h3>
                 <h3 className="dark:text-white text-gray-700 text-2xl sm:text-2xl">
                   Fullstack Engineer
                 </h3>
@@ -148,14 +154,15 @@ const Team: React.FC = () => {
                   />
                 </div>
               </div>
+
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
-                <img src={kevinh} className="w-[200px] h-[200px]" />
+                <img src={harum} className="w-[200px] h-[200px]" />
                 <br />
                 <h2 className="dark:text-white text-gray-700 text-3xl sm:text-4xl">
-                  Kevin H
+                  Haru M
                 </h2>
                 <h3 className="dark:text-white text-gray-700 text-2xl sm:text-2xl">
-                  Tech Lead
+                  Fullstack Engineer
                 </h3>
                 <br />
                 <div className="flex flex-row gap-6">
