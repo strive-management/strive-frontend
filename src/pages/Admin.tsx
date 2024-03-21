@@ -6,6 +6,7 @@ import axios from "axios";
 // import logoDark from "../images/strive1.svg";
 import Select from "../components/ui/Select";
 import InputModal from "../components/ui/InputModal";
+import { useAuth } from "../context/AuthContext";
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -13,6 +14,7 @@ interface EmployeeInfo {
   first_name: string;
   last_name: string;
   email: string;
+  user_id:string;
   phone_number: string;
   job_title: string;
   department_name: string;
@@ -36,10 +38,15 @@ interface OptionsState {
 }
 
 export default function Admin() {
+
+  const { currentUser } = useAuth()
+
+
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
     first_name: "",
     last_name: "",
     email: "",
+    user_id: '',
     phone_number: "",
     job_title: "",
     department_name: "",
@@ -75,8 +82,11 @@ export default function Admin() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.post(`${LOCALDB_URL}employees`, { ...employeeInfo });
+      const newUser = await axios.post(`${LOCALDB_URL}employees`, { ...employeeInfo, user_id:currentUser?.uid });
       console.log("Employee added successfully");
+      console.log(newUser);
+      
+
       // Optionally reset form or handle success further
     } catch (error) {
       console.error("Error adding employee: ", error);
