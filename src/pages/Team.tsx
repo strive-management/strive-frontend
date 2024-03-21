@@ -94,15 +94,27 @@ const Team: React.FC = () => {
                 </h3>
                 <br />
                 <div className="flex flex-row gap-6">
-                  <img
-                    src={github}
-                    className="w-10 h-10 block black dark:bg-white"
-                  ></img>
+                  <a
+                    href="https://github.com/shizuokaterrier"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={github}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
 
-                  <img
-                    src={linkedin}
-                    className="w-10 h-10 block black dark:bg-white"
-                  ></img>
+                  <a
+                    href="https://www.linkedin.com/in/matt-keighley-4099202a9/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={linkedin}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
                 </div>
               </div>
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
@@ -119,18 +131,28 @@ const Team: React.FC = () => {
                 </h3>
                 <br />
                 <div className="flex flex-row gap-6">
-                  <img
-                    src={github}
-                    className="w-10 h-10 filter dark:invert"
-                    alt="GitHub"
-                  />
+                  <a
+                    href="https://github.com/RH-Kevin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={github}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
 
-                  <img
-                    src={linkedin}
-                    className="w-10 h-10 block black dark:bg-white"
-                  />
-                </div>
-              </div>
+                  <a
+                    href="www.linkedin.com/in/kevin-h-9522b023b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={linkedin}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
+                </div></div>
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
                 <img src={kevint} className="w-[200px] h-[200px]" />
                 <br />
@@ -142,16 +164,27 @@ const Team: React.FC = () => {
                 </h3>
                 <br />
                 <div className="flex flex-row gap-6">
-                  <img
-                    src={github}
-                    className="w-10 h-10 filter dark:invert"
-                    alt="GitHub"
-                  />
+                  <a
+                    href="https://github.com/mylordkaz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={github}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
 
-                  <img
-                    src={linkedin}
-                    className="w-10 h-10 block black dark:bg-white"
-                  />
+                  <a
+                    href="https://www.linkedin.com/in/kevin-timsiline-69603b204/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={linkedin}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
                 </div>
               </div>
 
@@ -166,16 +199,27 @@ const Team: React.FC = () => {
                 </h3>
                 <br />
                 <div className="flex flex-row gap-6">
-                  <img
-                    src={github}
-                    className="w-10 h-10 filter dark:invert"
-                    alt="GitHub"
-                  />
+                  <a
+                    href="https://github.com/H-Morii"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={github}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
 
-                  <img
-                    src={linkedin}
-                    className="w-10 h-10 block black dark:bg-white"
-                  />
+                  <a
+                    href="https://www.linkedin.com/in/haruki-mori/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={linkedin}
+                      className="w-10 h-10 block black dark:bg-white"
+                    ></img>
+                  </a>
                 </div>
               </div>
             </div>
