@@ -107,7 +107,7 @@ export default function Register() {
     <>
       <div
         ref={registerRef}
-        className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+        className="flex flex-col items-center justify-center w-full px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
       >
         <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
