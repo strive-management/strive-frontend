@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Team from './pages/Team';
 
 import Dashboard from './pages/Dashboard';
 
@@ -17,7 +18,12 @@ import EditModal from './components/EditModal';
 import ErrorPage from './pages/ErrorPage';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+
+import Contact from './pages/Contact';
+import About from './pages/About';
+
 import CloudDisplay from './components/CloudDisplay';
+
 
 const Admin = lazy(() => import('./pages/Admin'));
 const Clock = lazy(() => import('./pages/Clock'));
@@ -58,6 +64,27 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
     ],
+  },
+
+  {
+    path: '/team',
+    element: <Team />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/about',
+    element: <About />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/team',
+    element: <Team />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/contact',
+    element: <Contact />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/dashboard',
