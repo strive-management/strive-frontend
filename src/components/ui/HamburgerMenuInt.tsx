@@ -37,7 +37,7 @@ const BurgerMenuInternal: React.FC = () => {
             <Link to="/dashboard/admin">
               <div className="flex flex-row gap-2 items-center">
                 <FontAwesomeIcon icon={faUser} />{" "}
-                <h4 className=" md:block">Admin</h4>
+                <h4 className=" md:block">Add Employee</h4>
               </div>
             </Link>
             <Link to="/dashboard/roster">

@@ -159,7 +159,7 @@ export default function Admin() {
 
       <div className="flex flex-col w-full">
         <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
-          <div>Add Record</div>
+          <div>Add Employee</div>
 
         </div>
         {/* <div className="md:fixed flex flex-row border-b-2 border-gray-400 justify-center h-20 top-0 z-20">
@@ -194,7 +194,7 @@ export default function Admin() {
                 value={employeeInfo.first_name}
                 onChange={handleChange}
                 placeholder='First Name'
-                required={true}
+               
               />
             </div>
             <div>
@@ -205,7 +205,7 @@ export default function Admin() {
                 value={employeeInfo.last_name}
                 onChange={handleChange}
                 placeholder='Last Name'
-                required={true}
+                required
               />
             </div>
             <div>
