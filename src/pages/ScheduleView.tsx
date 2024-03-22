@@ -4,8 +4,11 @@ import dayjs from 'dayjs';
 import EditModal from '../components/EditModal';
 // import DeleteUserModal from '../components/DeleteUserModal';
 
+import { useAuth } from '../context/AuthContext';
+
 interface ScheduleInfo {
   id: number;
+  user_id: string;
   employee_id: number;
   fullname: string;
   date: string;
@@ -23,6 +26,7 @@ interface range {
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 const ScheduleView = () => {
+  const { currentUser } = useAuth();
   const [scheduleInformation, setScheduleInformation] = useState<
     ScheduleInfo[]
   >([]);
@@ -42,7 +46,9 @@ const ScheduleView = () => {
   useEffect(() => {
     const fetchScheduleData = async () => {
       try {
-        const response = await axios.get(`${LOCALDB_URL}schedules`);
+        const response = await axios.get(
+          `${LOCALDB_URL}schedules?user_id=${currentUser?.uid}`
+        );
         setScheduleInformation(response.data);
       } catch (error) {
         console.log(error);
@@ -177,37 +183,3 @@ const ScheduleView = () => {
 };
 
 export default ScheduleView;
-
-{
-  /* const h1Style: React.CSSProperties = {
-  marginTop: '40px',
-  marginBottom: '40px',
-};
-
-const containerStyle: React.CSSProperties = {
-  margin: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: 'auto',
-};
-
-const tableStyle: React.CSSProperties = {
-  borderCollapse: 'collapse',
-  width: 'auto',
-};
-
-const thStyle: React.CSSProperties = {
-  border: '1px solid #dddddd',
-  padding: '8px 16px',
-  textAlign: 'left',
-  backgroundColor: '#f2f2f2',
-};
-
-const tdStyle: React.CSSProperties = {
-  border: '1px solid #dddddd',
-  padding: '8px',
-  textAlign: 'left',
-}; */
-}

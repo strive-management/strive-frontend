@@ -6,8 +6,11 @@ import axios from 'axios';
 import EditModal from '../components/EditModal';
 // import DeleteUserModal from '../components/DeleteUserModal';
 
+import { useAuth } from '../context/AuthContext';
+
 interface ScheduleInfo {
   id: number;
+  user_id: string;
   employee_id: number;
   fullname: string;
   date: string;
@@ -27,6 +30,8 @@ interface EmployeeInfo {
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 export default function Schedule() {
+  const { currentUser } = useAuth();
+
   const [scheduleInformation, setScheduleInformation] = useState<
     ScheduleInfo[]
   >([]);
@@ -73,7 +78,9 @@ export default function Schedule() {
   useEffect(() => {
     const fetchNames = async () => {
       try {
-        const response = await axios.get(`${LOCALDB_URL}employees`);
+        const response = await axios.get(
+          `${LOCALDB_URL}employees?user_id=${currentUser?.uid}`
+        );
         setEmployeeInfo(response.data);
         setUpdatedEmployeeInfo(response.data);
       } catch (error) {
@@ -86,7 +93,9 @@ export default function Schedule() {
   useEffect(() => {
     const fetchScheduleData = async () => {
       try {
-        const response = await axios.get(`${LOCALDB_URL}schedules`);
+        const response = await axios.get(
+          `${LOCALDB_URL}schedules?user_id=${currentUser?.uid}`
+        );
         setScheduleInformation(response.data);
       } catch (error) {
         console.log(error);
@@ -120,10 +129,10 @@ export default function Schedule() {
 
   const postSchedule = async () => {
     try {
-      const response = await axios.post(
-        `${LOCALDB_URL}schedules`,
-        employeeScheduleInfo
-      );
+      const response = await axios.post(`${LOCALDB_URL}schedules`, {
+        ...employeeScheduleInfo,
+        user_id: currentUser?.uid,
+      });
       const createdSchedule = response.data;
       setScheduleInformation((prev) => [...prev, createdSchedule]);
     } catch (err: any) {
