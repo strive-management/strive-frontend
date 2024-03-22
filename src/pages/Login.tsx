@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
-import logoLightMode from '../assets/strive2.svg';
-import logoDarkMode from '../assets/2-white.svg';
+// import logoLightMode from '../assets/strive2.svg';
+// import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import { auth } from '../firebase/firebase';
 import { useRef, useState } from 'react';
@@ -90,18 +90,18 @@ export default function Login() {
     <>
       <div
         ref={signinRef}
-        className="flex flex-col items-center w-full justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+        className="flex flex-col items-center w-full justify-center px-6 py-8 mt-10 mx-auto md:h-screen lg:py-0"
       >
-        <div>
+        {/* <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
-        </div>
-        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-[#c0f2fc] bg-white dark:bg-[#1a0429] dark:border-[#75c479] rounded-xl">
-          <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-gray-300">
+        </div> */}
+        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-gray-600  dark:border-gray-300 rounded-xl">
+          <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-600 md:text-2xl dark:text-gray-300">
             Login
           </h3>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
               Email
             </label>
             <Input
@@ -113,7 +113,7 @@ export default function Login() {
             />
           </div>
           <div className="mb-5">
-            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
               Password
             </label>
             <Input
@@ -129,27 +129,29 @@ export default function Login() {
             <button
               type="submit"
               onClick={handleLogin}
-              className="text-gray-700 bg-[#c0f2fc] hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-[#75c479] dark:hover:bg-[#58945b] dark:focus:ring-gray-800"
+              className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
             >
-              Login
+              Log In
             </button>
             <Link
               to="/"
-              className="text-gray-700 bg-gray-400 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
             >
               Go Back
             </Link>
           </div>
+          <br/>
           <a
             onClick={handlePwdReset}
-            className="text-xs pt-6 text-center"
+            className="text-xs pt-6 text-center text-gray-600 dark:text-gray-200"
             href="#"
           >
             Forgot Password?
           </a>
-          <div className="text-sm text-center">
-            Not registered yet ?{' '}
-            <Link to="/register" className="text-blue-600 hover:underline">
+          <br/>
+          <div className="text-sm text-center text-gray-600 dark:text-gray-200">
+            Not registered yet?{' '}
+            <Link to="/register" className="text-blue-500 hover:underline">
               Create an Account
             </Link>
           </div>
@@ -157,18 +159,18 @@ export default function Login() {
 
           {error && <div className="text-red-500">{error}</div>}
 
-          <div className="my-12 border-t text-center">
-            <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium transform translate-y-1/2">
+          <div className="my-12 border-t border-gray-600 dark:border-gray-200 text-center">
+            <div className="leading-none px-2 inline-block text-sm text-gray-600 dark:text-gray-200 tracking-wide font-medium transform translate-y-1/2">
               Or
             </div>
           </div>
           <div className="flex gap-10 items-center justify-center">
             <button
               onClick={handleGoogleSignIn}
-              className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="text-gray-700 text-sm max-w-xs w-full bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
             >
-              <div className="bg-white p-2 rounded-full">
-                <svg className="w-4" viewBox="0 0 533.5 544.3">
+              <div className="flex flex-row justify-center p-2 rounded-full">
+                <svg className="w-6" viewBox="0 0 533.5 544.3">
                   <path
                     d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
                     fill="#4285f4"
