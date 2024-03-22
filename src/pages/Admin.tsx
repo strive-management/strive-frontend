@@ -13,6 +13,7 @@ interface EmployeeInfo {
   first_name: string;
   last_name: string;
   email: string;
+  user_id: string;
   phone_number: string;
   job_title: string;
   department_name: string;
@@ -27,6 +28,7 @@ interface EmployeeInfo {
 interface Option {
   id: number;
   [key: string]: string | number; // Allow any string or number property
+  user_id: string;
 }
 interface OptionsState {
   jobs: Option[];
@@ -36,6 +38,8 @@ interface OptionsState {
 }
 
 export default function Admin() {
+  const { currentUser } = useAuth();
+
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
     first_name: '',
     last_name: '',
@@ -110,7 +114,10 @@ export default function Admin() {
 
       setOptions((prev) => ({
         ...prev,
-        [type]: [...prev[type], { id: newItem.id, name: newValue }],
+        [type]: [
+          ...prev[type],
+          { id: newItem.id, name: newValue, user_id: `${currentUser?.uid}` },
+        ],
       }));
       setShowModal(false);
     } catch (error) {
@@ -120,11 +127,13 @@ export default function Admin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!currentUser?.uid) return [];
+        const user = currentUser?.uid;
         const [jobsResponse, departmentsResponse, locationsResponse] =
           await Promise.all([
-            axios.get(`${LOCALDB_URL}jobs`),
-            axios.get(`${LOCALDB_URL}departments`),
-            axios.get(`${LOCALDB_URL}locations`),
+            axios.get(`${LOCALDB_URL}jobs?user_id=${user}`),
+            axios.get(`${LOCALDB_URL}departments?user_id=${user}`),
+            axios.get(`${LOCALDB_URL}locations?user_id=${user}`),
           ]);
         setOptions({
           jobs: jobsResponse.data,
@@ -135,7 +144,6 @@ export default function Admin() {
         console.error('Error fetching data: ', error);
       }
     };
-
     fetchData();
   }, []);
 
