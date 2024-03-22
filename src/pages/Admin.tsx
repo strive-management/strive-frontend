@@ -1,12 +1,12 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import Input from "../components/ui/Input";
-import Label from "../components/ui/Label";
-import axios from "axios";
+import { ChangeEvent, useState, useEffect } from 'react';
+import Input from '../components/ui/Input';
+import Label from '../components/ui/Label';
+import axios from 'axios';
 // import logoLight from "../assets/2-white.svg";
 // import logoDark from "../images/strive1.svg";
-import Select from "../components/ui/Select";
-import InputModal from "../components/ui/InputModal";
-import { useAuth } from "../context/AuthContext";
+import Select from '../components/ui/Select';
+import InputModal from '../components/ui/InputModal';
+import { useAuth } from '../context/AuthContext';
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -14,7 +14,7 @@ interface EmployeeInfo {
   first_name: string;
   last_name: string;
   email: string;
-  user_id:string;
+  user_id: string;
   phone_number: string;
   job_title: string;
   department_name: string;
@@ -38,24 +38,22 @@ interface OptionsState {
 }
 
 export default function Admin() {
-
-  const { currentUser } = useAuth()
-
+  const { currentUser } = useAuth();
 
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
-    first_name: "",
-    last_name: "",
-    email: "",
+    first_name: '',
+    last_name: '',
+    email: '',
     user_id: '',
-    phone_number: "",
-    job_title: "",
-    department_name: "",
-    city: "",
-    address_1: "",
-    address_2: "",
-    zipcode: "",
-    country: "",
-    location_name: "",
+    phone_number: '',
+    job_title: '',
+    department_name: '',
+    city: '',
+    address_1: '',
+    address_2: '',
+    zipcode: '',
+    country: '',
+    location_name: '',
     manager_id: null,
   });
   const [options, setOptions] = useState<OptionsState>({
@@ -64,7 +62,7 @@ export default function Admin() {
     locations: [],
   });
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [modalType, setModalType] = useState('');
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -72,7 +70,7 @@ export default function Admin() {
     const { name, value } = e.target;
 
     const updatedValue =
-      name === "manager_id" ? (value === "" ? null : Number(value)) : value;
+      name === 'manager_id' ? (value === '' ? null : Number(value)) : value;
 
     setEmployeeInfo((prevState) => ({
       ...prevState,
@@ -82,14 +80,16 @@ export default function Admin() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const newUser = await axios.post(`${LOCALDB_URL}employees`, { ...employeeInfo, user_id:currentUser?.uid });
-      console.log("Employee added successfully");
+      const newUser = await axios.post(`${LOCALDB_URL}employees`, {
+        ...employeeInfo,
+        user_id: currentUser?.uid,
+      });
+      console.log('Employee added successfully');
       console.log(newUser);
-      
 
       // Optionally reset form or handle success further
     } catch (error) {
-      console.error("Error adding employee: ", error);
+      console.error('Error adding employee: ', error);
       // Handle error
     }
   };
@@ -101,13 +101,13 @@ export default function Admin() {
     let payload;
 
     switch (type) {
-      case "locations":
+      case 'locations':
         payload = { location_name: newValue };
         break;
-      case "jobs":
+      case 'jobs':
         payload = { job_title: newValue };
         break;
-      case "departments":
+      case 'departments':
         payload = { department_name: newValue };
         break;
       default:
@@ -115,7 +115,10 @@ export default function Admin() {
         return;
     }
     try {
-      const response = await axios.post(`${LOCALDB_URL}${type}`, payload);
+      const response = await axios.post(`${LOCALDB_URL}${type}`, {
+        ...payload,
+        user_id: currentUser?.uid,
+      });
       const newItem = response.data;
 
       setOptions((prev) => ({
@@ -142,7 +145,7 @@ export default function Admin() {
           locations: locationsResponse.data,
         });
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error);
       }
     };
 
@@ -151,8 +154,8 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex flex-col w-full">
-        <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full dark:text-gray-300">
+      <div className='flex flex-col w-full'>
+        <div className='flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full dark:text-gray-300'>
           <div>Admin</div>
         </div>
         {/* <div className="md:fixed flex flex-row border-b-2 border-gray-400 justify-center h-20 top-0 z-20">
@@ -168,177 +171,176 @@ export default function Admin() {
         />
       </div> */}
 
-        
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col p-5 sm:p-10 mt-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
+          className='flex flex-col p-5 sm:p-10 mt-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto'
         >
-          <div className="flex flex-col border-2 p-10 gap-2 rounded-2xl">
-            <label className="font-medium text-lg dark:text-gray-300">
+          <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
+            <label className='font-medium text-lg dark:text-gray-300'>
               Basic Information
             </label>
             <div>
-              <Label text={""} />
+              <Label text={''} />
 
               <Input
-                type={"text"}
-                name="first_name"
+                type={'text'}
+                name='first_name'
                 value={employeeInfo.first_name}
                 onChange={handleChange}
-                placeholder="First Name"
+                placeholder='First Name'
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"text"}
-                name="last_name"
+                type={'text'}
+                name='last_name'
                 value={employeeInfo.last_name}
                 onChange={handleChange}
-                placeholder="Last Name"
+                placeholder='Last Name'
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"email"}
-                name="email"
+                type={'email'}
+                name='email'
                 value={employeeInfo.email}
                 onChange={handleChange}
-                placeholder="Email"
+                placeholder='Email'
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"tel"}
-                name="phone_number"
+                type={'tel'}
+                name='phone_number'
                 value={employeeInfo.phone_number}
                 onChange={handleChange}
-                placeholder="Phone Number"
+                placeholder='Phone Number'
               />
             </div>
           </div>
 
-          <div className="flex flex-col border-2 p-10 gap-2 rounded-2xl">
-            <label className="font-medium text-lg dark:text-gray-300">
+          <div className='flex flex-col border-2 p-10 gap-2 rounded-2xl'>
+            <label className='font-medium text-lg dark:text-gray-300'>
               Address Information
             </label>
 
-            <Label text={""} />
+            <Label text={''} />
 
             <Input
-              type={"number"}
-              name="zipcode"
+              type={'number'}
+              name='zipcode'
               value={employeeInfo.zipcode}
               onChange={handleChange}
-              placeholder="Zip Code"
+              placeholder='Zip Code'
             />
             <div>
               <Input
-                type={"text"}
-                name="address_1"
+                type={'text'}
+                name='address_1'
                 value={employeeInfo.address_1}
                 onChange={handleChange}
-                placeholder="Address line 1"
+                placeholder='Address line 1'
               />
             </div>
             <div>
               <Input
-                type={"text"}
-                name="address_2"
+                type={'text'}
+                name='address_2'
                 value={employeeInfo.address_2}
                 onChange={handleChange}
-                placeholder="Address line 2"
+                placeholder='Address line 2'
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"text"}
-                name="city"
+                type={'text'}
+                name='city'
                 value={employeeInfo.city}
                 onChange={handleChange}
-                placeholder="City"
+                placeholder='City'
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"text"}
-                name="country"
+                type={'text'}
+                name='country'
                 value={employeeInfo.country}
                 onChange={handleChange}
-                placeholder="Country"
+                placeholder='Country'
               />
             </div>
           </div>
 
-          <div className="flex flex-col border-2 p-10 rounded-2xl">
-            <Label text={"Work Location"} />
+          <div className='flex flex-col border-2 p-10 rounded-2xl'>
+            <Label text={'Work Location'} />
             <Select
-              name="location_name"
+              name='location_name'
               value={employeeInfo.location_name}
               onChange={handleChange}
               options={options.locations.map((option) => ({
                 id: option.id,
                 name: option.location_name,
               }))}
-              defaultOption="Select Location"
+              defaultOption='Select Location'
               includeAddNew={true}
-              onAddNew={() => handleAddNew("locations")}
+              onAddNew={() => handleAddNew('locations')}
             />
 
-            <Label text={"Job"} />
+            <Label text={'Job'} />
             <Select
-              name="job_title"
+              name='job_title'
               value={employeeInfo.job_title}
               onChange={handleChange}
               options={options.jobs.map((option) => ({
                 id: option.id,
                 name: option.job_title, // Assuming your data source has 'department_name'
               }))}
-              defaultOption="Select Job"
+              defaultOption='Select Job'
               includeAddNew={true}
-              onAddNew={() => handleAddNew("jobs")}
+              onAddNew={() => handleAddNew('jobs')}
             />
 
-            <Label text={"Department"} />
+            <Label text={'Department'} />
             <Select
-              name="department_name"
+              name='department_name'
               value={employeeInfo.department_name}
               onChange={handleChange}
               options={options.departments.map((option) => ({
                 id: option.id,
                 name: option.department_name, // Assuming your data source has 'department_name'
               }))}
-              defaultOption="Select Department"
+              defaultOption='Select Department'
               includeAddNew={true}
-              onAddNew={() => handleAddNew("departments")}
+              onAddNew={() => handleAddNew('departments')}
             />
           </div>
 
-          <div className="flex flex-col border-2 p-10 rounded-2xl">
-            <div className="">
-              <Label text={"Manager"} />
+          <div className='flex flex-col border-2 p-10 rounded-2xl'>
+            <div className=''>
+              <Label text={'Manager'} />
               <Input
-                type="text"
-                name="manager_id"
+                type='text'
+                name='manager_id'
                 value={
                   employeeInfo.manager_id !== null
                     ? employeeInfo.manager_id.toString()
-                    : ""
+                    : ''
                 }
                 onChange={handleChange}
-                placeholder="Manager ID"
+                placeholder='Manager ID'
               />
             </div>
           </div>
 
-          <div className="flex flex-row border-2 p-6 gap-4 rounded-2xl">
+          <div className='flex flex-row border-2 p-6 gap-4 rounded-2xl'>
             <button
-              type="submit"
-              className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              type='submit'
+              className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
             >
               Send
             </button>
@@ -350,15 +352,14 @@ export default function Admin() {
               />
             )}
             <button
-              type="button"
-              className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              type='button'
+              className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
             >
               Cancel
             </button>
           </div>
         </form>
-        </div>
-      
+      </div>
     </>
   );
 }
