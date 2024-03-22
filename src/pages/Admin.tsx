@@ -161,9 +161,9 @@ export default function Admin() {
         
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col p-5 sm:p-10 mt-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
+          className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
         >
-          <div className="flex flex-col border-2 p-10 gap-2 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
               Basic Information
             </label>
@@ -210,7 +210,7 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="flex flex-col border-2 p-10 gap-2 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
               Address Information
             </label>
@@ -264,7 +264,7 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="flex flex-col border-2 p-10 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 p-10 rounded-2xl">
             <Label text={"Work Location"} />
             <Select
               name="location_name"
@@ -308,7 +308,7 @@ export default function Admin() {
             />
           </div>
 
-          <div className="flex flex-col border-2 p-10 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 p-10 rounded-2xl">
             <div className="">
               <Label text={"Manager"} />
               <Input
@@ -325,7 +325,7 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="flex flex-row border-2 p-6 gap-4 rounded-2xl">
+          <div className="flex flex-row border-2 border-gray-500 p-6 gap-4 rounded-2xl">
             <button
               type="submit"
               className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"

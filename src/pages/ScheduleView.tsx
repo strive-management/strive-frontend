@@ -146,7 +146,10 @@ const ScheduleView = () => {
                     </tbody>
                   </table>
                 </div>
-                <div className='flex flex-row gap-6 text-gray-700 dark:text-gray-300'>
+                
+              </div>
+            </div>
+                <div className='flex flex-col pt-10 px-[120px] sm:flex-row gap-6 text-gray-700 dark:text-gray-300'>
                   <h4>From</h4>
                   <input
                     type='date'
@@ -161,9 +164,8 @@ const ScheduleView = () => {
                     name='until'
                     onChange={handleRange}
                   />
+                
                 </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

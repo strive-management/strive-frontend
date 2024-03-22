@@ -134,9 +134,9 @@ export default function Schedule() {
   console.log(date.slice(0, 11) + '   ' + date.slice(16, date.length));
   return (
     <>
-      <div className='flex flex-col w-full overflow-auto'>
+      <div className='flex flex-col pt-10 w-full overflow-auto'>
         <div className='top-20 p-5 sm:p-10 mt-20 sm:mt-10'>
-          <div className='flex flex-col border-2 p-10 border-gray-300 dark:border-gray-300 rounded-xl'>
+          <div className='flex flex-col border-2 p-10 border-gray-600 dark:border-gray-300 rounded-xl'>
             <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
                 <div className='overflow-hidden'>
@@ -207,7 +207,7 @@ export default function Schedule() {
                 </div>
               </div>
             </div>
-            <div className='flex flex-col top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto'>
+            <div className='flex flex-col items-center top-20 p-10 w-full gap-6 overflow-auto rounded-xl sm:left-20 md:left-40 md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto'>
               <div className='w-[200px] text-gray-700 dark:text-gray-300'>
                 <h4>Select Employee</h4>
                 <select
