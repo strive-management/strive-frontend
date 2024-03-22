@@ -10,6 +10,7 @@ interface SelectProps {
   defaultOption?: string;
   includeAddNew?: boolean; // New prop to conditionally include an "Add new..." option
   onAddNew?: () => void; // Handler for when "Add new..." is selected
+  required?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({

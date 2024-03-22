@@ -194,6 +194,7 @@ export default function Admin() {
                 value={employeeInfo.first_name}
                 onChange={handleChange}
                 placeholder='First Name'
+                required={true}
               />
             </div>
             <div>
@@ -204,6 +205,7 @@ export default function Admin() {
                 value={employeeInfo.last_name}
                 onChange={handleChange}
                 placeholder='Last Name'
+                required={true}
               />
             </div>
             <div>
@@ -214,6 +216,7 @@ export default function Admin() {
                 value={employeeInfo.email}
                 onChange={handleChange}
                 placeholder='Email'
+                required={true}
               />
             </div>
             <div>
@@ -224,6 +227,7 @@ export default function Admin() {
                 value={employeeInfo.phone_number}
                 onChange={handleChange}
                 placeholder='Phone Number'
+                required={true}
               />
             </div>
           </div>
@@ -301,6 +305,7 @@ export default function Admin() {
               defaultOption='Select Location'
               includeAddNew={true}
               onAddNew={() => handleAddNew('locations')}
+              required={true}
             />
 
             <Label text={'Job'} />
@@ -315,6 +320,7 @@ export default function Admin() {
               defaultOption='Select Job'
               includeAddNew={true}
               onAddNew={() => handleAddNew('jobs')}
+              required={true}
             />
 
             <Label text={'Department'} />
@@ -329,6 +335,7 @@ export default function Admin() {
               defaultOption='Select Department'
               includeAddNew={true}
               onAddNew={() => handleAddNew('departments')}
+              required={true}
             />
           </div>
 
