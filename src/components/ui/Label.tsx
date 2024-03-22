@@ -6,7 +6,7 @@ interface LabelProps {
 }
 
 const Label: FC<LabelProps> = ({ text, additionalClasses = '' }) => {
-  const labelClasses = `block mb-2 text-sm font-medium text-gray-900 dark:text-white ${additionalClasses}`;
+  const labelClasses = `block mb-2 text-sm font-medium text-gray-300 dark:text-gray-300 ${additionalClasses}`;
 
   return <label className={labelClasses}>{text}</label>;
 };

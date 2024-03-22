@@ -27,7 +27,7 @@ const BurgerMenuInternal: React.FC = () => {
       />
       {opened && (
         <div className="absolute backdrop-blur-md top-20 z-20 border-b-2 border-gray-300 left-0 right-0 bg-white dark:bg-[#212020] p-5 sm:hidden">
-          <div className="gap-8 flex flex-col place-items-center justify-items-center sm:hidden">
+          <div className="gap-8 flex flex-col place-items-center justify-items-center sm:hidden dark:text-gray-300">
             <Link to="/dashboard">
               <div className="flex flex-row gap-2 items-center">
                 <FontAwesomeIcon icon={faChartBar} />{" "}

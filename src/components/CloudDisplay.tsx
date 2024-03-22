@@ -38,11 +38,11 @@ const CloudDisplay: React.FC = () => {
   return (
     <>
       <div className="flex flex-col w-full mt-10 p-10">
-        <div className="flex flex-col sm:flex-row gap-10 justify-evenly top-20 p-4 mt-10 border-2 border-gray-600 rounded-xl sm:p-10 sm:mt-10">
+        <div className="flex flex-col sm:flex-row gap-10 justify-evenly top-20 p-4 mt-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl sm:p-10 sm:mt-10">
           <FileUpload />
           <div className="overflow-x-auto">
             {documents.map((doc) => (
-              <div className="flex justify-end gap-5 m-2" key={doc.id}>
+              <div className="flex justify-end gap-5 m-2 text-gray-700 dark:text-gray-300" key={doc.id}>
                 <p className="p-2 border-b-2">
                   {doc.fileName || "No file name available"}
                 </p>

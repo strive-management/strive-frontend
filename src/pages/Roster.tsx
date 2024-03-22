@@ -74,6 +74,9 @@ export default function Roster() {
   return (
 
     <div className="flex flex-col w-full">
+      <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
+          <div>Roster</div>
+        </div>
       {/* <div className="flex flex-row place-content-start items-center bg-gray-300 w-full h-20">
         <h1
           style={{ fontFamily: "'Lato', sans-serif" }}
@@ -86,7 +89,7 @@ export default function Roster() {
       <div className="top-20 p-5 mt-10 sm:p-10 sm:mt-10">
         {/* <h1 className="text-gray-700 dark:text-gray-300 text-xl place-content-center">All Employees</h1> */}
 
-        <div className="flex flex-col mt-10 border-2 p-2 sm:p-10 border-gray-600 dark:border-gray-300 rounded-xl">
+        <div className="flex flex-col border-2 p-2 sm:p-10 border-gray-600 dark:border-gray-300 rounded-xl">
           <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               <div className="overflow-hidden">

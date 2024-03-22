@@ -143,7 +143,10 @@ export default function Schedule() {
   console.log(date.slice(0, 11) + '   ' + date.slice(16, date.length));
   return (
     <>
-      <div className='flex flex-col pt-10 w-full overflow-auto'>
+      <div className='flex flex-col w-full pt-5 sm:pt-0 overflow-auto'>
+      <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
+          <div>Update Schedule</div>
+        </div>
         <div className='top-20 p-5 sm:p-10 mt-20 sm:mt-10'>
           <div className='flex flex-col border-2 p-10 border-gray-600 dark:border-gray-300 rounded-xl'>
             <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -156,7 +159,7 @@ export default function Schedule() {
                           Employee ID
                         </th>
                         <th scope='col' className='px-6 py-4'>
-                          Fullname
+                          Full Name
                         </th>
                         <th scope='col' className='px-6 py-4'>
                           Date
