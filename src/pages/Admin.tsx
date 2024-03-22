@@ -29,6 +29,7 @@ interface EmployeeInfo {
 interface Option {
   id: number;
   [key: string]: string | number; // Allow any string or number property
+  user_id: string;
 }
 interface OptionsState {
   jobs: Option[];
@@ -44,7 +45,7 @@ export default function Admin() {
     first_name: '',
     last_name: '',
     email: '',
-    user_id: '',
+    user_id: `${currentUser?.uid}`,
     phone_number: '',
     job_title: '',
     department_name: '',
@@ -102,28 +103,28 @@ export default function Admin() {
 
     switch (type) {
       case 'locations':
-        payload = { location_name: newValue };
+        payload = { location_name: newValue, user_id: currentUser?.uid };
         break;
       case 'jobs':
-        payload = { job_title: newValue };
+        payload = { job_title: newValue, user_id: currentUser?.uid };
         break;
       case 'departments':
-        payload = { department_name: newValue };
+        payload = { department_name: newValue, user_id: currentUser?.uid };
         break;
       default:
         console.error(`Unhandled type: ${type}`);
         return;
     }
     try {
-      const response = await axios.post(`${LOCALDB_URL}${type}`, {
-        ...payload,
-        user_id: currentUser?.uid,
-      });
+      const response = await axios.post(`${LOCALDB_URL}${type}`, payload);
       const newItem = response.data;
 
       setOptions((prev) => ({
         ...prev,
-        [type]: [...prev[type], { id: newItem.id, name: newValue }],
+        [type]: [
+          ...prev[type],
+          { id: newItem.id, name: newValue, user_id: `${currentUser?.uid}` },
+        ],
       }));
       setShowModal(false);
     } catch (error) {
@@ -133,11 +134,13 @@ export default function Admin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!currentUser?.uid) return [];
+        const user = currentUser?.uid;
         const [jobsResponse, departmentsResponse, locationsResponse] =
           await Promise.all([
-            axios.get(`${LOCALDB_URL}jobs`),
-            axios.get(`${LOCALDB_URL}departments`),
-            axios.get(`${LOCALDB_URL}locations`),
+            axios.get(`${LOCALDB_URL}jobs?user_id=${user}`),
+            axios.get(`${LOCALDB_URL}departments?user_id=${user}`),
+            axios.get(`${LOCALDB_URL}locations?user_id=${user}`),
           ]);
         setOptions({
           jobs: jobsResponse.data,
@@ -148,7 +151,6 @@ export default function Admin() {
         console.error('Error fetching data: ', error);
       }
     };
-
     fetchData();
   }, []);
 
