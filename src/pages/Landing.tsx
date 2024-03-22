@@ -3,10 +3,15 @@ import { Link, Outlet } from "react-router-dom";
 import logoLight from "../assets/1-white.svg";
 import logoDark from "../assets/strive1.svg";
 
-import bolt from "../assets/Icons/bolt.svg";
-import celebrate from "../assets/Icons/celebrate.svg";
-import lock from "../assets/Icons/lock.svg";
-import spa from "../assets/Icons/spa.png";
+import celebrateBlack from "../assets/Icons/celebrate-black.svg";
+import celebrateWhite from "../assets/Icons/celebrate-white.svg";
+import fastBlack from "../assets/Icons/fast-black.svg";
+import fastWhite from "../assets/Icons/fast-white.svg";
+import lockBlack from "../assets/Icons/lock-black.svg";
+import lockWhite from "../assets/Icons/lock-white.svg";
+import sunnyBlack from "../assets/Icons/sunny-black.svg";
+import sunnyWhite from "../assets/Icons/sunny-white.svg";
+
 import BurgerMenu from "../components/ui/HamburgerMenu";
 
 import WebFont from "webfontloader";
@@ -32,12 +37,12 @@ const Landing: React.FC = () => {
                   <img
                     src={logoDark}
                     alt="logo-dark"
-                    className="w-20 h-20 block dark:hidden"
+                    className="w-24 h-24 block dark:hidden"
                   />
                   <img
                     src={logoLight}
                     alt="logo-light"
-                    className="w-20 h-20 hidden dark:block"
+                    className="w-24 h-24 hidden dark:block"
                   />
                 </a>
               </div>
@@ -61,7 +66,7 @@ const Landing: React.FC = () => {
               >
                 <div className="m-10 place-self-center sm:m-6">
                   <Link
-                    className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-black dark:bg-gray-200 dark:hover:bg-gray-400 sm:px-4 py-2 m-2 rounded"
+                    className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
                     to="/login"
                   >
                     Log In
@@ -93,11 +98,11 @@ const Landing: React.FC = () => {
               <br />
               <br />
               <Link
-              className="text-gray-700 text-lg sm:text-2xl bg-blue-100 hover:bg-[#92c9f9] dark:text-black dark:bg-gray-200 dark:hover:bg-gray-400 px-8 py-3 sm:px-10 sm:py-4 ms:m-2 rounded-xl"
-              to="/about"
-            >
-              Learn More
-            </Link>
+                className="text-gray-700 text-lg sm:text-2xl bg-blue-100 hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 px-8 py-3 sm:px-10 sm:py-4 ms:m-2 rounded-xl"
+                to="/about"
+              >
+                Learn More
+              </Link>
             </div>
           </section>
         </main>
@@ -117,36 +122,56 @@ const Landing: React.FC = () => {
           <div className="py-10 w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-8 auto-rows-[200px] font-rubik text-4xl">
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
+              <img
+                  src={fastBlack}
+                  alt="logo-dark"
+                  className="w-20 h-20 block dark:hidden"
+                />
+                <img
+                  src={fastWhite}
+                  alt="logo-light"
+                  className="w-20 h-20 hidden dark:block"
+                />
                 <h1 className="text-3xl sm:text-4xl">Fast</h1>
-                <img
-                  src={bolt}
-                  alt="logo-dark"
-                  className="w-10 h-10 block dark:hidden"
-                />
               </div>
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
+                <img
+                  src={celebrateBlack}
+                  alt="logo-dark"
+                  className="w-20 h-20 block dark:hidden"
+                />
+                <img
+                  src={celebrateWhite}
+                  alt="logo-light"
+                  className="w-20 h-20 hidden dark:block"
+                />
                 <h1 className="text-3xl sm:text-4xl">Simple</h1>
-                <img
-                  src={celebrate}
-                  alt="logo-dark"
-                  className="w-10 h-10 block dark:hidden"
-                />
               </div>
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
+              <img
+                  src={sunnyBlack}
+                  alt="logo-dark"
+                  className="w-20 h-20 block dark:hidden"
+                />
+                <img
+                  src={sunnyWhite}
+                  alt="logo-light"
+                  className="w-20 h-20 hidden dark:block"
+                />
                 <h1 className="text-3xl sm:text-4xl">Efficient</h1>
-                <img
-                  src={spa}
-                  alt="logo-dark"
-                  className="w-10 h-10 block dark:hidden"
-                />
               </div>
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
-                <h1 className="text-3xl sm:text-4xl">Secure</h1>
-                <img
-                  src={lock}
+              <img
+                  src={lockBlack}
                   alt="logo-dark"
-                  className="w-10 h-10 block dark:hidden"
+                  className="w-20 h-20 block dark:hidden"
                 />
+                <img
+                  src={lockWhite}
+                  alt="logo-light"
+                  className="w-20 h-20 hidden dark:block"
+                />
+                <h1 className="text-3xl sm:text-4xl">Secure</h1>
               </div>
             </div>
           </div>
