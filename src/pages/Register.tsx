@@ -1,17 +1,17 @@
-import { Link, useNavigate } from 'react-router-dom';
-import logoLightMode from '../assets/strive2.svg';
-import logoDarkMode from '../assets/2-white.svg';
-import Input from '../components/ui/Input';
-import Label from '../components/ui/Label';
-import { ChangeEvent, useRef, useState } from 'react';
-import { auth } from '../firebase/firebase';
+import { Link, useNavigate } from "react-router-dom";
+// import logoLightMode from '../assets/strive2.svg';
+// import logoDarkMode from '../assets/2-white.svg';
+import Input from "../components/ui/Input";
+import Label from "../components/ui/Label";
+import { ChangeEvent, useRef, useState } from "react";
+import { auth } from "../firebase/firebase";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithPopup,
-} from 'firebase/auth';
-import axios from 'axios';
-import useOutsideClick from '../hook/useOutsideClick';
+} from "firebase/auth";
+import axios from "axios";
+import useOutsideClick from "../hook/useOutsideClick";
 
 interface RegistrationData {
   email: string;
@@ -25,12 +25,12 @@ const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 export default function Register() {
   const navigate = useNavigate();
   const registerRef = useRef<HTMLDivElement | null>(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [registrationData, setRegistrationData] = useState<RegistrationData>({
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ export default function Register() {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     try {
       axios.defaults.withCredentials = true;
@@ -51,7 +51,7 @@ export default function Register() {
         registrationData.password
       );
       const idToken = await userCredential.user.getIdToken();
-      console.log('Firebase user created', userCredential.user);
+      console.log("Firebase user created", userCredential.user);
 
       const postData = {
         token: idToken,
@@ -62,7 +62,7 @@ export default function Register() {
       };
       await axios.post(`${LOCALDB_URL}register`, postData);
 
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error: any) {
       const errorMessage = error.message;
       setError(errorMessage);
@@ -82,45 +82,45 @@ export default function Register() {
       const postData = {
         token: idToken,
         email: userInfo.email,
-        first_name: userInfo.displayName?.split(' ')[0],
-        last_name: userInfo.displayName?.split(' ')[1],
+        first_name: userInfo.displayName?.split(" ")[0],
+        last_name: userInfo.displayName?.split(" ")[1],
         UUID: userInfo.uid,
       };
 
       await axios.post(`${LOCALDB_URL}register`, postData);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error('Axios error data:', error.response?.data);
-        setError('Google sign-up failed. Please try again.');
+        console.error("Axios error data:", error.response?.data);
+        setError("Google sign-up failed. Please try again.");
       } else {
-        console.error('Error during Google sign-up:', error);
-        setError('Unexpected error occurred. Please try again.');
+        console.error("Error during Google sign-up:", error);
+        setError("Unexpected error occurred. Please try again.");
       }
     }
   };
   useOutsideClick(registerRef, () => {
-    navigate('/');
+    navigate("/");
   });
 
   return (
     <>
       <div
         ref={registerRef}
-        className="flex flex-col items-center justify-center px-6 py-8 mx-auto bg-white dark:bg-[#1a0429] md:h-screen lg:py-0"
+        className="flex flex-col items-center justify-center w-full px-6 py-8 mt-24 mx-auto md:h-screen lg:py-0"
       >
-        <div>
+        {/* <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
           <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
-        </div>
-        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-[#c0f2fc] bg-white dark:bg-[#1a0429] dark:border-[#75c479] rounded-xl">
+        </div> */}
+        <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-gray-600 dark:border-gray-200 rounded-xl">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-300">
             Register
           </h3>
           <div className="mb-5">
-            <Label text={'First Name'} />
+            <Label text={"First Name"} />
             <Input
-              type={'text'}
+              type={"text"}
               placeholder=""
               name="firstName"
               value={registrationData.firstName}
@@ -128,9 +128,9 @@ export default function Register() {
             />
           </div>
           <div className="mb-5">
-            <Label text={'Last Name'} />
+            <Label text={"Last Name"} />
             <Input
-              type={'text'}
+              type={"text"}
               placeholder=""
               name="lastName"
               value={registrationData.lastName}
@@ -138,9 +138,9 @@ export default function Register() {
             />
           </div>
           <div className="mb-5">
-            <Label text={'Email'} />
+            <Label text={"Email"} />
             <Input
-              type={'email'}
+              type={"email"}
               name="email"
               placeholder=""
               value={registrationData.email}
@@ -148,9 +148,9 @@ export default function Register() {
             />
           </div>
           <div className="mb-5">
-            <Label text={'Password'} />
+            <Label text={"Password"} />
             <Input
-              type={'password'}
+              type={"password"}
               name="password"
               placeholder=""
               value={registrationData.password}
@@ -162,16 +162,27 @@ export default function Register() {
             <Input type={'password'} placeholder="" />
           </div> */}
           <br />
-          <button
-            onClick={handleSubmit}
-            type="submit"
-            className="text-gray-700 bg-[#d3ebf9] hover:bg-[#92c9f9] focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-gray-700 dark:bg-[#c982f9] dark:hover:bg-[#905593] dark:focus:ring-gray-800"
-          >
-            Register
-          </button>
-          <div className="text-sm text-center">
-            Already have an account?{' '}
-            <Link to="/login" className="text-blue-600 hover:underline">
+          <div className="flex flex-row justify-evenly">
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+            >
+              Register
+            </button>
+            <Link
+              to="/"
+              className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+            >
+              Go Back
+            </Link>
+          </div>
+
+          <br />
+          <br />
+          <div className="text-sm text-center text-gray-600 dark:text-gray-200">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500 hover:underline">
               Log in
             </Link>
           </div>
@@ -180,17 +191,17 @@ export default function Register() {
 
           {error && <div className="text-red-500">{error}</div>}
 
-          <div className="my-12 border-t text-center">
-            <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium transform translate-y-1/2">
+          <div className="my-12 border-t border-gray-600 dark:border-gray-200 text-center">
+            <div className="leading-none px-2 inline-block text-sm text-gray-600 dark:text-gray-200 tracking-wide font-medium transform translate-y-1/2">
               Or
             </div>
           </div>
           <div className="flex gap-10 items-center justify-center">
             <button
               onClick={handleGoogleSignup}
-              className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:bg-[#c982f9] dark:hover:bg-[#905593] text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+              className="text-gray-700 text-sm max-w-xs w-full bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
             >
-              <div className="bg-white p-2 rounded-full">
+              <div className="flex flex-row justify-center p-2 rounded-xl">
                 <svg className="w-4" viewBox="0 0 533.5 544.3">
                   <path
                     d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
