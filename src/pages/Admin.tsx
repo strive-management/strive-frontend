@@ -142,8 +142,8 @@ export default function Admin() {
   return (
     <>
       <div className="flex flex-col w-full">
-        <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full dark:text-gray-300">
-          <div>Admin</div>
+        <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
+          <div>Add Record</div>
         </div>
         {/* <div className="md:fixed flex flex-row border-b-2 border-gray-400 justify-center h-20 top-0 z-20">
         <img
@@ -163,7 +163,7 @@ export default function Admin() {
           onSubmit={handleSubmit}
           className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
         >
-          <div className="flex flex-col border-2 border-gray-500 p-10 gap-2 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
               Basic Information
             </label>
@@ -210,7 +210,7 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="flex flex-col border-2 border-gray-500 p-10 gap-2 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
               Address Information
             </label>
@@ -264,7 +264,7 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="flex flex-col border-2 border-gray-500 p-10 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
             <Label text={"Work Location"} />
             <Select
               name="location_name"
@@ -308,7 +308,7 @@ export default function Admin() {
             />
           </div>
 
-          <div className="flex flex-col border-2 border-gray-500 p-10 rounded-2xl">
+          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
             <div className="">
               <Label text={"Manager"} />
               <Input
@@ -325,7 +325,7 @@ export default function Admin() {
             </div>
           </div>
 
-          <div className="flex flex-row border-2 border-gray-500 p-6 gap-4 rounded-2xl">
+          <div className="flex flex-row border-2 border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
             <button
               type="submit"
               className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
