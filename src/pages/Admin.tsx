@@ -1,11 +1,11 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import Input from "../components/ui/Input";
-import Label from "../components/ui/Label";
-import axios from "axios";
+import { ChangeEvent, useState, useEffect } from 'react';
+import Input from '../components/ui/Input';
+import Label from '../components/ui/Label';
+import axios from 'axios';
 // import logoLight from "../assets/2-white.svg";
 // import logoDark from "../images/strive1.svg";
-import Select from "../components/ui/Select";
-import InputModal from "../components/ui/InputModal";
+import Select from '../components/ui/Select';
+import InputModal from '../components/ui/InputModal';
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -37,18 +37,18 @@ interface OptionsState {
 
 export default function Admin() {
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_number: "",
-    job_title: "",
-    department_name: "",
-    city: "",
-    address_1: "",
-    address_2: "",
-    zipcode: "",
-    country: "",
-    location_name: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+    job_title: '',
+    department_name: '',
+    city: '',
+    address_1: '',
+    address_2: '',
+    zipcode: '',
+    country: '',
+    location_name: '',
     manager_id: null,
   });
   const [options, setOptions] = useState<OptionsState>({
@@ -57,7 +57,7 @@ export default function Admin() {
     locations: [],
   });
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [modalType, setModalType] = useState('');
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -65,7 +65,7 @@ export default function Admin() {
     const { name, value } = e.target;
 
     const updatedValue =
-      name === "manager_id" ? (value === "" ? null : Number(value)) : value;
+      name === 'manager_id' ? (value === '' ? null : Number(value)) : value;
 
     setEmployeeInfo((prevState) => ({
       ...prevState,
@@ -76,10 +76,10 @@ export default function Admin() {
     e.preventDefault();
     try {
       await axios.post(`${LOCALDB_URL}employees`, { ...employeeInfo });
-      console.log("Employee added successfully");
+      console.log('Employee added successfully');
       // Optionally reset form or handle success further
     } catch (error) {
-      console.error("Error adding employee: ", error);
+      console.error('Error adding employee: ', error);
       // Handle error
     }
   };
@@ -91,13 +91,13 @@ export default function Admin() {
     let payload;
 
     switch (type) {
-      case "locations":
+      case 'locations':
         payload = { location_name: newValue };
         break;
-      case "jobs":
+      case 'jobs':
         payload = { job_title: newValue };
         break;
-      case "departments":
+      case 'departments':
         payload = { department_name: newValue };
         break;
       default:
@@ -132,7 +132,7 @@ export default function Admin() {
           locations: locationsResponse.data,
         });
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error);
       }
     };
 
@@ -158,7 +158,6 @@ export default function Admin() {
         />
       </div> */}
 
-        
         <form
           onSubmit={handleSubmit}
           className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
@@ -168,10 +167,10 @@ export default function Admin() {
               Basic Information
             </label>
             <div>
-              <Label text={""} />
+              <Label text={''} />
 
               <Input
-                type={"text"}
+                type={'text'}
                 name="first_name"
                 value={employeeInfo.first_name}
                 onChange={handleChange}
@@ -179,9 +178,9 @@ export default function Admin() {
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"text"}
+                type={'text'}
                 name="last_name"
                 value={employeeInfo.last_name}
                 onChange={handleChange}
@@ -189,9 +188,9 @@ export default function Admin() {
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"email"}
+                type={'email'}
                 name="email"
                 value={employeeInfo.email}
                 onChange={handleChange}
@@ -199,9 +198,9 @@ export default function Admin() {
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"tel"}
+                type={'tel'}
                 name="phone_number"
                 value={employeeInfo.phone_number}
                 onChange={handleChange}
@@ -215,10 +214,10 @@ export default function Admin() {
               Address Information
             </label>
 
-            <Label text={""} />
+            <Label text={''} />
 
             <Input
-              type={"number"}
+              type={'number'}
               name="zipcode"
               value={employeeInfo.zipcode}
               onChange={handleChange}
@@ -226,7 +225,7 @@ export default function Admin() {
             />
             <div>
               <Input
-                type={"text"}
+                type={'text'}
                 name="address_1"
                 value={employeeInfo.address_1}
                 onChange={handleChange}
@@ -235,7 +234,7 @@ export default function Admin() {
             </div>
             <div>
               <Input
-                type={"text"}
+                type={'text'}
                 name="address_2"
                 value={employeeInfo.address_2}
                 onChange={handleChange}
@@ -243,9 +242,9 @@ export default function Admin() {
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"text"}
+                type={'text'}
                 name="city"
                 value={employeeInfo.city}
                 onChange={handleChange}
@@ -253,9 +252,9 @@ export default function Admin() {
               />
             </div>
             <div>
-              <Label text={""} />
+              <Label text={''} />
               <Input
-                type={"text"}
+                type={'text'}
                 name="country"
                 value={employeeInfo.country}
                 onChange={handleChange}
@@ -265,7 +264,7 @@ export default function Admin() {
           </div>
 
           <div className="flex flex-col border-2 border-gray-500 p-10 rounded-2xl">
-            <Label text={"Work Location"} />
+            <Label text={'Work Location'} />
             <Select
               name="location_name"
               value={employeeInfo.location_name}
@@ -276,10 +275,10 @@ export default function Admin() {
               }))}
               defaultOption="Select Location"
               includeAddNew={true}
-              onAddNew={() => handleAddNew("locations")}
+              onAddNew={() => handleAddNew('locations')}
             />
 
-            <Label text={"Job"} />
+            <Label text={'Job'} />
             <Select
               name="job_title"
               value={employeeInfo.job_title}
@@ -290,10 +289,10 @@ export default function Admin() {
               }))}
               defaultOption="Select Job"
               includeAddNew={true}
-              onAddNew={() => handleAddNew("jobs")}
+              onAddNew={() => handleAddNew('jobs')}
             />
 
-            <Label text={"Department"} />
+            <Label text={'Department'} />
             <Select
               name="department_name"
               value={employeeInfo.department_name}
@@ -304,20 +303,20 @@ export default function Admin() {
               }))}
               defaultOption="Select Department"
               includeAddNew={true}
-              onAddNew={() => handleAddNew("departments")}
+              onAddNew={() => handleAddNew('departments')}
             />
           </div>
 
           <div className="flex flex-col border-2 border-gray-500 p-10 rounded-2xl">
             <div className="">
-              <Label text={"Manager"} />
+              <Label text={'Manager'} />
               <Input
                 type="text"
                 name="manager_id"
                 value={
                   employeeInfo.manager_id !== null
                     ? employeeInfo.manager_id.toString()
-                    : ""
+                    : ''
                 }
                 onChange={handleChange}
                 placeholder="Manager ID"
@@ -347,8 +346,7 @@ export default function Admin() {
             </button>
           </div>
         </form>
-        </div>
-      
+      </div>
     </>
   );
 }
