@@ -76,7 +76,6 @@ const Clock = () => {
           <div>Clock In / Out</div>
         </div>
         <div className="flex flex-col place-items-center top-20 p-5">
-          
             <div className="flex flex-row place-content-center w-full h-20">
               <h1
                 style={{ fontFamily: "'Lato', sans-serif" }}
@@ -98,7 +97,7 @@ const Clock = () => {
                     </h1>
                   )}
                 </div>
-                <div className="flex flex-col border-1 w-[200px] h-[100px] sm:w-[400px] sm:h-[100px] justify-center items-center opacity-40 bg-slate-400 rounded-xl">
+                <div className="flex flex-col w-[200px] h-[100px] sm:w-[400px] sm:h-[100px] justify-center border-2 border-gray-600 dark:border-gray-100 items-center opacity-40 bg-transparent rounded-xl">
                   <p className=" font-extralight text-3xl sm:text-5xl relative dark:text-gray-50">
                     <span>{hour}</span>
                     <span>:</span>
