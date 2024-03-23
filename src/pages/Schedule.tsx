@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 // import Label from '../components/ui/Label';
 import axios from "axios";
 //import moment from 'moment';
-//import EditScheduleModal from "../components/EditScheduleModal";
+import EditScheduleModal from "../components/EditScheduleModal";
 // import DeleteUserModal from '../components/DeleteUserModal';
 
 import { useAuth } from "../context/AuthContext";
@@ -48,20 +48,23 @@ export default function Schedule() {
 
   const [date, setDate] = useState<string>("");
 
+  const [isEditScheduleModalOpen, setIsEditScheduleModalOpen] = useState<boolean>(false);
+
 
   //const [editingItemId, setEditingItemId] = useState<number | null>(null);
 
 
-  // const openEditScheduleModal = (id: number) => {
-  //   setEditingItemId(id);
-  //   setIsEditScheduleModalOpen(true);
-  // };
-  // const closeEditScheduleModal = () => {
-  //   setIsEditScheduleModalOpen(false);
-  //   setEditingItemId(null);
-  // };
+  const openEditScheduleModal = (id: number) => {
+    //setEditingItemId(id);
+    id; // <---  Delete this. It's just so TS stops complaining. 
+    setIsEditScheduleModalOpen(true);
+  };
+  const closeEditScheduleModal = () => {
+    setIsEditScheduleModalOpen(false);
+    //setEditingItemId(null);
+  };
 
-  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  
 
   // const openModal = () => setIsModalOpen(true);
   // const closeModal = () => setIsModalOpen(false);
@@ -216,7 +219,7 @@ export default function Schedule() {
                           <td>{schedule.clock_in}</td>
                           <td>{schedule.clock_out}</td>
                           <td>
-                          {/* <button
+                          <button
                             className='inline-block rounded bg-yellow-400 dark:bg-transparent dark:border-2 dark:border-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-yellow-300 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-yellow-200 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"'
                             onClick={() => openEditScheduleModal(schedule.id)}
                           >
@@ -224,15 +227,16 @@ export default function Schedule() {
                           </button>
                             {isEditScheduleModalOpen && (
                               <EditScheduleModal
-                                id={schedule.id}
+                                id={schedule.employee_id}
                                 isOpen={isEditScheduleModalOpen}
-                                onClose={handleModalClose}
+                                onClose={closeEditScheduleModal}
+                                empName={schedule.fullname}
                               />
-                            )} */}
+                            )}
                           </td>
                           <td>
                             <button
-                              className="inline-block rounded bg-blue-50 dark:bg-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                              className="inline-block rounded bg-blue-50 dark:bg-transparent dark:border-2 dark:border-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-red-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-red-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                               // onClick={() => openModal()}
                               onClick={(e) => handleDelete(e, schedule.id)}
                             >

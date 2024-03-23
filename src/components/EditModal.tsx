@@ -36,9 +36,9 @@ const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
     }
   };
 
-  useOutsideClick(modalRef, () => {
-    onClose();
-  });
+  // useOutsideClick(modalRef, () => {
+  //   onClose();
+  // });
 
   return (
     <>
