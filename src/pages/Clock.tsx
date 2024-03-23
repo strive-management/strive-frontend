@@ -156,6 +156,7 @@ const Clock = () => {
         <div className='flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300'>
           <div>Clock In / Out</div>
         </div>
+
         <div className='flex flex-col place-items-center top-20 p-5'>
           <div className='flex flex-row place-content-center w-full h-20'>
             <h1
@@ -212,6 +213,7 @@ const Clock = () => {
                     <option
                       key={employee.id as number}
                       value={employee.id as number}
+
                     >
                       {employee.id} {employee.first_name} {employee.last_name}
                     </option>
