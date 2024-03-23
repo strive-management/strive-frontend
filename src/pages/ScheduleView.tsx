@@ -1,7 +1,7 @@
 import { useEffect, useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import EditModal from '../components/EditModal';
+//import EditModal from '../components/EditModal';
 // import DeleteUserModal from '../components/DeleteUserModal';
 
 import { useAuth } from '../context/AuthContext';
@@ -86,15 +86,18 @@ const ScheduleView = () => {
           <div>View Schedule</div>
         </div>
         <div className='top-20 p-5 sm:p-10 mt-10 sm:mt-0'>
-          <div className='flex flex-col p-5 sm:p-10 mt-0 border-2 border-gray-300 dark:border-gray-300 rounded-xl'>
+          <div className='flex flex-col p-5 sm:p-10 mt-0 border-2 border-gray-500 dark:border-gray-300 rounded-xl'>
             <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
               <div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
                 <div className='overflow-hidden mb-20'>
                   <table className='min-w-full text-left text-sm font-light text-surface dark:text-white'>
-                    <thead className='border-b border-neutral-200 font-medium dark:border-white/10'>
+                    <thead className='border-b-2 border-neutral-600 text-center font-medium dark:border-gray-300'>
                       <tr>
                         <th scope='col' className='px-6 py-4'>
                           Employee ID
+                        </th>
+                        <th scope='col' className='px-6 py-4'>
+                          Full Name
                         </th>
                         <th scope='col' className='px-6 py-4'>
                           Date
@@ -124,7 +127,7 @@ const ScheduleView = () => {
                             schedule.date <= range.until
                         ) // Filter rows based on condition
                         .map((schedule) => (
-                          <tr key={schedule.id}>
+                          <tr className='border-b border-gray-600 text-center font-medium hover:bg-gray-300 dark:border-gray-200 dark:hover:bg-neutral-600' key={schedule.id}>
                             <td>{schedule.employee_id}</td>
                             <td>{schedule.fullname}</td>
                             <td>{dayjs(schedule.date).format('YYYY/MM/DD')}</td>
@@ -137,12 +140,7 @@ const ScheduleView = () => {
                             </td>
                             <td>{dayjs(schedule.clock_in).format('HH:mm')}</td>
                             <td>{dayjs(schedule.clock_out).format('HH:mm')}</td>
-                            <td>
-                              <EditModal id={schedule.id} onClose={function (): void {
-                                throw new Error('Function not implemented.');
-                              } } isOpen={false} />
-                            </td>
-                            <td>
+                            <td className='border-b border-gray-200 text-center transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-gray-200 dark:hover:bg-neutral-600 px-2 py-2'>
                               <button
                                 className='inline-block rounded bg-blue-50 dark:bg-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong'
                                 // onClick={() => openModal()}
