@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, useRef } from "react";
 import axios from "axios";
-import useOutsideClick from "../hook/useOutsideClick";
+//import useOutsideClick from "../hook/useOutsideClick";
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -10,7 +10,7 @@ interface EmployeeInfo {
 
 interface EditModalProps {
   onClose: () => void;
-  id: any; // Temporarily changed to any.
+  id: number; // Temporarily changed to any.
   isOpen: boolean;
 }
 
@@ -27,7 +27,7 @@ const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
   const updateData = async () => {
     try {
       const response = axios.patch(
-        `${LOCALDB_URL + "employees/" + parseInt(id)}`,
+        `${LOCALDB_URL}employees/${id}}`,
         editData
       );
       console.log(response);
