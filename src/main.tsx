@@ -14,7 +14,7 @@ import Dashboard from './pages/Dashboard';
 import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
-import EditModal from './components/EditModal';
+
 import ErrorPage from './pages/ErrorPage';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -112,13 +112,7 @@ const router = createBrowserRouter([
           </LazyWrap>
         ),
         errorElement: <ErrorPage />,
-        children: [
-          {
-            path: '/dashboard/roster/EditModal',
-            element: <EditModal />,
-            errorElement: <ErrorPage />,
-          },
-        ],
+        
       },
       {
         path: '/dashboard/clock',

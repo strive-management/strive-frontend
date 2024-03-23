@@ -138,7 +138,9 @@ const ScheduleView = () => {
                             <td>{dayjs(schedule.clock_in).format('HH:mm')}</td>
                             <td>{dayjs(schedule.clock_out).format('HH:mm')}</td>
                             <td>
-                              <EditModal id={schedule.id} />
+                              <EditModal id={schedule.id} onClose={function (): void {
+                                throw new Error('Function not implemented.');
+                              } } isOpen={false} />
                             </td>
                             <td>
                               <button
