@@ -7,7 +7,7 @@ interface DeleteUserModalProps {
 }
 
 
-const DeleteUserModal: React.FC<DeleteUserModalProps> = ({ isOpen, onClose, onConfirm }) => {
+const DeleteScheduleModal: React.FC<DeleteUserModalProps> = ({ isOpen, onClose, onConfirm }) => {
   if (!isOpen) return null;
 
   return (
@@ -34,4 +34,4 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = ({ isOpen, onClose, onCo
   );
 };
 
-export default DeleteUserModal;
+export default DeleteScheduleModal;
