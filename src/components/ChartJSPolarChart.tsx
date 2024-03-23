@@ -1,43 +1,39 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, registerables } from 'chart.js';
+import { PolarArea } from 'react-chartjs-2';
 import { ChartData } from 'chart.js';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(...registerables);
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
-interface locations {
-  id: number;
-  location_name: string;
-  number_of_staff: number;
+interface departments {
+  department_name: string;
   _count: {
     employees: number;
   };
 }
 
-function ChartJSDonut() {
-  const [data, setData] = useState<ChartData<'doughnut'>>();
+function ChartJSPolarChart() {
+  const [data, setData] = useState<ChartData<'polarArea'> | null>(null);
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    const fetchNames = async () => {
+    const fetchDepartments = async () => {
       try {
         await axios
-          .get(`${LOCALDB_URL}locations?user_id=${currentUser?.uid}`)
+          .get(`${LOCALDB_URL}departments?user_id=${currentUser?.uid}`)
           .then((response) => {
-            console.log(response.data);
-            console.log('this is location data');
             setData({
               labels: response.data.map(
-                (location: locations) => location.location_name
+                (department: departments) => department?.department_name
               ),
               datasets: [
                 {
                   label: 'dataset',
                   data: response.data.map(
-                    (location: locations) => location._count.employees
+                    (department: departments) => department?._count.employees
                   ),
                   borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -59,13 +55,14 @@ function ChartJSDonut() {
               ],
             });
           });
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        console.error(error.message);
       }
     };
-    fetchNames();
+    fetchDepartments();
   }, []);
-  return <>{data ? <Doughnut data={data} /> : null}</>;
+
+  return <div>{data ? <PolarArea data={data} /> : null}</div>;
 }
 
-export default ChartJSDonut;
+export default ChartJSPolarChart;
