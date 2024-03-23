@@ -166,8 +166,10 @@ export default function Schedule() {
   console.log(date.slice(0, 11) + "   " + date.slice(16, date.length));
   return (
     <>
+
       <div className="flex flex-col w-full pt-5 sm:pt-0 overflow-auto">
         <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
+
           <div>Update Schedule</div>
         </div>
         <div className="top-20 p-5 sm:p-10 mt-20 sm:mt-10">
@@ -214,10 +216,14 @@ export default function Schedule() {
                           <td>{schedule.fullname}</td>
                           <td>{dayjs(schedule.date).format("YYYY/MM/DD")}</td>
                           <td>{schedule.available}</td>
-                          <td>{schedule.scheduled_start}</td>
-                          <td>{schedule.scheduled_end}</td>
-                          <td>{schedule.clock_in}</td>
-                          <td>{schedule.clock_out}</td>
+                          <td>
+                            {dayjs(schedule.scheduled_start).format('HH:mm')}
+                          </td>
+                          <td>
+                            {dayjs(schedule.scheduled_end).format('HH:mm')}
+                          </td>
+                          <td>{dayjs(schedule.clock_in).format('HH:mm')}</td>
+                          <td>{dayjs(schedule.clock_out).format('HH:mm')}</td>
                           <td>
                           <button
                             className='inline-block rounded bg-yellow-400 dark:bg-transparent dark:border-2 dark:border-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-yellow-300 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-yellow-200 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"'
