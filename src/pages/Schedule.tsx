@@ -173,12 +173,12 @@ export default function Schedule() {
           <div>Update Schedule</div>
         </div>
         <div className="top-20 p-5 sm:p-10 mt-20 sm:mt-10">
-          <div className="flex flex-col border-2 p-10 border-gray-600 dark:border-gray-300 rounded-xl">
+          <div className="flex flex-col border-2 p-10 border-gray-500 dark:border-gray-300 rounded-xl">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
                   <table className="min-w-full text-left text-sm font-light text-surface dark:text-white">
-                    <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
+                    <thead className="border-b-2 border-gray-600 text-center font-medium dark:border-gray-300">
                       <tr>
                         <th scope="col" className="px-6 py-4">
                           Employee ID
@@ -210,7 +210,7 @@ export default function Schedule() {
                       {scheduleInformation.map((schedule) => (
                         <tr
                           key={schedule.id}
-                          className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600"
+                          className="border-b border-gray-600 text-center font-medium hover:bg-gray-300 dark:border-gray-200 dark:hover:bg-neutral-600"
                         >
                           <td>{schedule.employee_id}</td>
                           <td>{schedule.fullname}</td>
@@ -224,9 +224,9 @@ export default function Schedule() {
                           </td>
                           <td>{dayjs(schedule.clock_in).format('HH:mm')}</td>
                           <td>{dayjs(schedule.clock_out).format('HH:mm')}</td>
-                          <td>
+                          <td className="border-b border-gray-600 text-center font-medium dark:border-gray-200 px-2 py-2">
                           <button
-                            className='inline-block rounded bg-yellow-400 dark:bg-transparent dark:border-2 dark:border-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-yellow-300 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-yellow-200 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"'
+                            className='inline-block rounded bg-yellow-300 hover:bg-yellow-500 dark:bg-transparent dark:border-2 dark:border-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-yellow-300 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-yellow-200 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong'
                             onClick={() => openEditScheduleModal(schedule.id)}
                           >
                             Edit
@@ -240,9 +240,9 @@ export default function Schedule() {
                               />
                             )}
                           </td>
-                          <td>
+                          <td className="border-b border-gray-600 hover:bg-gray-300 dark:hover:bg-neutral-100 text-center font-medium dark:border-gray-300 px-2 py-2">
                             <button
-                              className="inline-block rounded bg-blue-50 dark:bg-transparent dark:border-2 dark:border-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-red-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-red-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                              className="inline-block rounded bg-red-300 hover:bg-red-500 dark:bg-transparent dark:border-2 dark:border-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-red-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-red-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                               // onClick={() => openModal()}
                               onClick={(e) => handleDelete(e, schedule.id)}
                             >
@@ -346,7 +346,7 @@ export default function Schedule() {
                   </button>
                 ) : (
                   <button
-                    className=" text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                    className=" text-black bg-blue-200 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                     onClick={handleAvailable}
                   >
                     Available
@@ -357,7 +357,7 @@ export default function Schedule() {
                 <div className="text-gray-300">
                   <button
                     onClick={postSchedule}
-                    className=" text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                    className=" text-black bg-blue-200 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                   >
                     Click here to update schedules
                   </button>

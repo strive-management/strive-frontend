@@ -41,7 +41,7 @@ const CloudDisplay: React.FC = () => {
       <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
           <div>File Storage</div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-10 justify-evenly top-20 p-4 mt-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl sm:p-10 sm:mt-10">
+        <div className="flex flex-col sm:flex-row gap-10 justify-evenly top-20 p-4 mt-10 border-2 border-gray-500 dark:border-gray-300 rounded-xl sm:p-10 sm:mt-10">
           <FileUpload />
           <div className="overflow-x-auto">
             {documents.map((doc) => (
