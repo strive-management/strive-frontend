@@ -8,13 +8,16 @@ interface EmployeeInfo {
   id: string | number;
 }
 
-interface EditModalProps {
+interface EditScheduleModalProps {
   onClose: () => void;
   id: any; // Temporarily changed to any.
   isOpen: boolean;
 }
 
-const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
+const EditScheduleModal: React.FC<EditScheduleModalProps> = ({
+  id,
+  onClose,
+}) => {
   const [editData, setEditData] = useState<EmployeeInfo>({
     id: id,
   });
@@ -36,6 +39,16 @@ const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
     }
   };
 
+  const [click, setClick] = useState<boolean>(false);
+
+
+  const handleAvailable = () => {
+    setClick(!click);
+    
+    };
+  };
+
+
   useOutsideClick(modalRef, () => {
     onClose();
   });
@@ -51,37 +64,24 @@ const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
             <h3 className="text-xl place-self-center">Edit Employee Data</h3>
             <h4>The Employee ID you are editing is {id}</h4>
 
-            <input
-              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              name="first_name"
-              placeholder="First name"
-              type="text"
-              onChange={(e) => handleEditEmployee(e)}
-            />
+            <div id="avail-button" className="mt-10">
+                {click ? (
+                  <button
+                    className="inline-block rounded bg-blue-50 dark:bg-blue-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+                    onClick={handleAvailable}
+                  >
+                    Not Available
+                  </button>
+                ) : (
+                  <button
+                    className=" text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                    onClick={handleAvailable}
+                  >
+                    Available
+                  </button>
+                )}
+              </div>
 
-            <input
-              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              name="last_name"
-              placeholder="Last name"
-              type="text"
-              onChange={(e) => handleEditEmployee(e)}
-            />
-
-            <input
-              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              name="email"
-              placeholder="Email"
-              type="text"
-              onChange={(e) => handleEditEmployee(e)}
-            />
-
-            <input
-              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              name="phone_number"
-              placeholder="Phone number"
-              type="text"
-              onChange={(e) => handleEditEmployee(e)}
-            />
             <button
               onClick={() => updateData()}
               className="text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
@@ -105,4 +105,4 @@ const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
   );
 };
 
-export default EditModal;
+export default EditScheduleModal;
