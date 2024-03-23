@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import "../index.css";
-import DeleteUserModal from "../components/DeleteUserModal";
-import EditModal from "../components/EditModal";
-import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import '../index.css';
+import DeleteUserModal from '../components/DeleteUserModal';
+import EditModal from '../components/EditModal';
+import { useAuth } from '../context/AuthContext';
 
 interface EmployeeInfo {
   id: number;
@@ -32,8 +32,12 @@ export default function Roster() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [editingItemId, setEditingItemId] = useState<number | null>(null);
+  const [deletingItemId, setDeletingItemId] = useState<number | null>(null);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = (id: number) => {
+    setIsModalOpen(true);
+    setDeletingItemId(id);
+  };
   const closeModal = () => setIsModalOpen(false);
   const openEditModal = (id: number) => {
     setEditingItemId(id);
@@ -64,21 +68,32 @@ export default function Roster() {
 
   async function handleDelete(
     e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-    id: any
+    id: number | null
   ) {
     e.preventDefault();
+    if (id === null) return;
     closeModal();
-    await axios
-      .delete(`${LOCALDB_URL}employees/${id}}`)
-      .then(function (response) {
-        console.log(response);
-        setEmpoyeeInformation((prevData) =>
-          prevData.filter((item) => item.id !== id)
-        );
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      const response = await axios.delete(`${LOCALDB_URL}employees/${id}`);
+      console.log(response);
+      setEmpoyeeInformation((prevData) =>
+        prevData.filter((item) => item.id !== id)
+      );
+      setDeletingItemId(null);
+    } catch (error) {
+      console.log(error);
+    }
+    // await axios
+    //   .delete(`${LOCALDB_URL}employees/${id}}`)
+    //   .then(function (response) {
+    //     console.log(response);
+    //     setEmpoyeeInformation((prevData) =>
+    //       prevData.filter((item) => item.id !== id)
+    //     );
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }
 
   return (
@@ -134,7 +149,7 @@ export default function Roster() {
                         ))}
                         <td className="border-b border-gray-600 hover:border-collapse px-2 py-2">
                           <button
-                            className='inline-block rounded bg-yellow-300 hover:bg-yellow-500 dark:bg-transparent dark:border-2 dark:border-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-yellow-300 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-yellow-200 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong'
+                            className="inline-block rounded bg-yellow-300 hover:bg-yellow-500 dark:bg-transparent dark:border-2 dark:border-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-yellow-300 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-yellow-200 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                             onClick={() => openEditModal(row[0])}
                           >
                             Edit
@@ -150,14 +165,14 @@ export default function Roster() {
                         <td className="border-b border-gray-600 hover:border-collapse px-2 py-2">
                           <button
                             className="inline-block rounded bg-red-300 hover:bg-red-500 dark:bg-transparent dark:border-2 dark:border-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-red-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-red-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                            onClick={() => openModal()}
+                            onClick={() => openModal(row[0])}
                           >
                             Delete
                           </button>
                           <DeleteUserModal
                             isOpen={isModalOpen}
                             onClose={closeModal}
-                            onConfirm={(e) => handleDelete(e, row[0])}
+                            onConfirm={(e) => handleDelete(e, deletingItemId)}
                           />
                         </td>
                       </tr>
