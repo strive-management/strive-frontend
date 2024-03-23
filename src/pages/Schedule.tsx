@@ -144,7 +144,7 @@ export default function Schedule() {
   return (
     <>
       <div className='flex flex-col w-full pt-5 sm:pt-0 overflow-auto'>
-      <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
+        <div className='flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300'>
           <div>Update Schedule</div>
         </div>
         <div className='top-20 p-5 sm:p-10 mt-20 sm:mt-10'>
@@ -191,10 +191,14 @@ export default function Schedule() {
                           <td>{schedule.fullname}</td>
                           <td>{dayjs(schedule.date).format('YYYY/MM/DD')}</td>
                           <td>{schedule.available}</td>
-                          <td>{schedule.scheduled_start}</td>
-                          <td>{schedule.scheduled_end}</td>
-                          <td>{schedule.clock_in}</td>
-                          <td>{schedule.clock_out}</td>
+                          <td>
+                            {dayjs(schedule.scheduled_start).format('HH:mm')}
+                          </td>
+                          <td>
+                            {dayjs(schedule.scheduled_end).format('HH:mm')}
+                          </td>
+                          <td>{dayjs(schedule.clock_in).format('HH:mm')}</td>
+                          <td>{dayjs(schedule.clock_out).format('HH:mm')}</td>
                           <td>
                             <EditModal id={schedule.id} />
                           </td>
