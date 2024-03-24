@@ -213,8 +213,8 @@ const Clock = () => {
             </div>
           </div>
           <div className="py-10">
-          <table>
-            <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
+          <table className="min-w-full text-left text-sm  font-light text-surface dark:text-white">
+            <thead className="border-b-2 border-neutral-600 text-center font-medium dark:border-gray-300">
               <tr>
                 <th scope="col" className="px-6 py-4">
                   Employee ID
@@ -246,7 +246,7 @@ const Clock = () => {
               {schedule.map((schedule) => (
                 <tr
                   key={schedule.id}
-                  className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-600"
+                  className="h-10 border-b border-gray-600 text-center transition duration-300 ease-in-out hover:bg-gray-300 dark:border-gray-200 dark:hover:bg-neutral-600"
                 >
                   <td>{schedule.employee_id}</td>
                   <td>{schedule.fullname}</td>
