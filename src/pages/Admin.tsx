@@ -2,8 +2,6 @@ import { ChangeEvent, useState, useEffect } from "react";
 import Input from "../components/ui/Input";
 import Label from "../components/ui/Label";
 import axios from "axios";
-// import logoLight from "../assets/2-white.svg";
-// import logoDark from "../images/strive1.svg";
 import Select from "../components/ui/Select";
 import InputModal from "../components/ui/InputModal";
 import { useAuth } from "../context/AuthContext";
