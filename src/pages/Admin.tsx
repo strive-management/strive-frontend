@@ -4,6 +4,7 @@ import Label from "../components/ui/Label";
 import axios from "axios";
 import Select from "../components/ui/Select";
 import InputModal from "../components/ui/InputModal";
+import ConfirmationModal from "../components/ConfirmationModal";
 import { useAuth } from "../context/AuthContext";
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
@@ -55,6 +56,27 @@ export default function Admin() {
     location_name: "",
     manager_id: null,
   });
+
+  const resetForm = () => {
+    setEmployeeInfo((prevState) => ({
+      ...prevState,
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
+      job_title: "",
+      department_name: "",
+      city: "",
+      address_1: "",
+      address_2: "",
+      zipcode: "",
+      country: "",
+      location_name: "",
+      manager_id: null,
+      user_id: `${currentUser?.uid}`, // Preserves the current user_id
+    }));
+  };
+
   const [options, setOptions] = useState<OptionsState>({
     jobs: [],
     departments: [],
@@ -62,6 +84,9 @@ export default function Admin() {
   });
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState("");
+
+  const [isConfModalOpen, setIsConfModalOpen] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -85,13 +110,21 @@ export default function Admin() {
       });
       console.log("Employee added successfully");
       console.log(newUser);
-
+      setConfirmationMessage("Employee added successfully!");
       // Optionally reset form or handle success further
     } catch (error) {
       console.error("Error adding employee: ", error);
+      setConfirmationMessage("Error. Please try again.");
       // Handle error
+      setIsConfModalOpen(true);
     }
+    setIsConfModalOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsConfModalOpen(false);
+  };
+
   const handleAddNew = (type: string) => {
     setModalType(type);
     setShowModal(true);
@@ -154,21 +187,17 @@ export default function Admin() {
 
   return (
     <>
-
       <div className="flex flex-col w-full">
         <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
           <div>Add Employee</div>
-
         </div>
 
         <form
           onSubmit={handleSubmit}
-
           className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
         >
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
-
               Basic Information
             </label>
             <div>
@@ -216,11 +245,8 @@ export default function Admin() {
               />
             </div>
           </div>
-
-
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
-
               Address Information
             </label>
 
@@ -272,11 +298,8 @@ export default function Admin() {
               />
             </div>
           </div>
-
-
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
             <Label text={"Work Location"} />
-
 
             <Select
               name="location_name"
@@ -322,12 +345,16 @@ export default function Admin() {
               required={true}
             />
           </div>
-
-
+          {showModal && (
+            <InputModal
+              type={modalType}
+              onSubmit={handleModalSubmit}
+              onClose={() => setShowModal(false)}
+            />
+          )}
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
             <div className="">
               <Label text={"Manager"} />
-
 
               <Input
                 type="text"
@@ -342,28 +369,25 @@ export default function Admin() {
               />
             </div>
           </div>
-
-
-          <div className="flex flex-row border-2 border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
-
+          <ConfirmationModal
+            isOpen={isConfModalOpen}
+            onClose={handleCloseModal}
+            message={confirmationMessage}
+          />
+          <div className="flex flex-row border-2 justify-center border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
             <button
               type="submit"
-              className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
             >
               Submit
             </button>
-            {showModal && (
-              <InputModal
-                type={modalType}
-                onSubmit={handleModalSubmit}
-                onClose={() => setShowModal(false)}
-              />
-            )}
+
             <button
               type="button"
-              className="mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              onClick={resetForm}
+              className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
             >
-              Cancel
+              Clear Form
             </button>
           </div>
         </form>
