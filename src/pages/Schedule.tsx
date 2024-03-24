@@ -133,6 +133,12 @@ export default function Schedule() {
       (employee) => !unavailableEmployees.includes(employee.id)
     );
     setUpdatedEmployeeInfo(availableEmployees);
+    console.log('selected Date:',selectedDate);
+    console.log('unavailableEmployees',unavailableEmployees);
+    console.log('available Employees',availableEmployees);
+    
+    
+    
   }, [employeeScheduleInfo]);
 
   // const [isEditScheduleModalOpen, setIsEditScheduleModalOpen] =
@@ -162,8 +168,8 @@ export default function Schedule() {
       console.error(err.message);
     }
   };
-  console.log(employeeScheduleInfo);
-  console.log(date.slice(0, 11) + "   " + date.slice(16, date.length));
+  // console.log(employeeScheduleInfo);
+  // console.log(date.slice(0, 11) + "   " + date.slice(16, date.length));
   return (
     <>
 
@@ -248,11 +254,6 @@ export default function Schedule() {
                             >
                               Delete
                             </button>
-                            {/* <DeleteUserModal
-                              isOpen={isModalOpen}
-                              onClose={closeModal}
-                              onConfirm={(e) => handleDelete(e, row[0])}
-                            /> */}
                           </td>
                         </tr>
                       ))}
@@ -269,6 +270,7 @@ export default function Schedule() {
                   className="px-6 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700"
                   name="date"
                   onChange={(e) => {
+                    if(e.target.value == '') return setUpdatedEmployeeInfo(employeeInfo)
                     setDate(new Date(e.target.value).toISOString());
                     setEmployeeScheduleInfo({
                       ...employeeScheduleInfo,
