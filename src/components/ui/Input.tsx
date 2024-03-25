@@ -7,6 +7,7 @@ interface InputProps {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   additionalClasses?: string;
+  required?: boolean;
 }
 
 const Input: FC<InputProps> = ({
@@ -17,7 +18,7 @@ const Input: FC<InputProps> = ({
   placeholder = '',
   additionalClasses,
 }) => {
-  const inputClasses = `bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${additionalClasses}`;
+  const inputClasses = `bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg required:border-red-500 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${additionalClasses}`;
 
   return (
     <input

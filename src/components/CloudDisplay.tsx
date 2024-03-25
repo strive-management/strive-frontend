@@ -37,17 +37,20 @@ const CloudDisplay: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col w-full mt-10 p-10">
-        <div className="flex flex-col sm:flex-row gap-10 justify-evenly top-20 p-4 mt-10 border-2 border-gray-300 dark:border-gray-300 rounded-xl sm:p-10 sm:mt-10">
+      <div className="flex flex-col px-10 w-full">
+      <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
+          <div>File Storage</div>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-10 justify-evenly top-20 p-4 mt-10 border-2 border-gray-500 dark:border-gray-300 rounded-xl sm:p-10 sm:mt-10">
           <FileUpload />
           <div className="overflow-x-auto">
             {documents.map((doc) => (
               <div className="flex justify-end gap-5 m-2 text-gray-700 dark:text-gray-300" key={doc.id}>
-                <p className="p-2 border-b-2">
+                <p className="p-2">
                   {doc.fileName || "No file name available"}
                 </p>
                 <button
-                  className="text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                  className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                   onClick={() => downloadFile(doc.file, doc.fileName)}
                 >
                   <div className="flex flex-row justify-center">
@@ -59,7 +62,7 @@ const CloudDisplay: React.FC = () => {
                 </button>
 
                 <button
-                  className="text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                  className="inline-block rounded bg-red-300 hover:bg-red-500 dark:bg-transparent dark:border-2 dark:border-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-red-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-red-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
                   onClick={() => deleteFile(doc.id)}
                 >
                   <div className="flex flex-row justify-center">

@@ -1,12 +1,11 @@
-import { ChangeEvent, useState, useEffect } from 'react';
-import Input from '../components/ui/Input';
-import Label from '../components/ui/Label';
-import axios from 'axios';
-// import logoLight from "../assets/2-white.svg";
-// import logoDark from "../images/strive1.svg";
-import Select from '../components/ui/Select';
-import InputModal from '../components/ui/InputModal';
-import { useAuth } from '../context/AuthContext';
+import { ChangeEvent, useState, useEffect } from "react";
+import Input from "../components/ui/Input";
+import Label from "../components/ui/Label";
+import axios from "axios";
+import Select from "../components/ui/Select";
+import InputModal from "../components/ui/InputModal";
+import ConfirmationModal from "../components/ConfirmationModal";
+import { useAuth } from "../context/AuthContext";
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -42,28 +41,52 @@ export default function Admin() {
   const { currentUser } = useAuth();
 
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
-    first_name: '',
-    last_name: '',
-    email: '',
+    first_name: "",
+    last_name: "",
+    email: "",
     user_id: `${currentUser?.uid}`,
-    phone_number: '',
-    job_title: '',
-    department_name: '',
-    city: '',
-    address_1: '',
-    address_2: '',
-    zipcode: '',
-    country: '',
-    location_name: '',
+    phone_number: "",
+    job_title: "",
+    department_name: "",
+    city: "",
+    address_1: "",
+    address_2: "",
+    zipcode: "",
+    country: "",
+    location_name: "",
     manager_id: null,
   });
+
+  const resetForm = () => {
+    setEmployeeInfo((prevState) => ({
+      ...prevState,
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_number: "",
+      job_title: "",
+      department_name: "",
+      city: "",
+      address_1: "",
+      address_2: "",
+      zipcode: "",
+      country: "",
+      location_name: "",
+      manager_id: null,
+      user_id: `${currentUser?.uid}`, // Preserves the current user_id
+    }));
+  };
+
   const [options, setOptions] = useState<OptionsState>({
     jobs: [],
     departments: [],
     locations: [],
   });
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState('');
+  const [modalType, setModalType] = useState("");
+
+  const [isConfModalOpen, setIsConfModalOpen] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -71,7 +94,7 @@ export default function Admin() {
     const { name, value } = e.target;
 
     const updatedValue =
-      name === 'manager_id' ? (value === '' ? null : Number(value)) : value;
+      name === "manager_id" ? (value === "" ? null : Number(value)) : value;
 
     setEmployeeInfo((prevState) => ({
       ...prevState,
@@ -85,15 +108,23 @@ export default function Admin() {
         ...employeeInfo,
         user_id: currentUser?.uid,
       });
-      console.log('Employee added successfully');
+      console.log("Employee added successfully");
       console.log(newUser);
-
+      setConfirmationMessage("Employee added successfully!");
       // Optionally reset form or handle success further
     } catch (error) {
-      console.error('Error adding employee: ', error);
+      console.error("Error adding employee: ", error);
+      setConfirmationMessage("Error. Please try again.");
       // Handle error
+      setIsConfModalOpen(true);
     }
+    setIsConfModalOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsConfModalOpen(false);
+  };
+
   const handleAddNew = (type: string) => {
     setModalType(type);
     setShowModal(true);
@@ -102,13 +133,13 @@ export default function Admin() {
     let payload;
 
     switch (type) {
-      case 'locations':
+      case "locations":
         payload = { location_name: newValue, user_id: currentUser?.uid };
         break;
-      case 'jobs':
+      case "jobs":
         payload = { job_title: newValue, user_id: currentUser?.uid };
         break;
-      case 'departments':
+      case "departments":
         payload = { department_name: newValue, user_id: currentUser?.uid };
         break;
       default:
@@ -148,231 +179,215 @@ export default function Admin() {
           locations: locationsResponse.data,
         });
       } catch (error) {
-        console.error('Error fetching data: ', error);
+        console.error("Error fetching data: ", error);
       }
     };
     fetchData();
-  }, []);
+  }, [handleModalSubmit]);
 
   return (
     <>
-
       <div className="flex flex-col w-full">
         <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
-          <div>Add Record</div>
-
+          <div>Add Employee</div>
         </div>
-        {/* <div className="md:fixed flex flex-row border-b-2 border-gray-400 justify-center h-20 top-0 z-20">
-        <img
-          src={logoDark}
-          alt="logo-dark"
-          className="sm:w-10 sm:h-10 w-20 h-20 block dark:hidden"
-        />
-        <img
-          src={logoLight}
-          alt="logo-light"
-          className="sm:w-10 sm:h-10 w-20 h-20 hidden dark:block"
-        />
-      </div> */}
 
         <form
           onSubmit={handleSubmit}
-
           className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
         >
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
             <label className="font-medium text-lg dark:text-gray-300">
-
               Basic Information
             </label>
             <div>
-              <Label text={''} />
+              <Label text={""} />
 
               <Input
-                type={'text'}
-                name='first_name'
+                type={"text"}
+                name="first_name"
                 value={employeeInfo.first_name}
                 onChange={handleChange}
-                placeholder='First Name'
+                placeholder="First Name"
               />
             </div>
             <div>
-              <Label text={''} />
+              <Label text={""} />
               <Input
-                type={'text'}
-                name='last_name'
+                type={"text"}
+                name="last_name"
                 value={employeeInfo.last_name}
                 onChange={handleChange}
-                placeholder='Last Name'
+                placeholder="Last Name"
+                required
               />
             </div>
             <div>
-              <Label text={''} />
+              <Label text={""} />
               <Input
-                type={'email'}
-                name='email'
+                type={"email"}
+                name="email"
                 value={employeeInfo.email}
                 onChange={handleChange}
-                placeholder='Email'
+                placeholder="Email"
+                required={true}
               />
             </div>
             <div>
-              <Label text={''} />
+              <Label text={""} />
               <Input
-                type={'tel'}
-                name='phone_number'
+                type={"tel"}
+                name="phone_number"
                 value={employeeInfo.phone_number}
                 onChange={handleChange}
-                placeholder='Phone Number'
+                placeholder="Phone Number"
+                required={true}
               />
             </div>
           </div>
-
-
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
-
             <label className="font-medium text-lg dark:text-gray-300">
-
               Address Information
             </label>
 
-            <Label text={''} />
+            <Label text={""} />
 
             <Input
-              type={'number'}
-              name='zipcode'
+              type={"number"}
+              name="zipcode"
               value={employeeInfo.zipcode}
               onChange={handleChange}
-              placeholder='Zip Code'
+              placeholder="Zip Code"
             />
             <div>
               <Input
-                type={'text'}
-                name='address_1'
+                type={"text"}
+                name="address_1"
                 value={employeeInfo.address_1}
                 onChange={handleChange}
-                placeholder='Address line 1'
+                placeholder="Address line 1"
               />
             </div>
             <div>
               <Input
-                type={'text'}
-                name='address_2'
+                type={"text"}
+                name="address_2"
                 value={employeeInfo.address_2}
                 onChange={handleChange}
-                placeholder='Address line 2'
+                placeholder="Address line 2"
               />
             </div>
             <div>
-              <Label text={''} />
+              <Label text={""} />
               <Input
-                type={'text'}
-                name='city'
+                type={"text"}
+                name="city"
                 value={employeeInfo.city}
                 onChange={handleChange}
-                placeholder='City'
+                placeholder="City"
               />
             </div>
             <div>
-              <Label text={''} />
+              <Label text={""} />
               <Input
-                type={'text'}
-                name='country'
+                type={"text"}
+                name="country"
                 value={employeeInfo.country}
                 onChange={handleChange}
-                placeholder='Country'
+                placeholder="Country"
               />
             </div>
           </div>
-
-
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
-
             <Label text={"Work Location"} />
 
             <Select
-              name='location_name'
+              name="location_name"
               value={employeeInfo.location_name}
               onChange={handleChange}
               options={options.locations.map((option) => ({
                 id: option.id,
                 name: option.location_name,
               }))}
-              defaultOption='Select Location'
+              defaultOption="Select Location"
               includeAddNew={true}
-              onAddNew={() => handleAddNew('locations')}
+              onAddNew={() => handleAddNew("locations")}
+              required={true}
             />
 
-            <Label text={'Job'} />
+            <Label text={"Job"} />
             <Select
-              name='job_title'
+              name="job_title"
               value={employeeInfo.job_title}
               onChange={handleChange}
               options={options.jobs.map((option) => ({
                 id: option.id,
                 name: option.job_title, // Assuming your data source has 'department_name'
               }))}
-              defaultOption='Select Job'
+              defaultOption="Select Job"
               includeAddNew={true}
-              onAddNew={() => handleAddNew('jobs')}
+              onAddNew={() => handleAddNew("jobs")}
+              required={true}
             />
 
-            <Label text={'Department'} />
+            <Label text={"Department"} />
             <Select
-              name='department_name'
+              name="department_name"
               value={employeeInfo.department_name}
               onChange={handleChange}
               options={options.departments.map((option) => ({
                 id: option.id,
                 name: option.department_name, // Assuming your data source has 'department_name'
               }))}
-              defaultOption='Select Department'
+              defaultOption="Select Department"
               includeAddNew={true}
-              onAddNew={() => handleAddNew('departments')}
+              onAddNew={() => handleAddNew("departments")}
+              required={true}
             />
           </div>
-
-
+          {showModal && (
+            <InputModal
+              type={modalType}
+              onSubmit={handleModalSubmit}
+              onClose={() => setShowModal(false)}
+            />
+          )}
           <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
-
             <div className="">
               <Label text={"Manager"} />
 
               <Input
-                type='text'
-                name='manager_id'
+                type="text"
+                name="manager_id"
                 value={
                   employeeInfo.manager_id !== null
                     ? employeeInfo.manager_id.toString()
-                    : ''
+                    : ""
                 }
                 onChange={handleChange}
-                placeholder='Manager ID'
+                placeholder="Manager ID"
               />
             </div>
           </div>
-
-
-          <div className="flex flex-row border-2 border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
-
+          <ConfirmationModal
+            isOpen={isConfModalOpen}
+            onClose={handleCloseModal}
+            message={confirmationMessage}
+          />
+          <div className="flex flex-row border-2 justify-center border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
             <button
-              type='submit'
-              className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              type="submit"
+              className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
             >
-              Send
+              Submit
             </button>
-            {showModal && (
-              <InputModal
-                type={modalType}
-                onSubmit={handleModalSubmit}
-                onClose={() => setShowModal(false)}
-              />
-            )}
+
             <button
-              type='button'
-              className='mt-10 text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+              type="button"
+              onClick={resetForm}
+              className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
             >
-              Cancel
+              Clear Form
             </button>
           </div>
         </form>

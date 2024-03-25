@@ -1,6 +1,6 @@
 import HamburgerMenuInt from "./ui/HamburgerMenuInt";
-import logoLight from "../assets/2-white.svg";
-import logoDark from "../images/strive1.svg";
+import logoLight from "../images/strive-black.svg";
+import logoDark from "../images/strive-white.svg";
 
 export default function Header() {
   return (
@@ -16,14 +16,14 @@ export default function Header() {
           </h1> */}
           <div className="flex items-center pl-10">
             <img
-              src={logoDark}
-              alt="Logo"
-              className="h-10 w-10 block dark:hidden"
-            />
-            <img
               src={logoLight}
               alt="Logo"
-              className="h-10 w-10 hidden dark:block"
+              className="h-20 w-20 block dark:hidden"
+            />
+            <img
+              src={logoDark}
+              alt="Logo"
+              className="h-20 w-20 hidden dark:block"
             />
           </div>
           <HamburgerMenuInt />

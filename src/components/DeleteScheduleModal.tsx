@@ -7,11 +7,11 @@ interface DeleteUserModalProps {
 }
 
 
-const DeleteUserModal: React.FC<DeleteUserModalProps> = ({ isOpen, onClose, onConfirm }) => {
+const DeleteScheduleModal: React.FC<DeleteUserModalProps> = ({ isOpen, onClose, onConfirm }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-10 bg-gray-300 dark:bg-gray-800 bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 z-10 bg-gray-300 dark:bg-gray-800 flex justify-center items-center">
       <div className="bg-gray-300 dark:bg-gray-800 rounded-lg p-4">
         <h2 className="text-lg font-semibold">Confirm Deletion</h2>
         <p>Are you sure you want to delete this record?</p>
@@ -34,4 +34,4 @@ const DeleteUserModal: React.FC<DeleteUserModalProps> = ({ isOpen, onClose, onCo
   );
 };
 
-export default DeleteUserModal;
+export default DeleteScheduleModal;

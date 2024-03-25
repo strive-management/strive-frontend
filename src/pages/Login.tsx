@@ -1,6 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-// import logoLightMode from '../assets/strive2.svg';
-// import logoDarkMode from '../assets/2-white.svg';
 import Input from '../components/ui/Input';
 import { auth } from '../firebase/firebase';
 import { useRef, useState } from 'react';

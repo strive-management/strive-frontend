@@ -1,29 +1,33 @@
-import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button } from '@mantine/core';
-import { ChangeEvent, useState } from 'react';
-import axios from 'axios';
-
-
+import { useState, ChangeEvent, useRef } from "react";
+import axios from "axios";
+//import useOutsideClick from "../hook/useOutsideClick";
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 interface EmployeeInfo {
-  id: string;
+  id: string | number;
 }
 
-function EditModal(props: any) {
-  const [opened, { open, close }] = useDisclosure(false);
+interface EditModalProps {
+  onClose: () => void;
+  id: number; // Temporarily changed to any.
+  isOpen: boolean;
+}
+
+const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
   const [editData, setEditData] = useState<EmployeeInfo>({
-    id: props.id,
+    id: id,
   });
   function handleEditEmployee(e: ChangeEvent<HTMLInputElement>) {
     setEditData({ ...editData, [e.target.name]: e.target.value });
   }
 
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
   const updateData = async () => {
     try {
       const response = axios.patch(
-        `${LOCALDB_URL + 'employees/' + parseInt(props.id)}`,
+        `${LOCALDB_URL}employees/${id}}`,
         editData
       );
       console.log(response);
@@ -32,55 +36,73 @@ function EditModal(props: any) {
     }
   };
 
+  // useOutsideClick(modalRef, () => {
+  //   onClose();
+  // });
+
   return (
     <>
-      <Modal opened={opened} onClose={close} title='Edit Employee Data' className="">
-        <div className=''>
-          <form action='' className='flex flex-col '>
-            <h3>Edit Me</h3>
-            <h4>The Employee ID you are editing is {props.id}</h4>
-            <h4>First Name</h4>
+      <div className="fixed inset-0 flex justify-center items-center">
+        <div
+          ref={modalRef}
+          className="bg-gray-200 border-2 border-gray-500 p-10 dark:bg-gray-800 rounded-lg dark:border-gray-300 dark:border"
+        >
+          <form action="" className="flex flex-col gap-6">
+            <h3 className="text-xl place-self-center">Edit Employee Data</h3>
+            <h4>The Employee ID you are editing is {id}</h4>
+
             <input
-              className='border p-2 my-2'
-              name='first_name'
-              placeholder='First name'
-              type='text'
+              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="first_name"
+              placeholder="First name"
+              type="text"
               onChange={(e) => handleEditEmployee(e)}
             />
-            <h4>Last Name</h4>
+
             <input
-              className='border p-2 my-2'
-              name='last_name'
-              placeholder='Last name'
-              type='text'
+              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="last_name"
+              placeholder="Last name"
+              type="text"
               onChange={(e) => handleEditEmployee(e)}
             />
-            <h4>Email</h4>
+
             <input
-              className='border p-2 my-2'
-              name='email'
-              placeholder='Email'
-              type='text'
+              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="email"
+              placeholder="Email"
+              type="text"
               onChange={(e) => handleEditEmployee(e)}
             />
-            <h4>Phone Number</h4>
+
             <input
-              className='border p-2 my-2'
-              name='phone_number'
-              placeholder='Phone number'
-              type='text'
+              className="bg-gray-50 border border-[#c0f2fc] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-200 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              name="phone_number"
+              placeholder="Phone number"
+              type="text"
               onChange={(e) => handleEditEmployee(e)}
             />
-            <button onClick={() => updateData()} className='border'>
-              Send Me
+            <button
+              onClick={() => updateData()}
+              className="text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+            >
+              Update
+            </button>
+            <button
+              type="button"
+              className="text-black bg-blue-200 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:text-white dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+              onClick={(e) => {
+                e.preventDefault();
+                onClose();
+              }}
+            >
+              Cancel
             </button>
           </form>
         </div>
-      </Modal>
-
-      <Button className='inline-block rounded bg-yellow-400 dark:bg-yellow-300 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"' onClick={open}>Edit</Button>
+      </div>
     </>
   );
-}
+};
 
 export default EditModal;
