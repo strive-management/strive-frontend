@@ -83,24 +83,13 @@ export default function Roster() {
     } catch (error) {
       console.log(error);
     }
-    // await axios
-    //   .delete(`${LOCALDB_URL}employees/${id}}`)
-    //   .then(function (response) {
-    //     console.log(response);
-    //     setEmpoyeeInformation((prevData) =>
-    //       prevData.filter((item) => item.id !== id)
-    //     );
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
   }
 
   return (
-    <div className='flex flex-col w-full pt-10 sm:pt-10 overflow-auto'>
+    <div className="flex flex-col w-full pt-10 sm:pt-10 overflow-auto">
       <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 pt-20 w-full text-gray-600 dark:text-gray-300">
-          <div className="mt-0">Roster</div>
-        </div>
+        <div className="mt-0">Roster</div>
+      </div>
 
       <div className="top-20 p-5 mt-10 sm:p-10 sm:mt-10">
         <div className="flex flex-col border-2 p-2 sm:p-10 border-gray-500 dark:border-gray-300 rounded-xl">
