@@ -88,7 +88,7 @@ export default function Login() {
     <>
       <div
         ref={signinRef}
-        className="flex flex-col items-center w-full justify-center px-6 py-8 mt-10 mx-auto md:h-screen lg:py-0"
+        className="flex flex-col items-center w-full justify-center px-6 py-8 mt-20 mx-auto md:h-screen lg:py-0"
       >
         {/* <div>
           <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
@@ -127,18 +127,18 @@ export default function Login() {
             <button
               type="submit"
               onClick={handleLogin}
-              className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+              className="text-gray-700 px-2 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
             >
               Log In
             </button>
             <Link
               to="/"
-              className="text-gray-700 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+              className="text-gray-700 px-2 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
             >
               Go Back
             </Link>
           </div>
-          <br/>
+          <br />
           <a
             onClick={handlePwdReset}
             className="text-xs pt-6 text-center text-gray-600 dark:text-gray-200"
@@ -146,7 +146,7 @@ export default function Login() {
           >
             Forgot Password?
           </a>
-          <br/>
+          <br />
           <div className="text-sm text-center text-gray-600 dark:text-gray-200">
             Not registered yet?{' '}
             <Link to="/register" className="text-blue-500 hover:underline">
