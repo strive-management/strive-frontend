@@ -165,7 +165,7 @@ export default function Schedule() {
   // console.log(date.slice(0, 11) + "   " + date.slice(16, date.length));
   return (
     <>
-      <div className="flex flex-col w-full pt-5 sm:pt-10 overflow-auto">
+      <div className="flex flex-col w-full pt-5 sm:pt-0 overflow-auto">
         <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
           <div className="fixed mt-0">Update Schedule</div>
         </div>
