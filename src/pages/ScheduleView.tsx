@@ -127,19 +127,36 @@ const ScheduleView = () => {
                             schedule.date <= range.until
                         ) // Filter rows based on condition
                         .map((schedule) => (
-                          <tr className='border-b border-gray-600 text-center font-medium hover:bg-gray-300 dark:border-gray-200 dark:hover:bg-neutral-600' key={schedule.id}>
+                          <tr
+                            className='border-b border-gray-600 text-center font-medium hover:bg-gray-300 dark:border-gray-200 dark:hover:bg-neutral-600'
+                            key={schedule.id}
+                          >
                             <td>{schedule.employee_id}</td>
                             <td>{schedule.fullname}</td>
                             <td>{dayjs(schedule.date).format('YYYY/MM/DD')}</td>
                             <td>{schedule.available}</td>
                             <td>
-                              {dayjs(schedule.scheduled_start).format('HH:mm')}
+                              {schedule.scheduled_start
+                                ? dayjs(schedule.scheduled_start).format(
+                                    'HH:mm'
+                                  )
+                                : null}
                             </td>
                             <td>
-                              {dayjs(schedule.scheduled_end).format('HH:mm')}
+                              {schedule.scheduled_end
+                                ? dayjs(schedule.scheduled_end).format('HH:mm')
+                                : null}
                             </td>
-                            <td>{dayjs(schedule.clock_in).format('HH:mm')}</td>
-                            <td>{dayjs(schedule.clock_out).format('HH:mm')}</td>
+                            <td>
+                              {schedule.clock_in
+                                ? dayjs(schedule.clock_in).format('HH:mm')
+                                : null}
+                            </td>
+                            <td>
+                              {schedule.clock_out
+                                ? dayjs(schedule.clock_out).format('HH:mm')
+                                : null}
+                            </td>
                             <td className='border-b border-gray-200 text-center transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-gray-200 dark:hover:bg-neutral-600 px-2 py-2'>
                               <button
                                 className='inline-block rounded bg-blue-50 dark:bg-red-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-700 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong'
