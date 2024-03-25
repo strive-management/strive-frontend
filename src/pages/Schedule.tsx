@@ -8,6 +8,17 @@ import DeleteScheduleModal from '../components/DeleteScheduleModal';
 
 import { useAuth } from '../context/AuthContext';
 
+// Timezone
+
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+dayjs.tz.setDefault('Asia/Tokyo');
+
+
 interface ScheduleInfo {
   id: number;
   user_id: string;
@@ -67,12 +78,7 @@ export default function Schedule() {
     //setEditingItemId(null);
   };
 
-  // const openModal = () => setIsModalOpen(true);
-  // const closeModal = () => setIsModalOpen(false);
 
-  // const headers = Object.keys(scheduleInformation[0] || {});
-  //const rows = scheduleInformation.map((item) => Object.values(item));
-  // because the table creates the content using the object.values method you have to use zero to access the id number.Then you can delete the specific entry.
 
   async function handleDelete(
     e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -121,6 +127,8 @@ export default function Schedule() {
     fetchScheduleData();
   }, []);
 
+  console.log('schedule information: ',scheduleInformation)
+
   // this useEffect is responsible for updating the drop down menu based on the date selected in the calendar input.
   useEffect(() => {
     setUpdatedEmployeeInfo(employeeInfo);
@@ -134,9 +142,7 @@ export default function Schedule() {
       (employee) => !unavailableEmployees.includes(employee.id)
     );
     setUpdatedEmployeeInfo(availableEmployees);
-    console.log('selected Date:', selectedDate);
-    console.log('unavailableEmployees', unavailableEmployees);
-    console.log('available Employees', availableEmployees);
+
   }, [employeeScheduleInfo]);
 
   const handleAvailable = () => {
@@ -159,8 +165,7 @@ export default function Schedule() {
       console.error(err.message);
     }
   };
-  // console.log(employeeScheduleInfo);
-  // console.log(date.slice(0, 11) + "   " + date.slice(16, date.length));
+
   return (
     <>
       <div className='flex flex-col w-full pt-5 sm:pt-10 overflow-auto'>
@@ -209,16 +214,16 @@ export default function Schedule() {
                         >
                           <td>{schedule.employee_id}</td>
                           <td>{schedule.fullname}</td>
-                          <td>{dayjs(schedule.date).format('YYYY/MM/DD')}</td>
+                          <td>{dayjs.tz(schedule.date).format('YYYY/MM/DD')}</td>
                           <td>{schedule.available}</td>
                           <td>
                             {schedule.scheduled_start
-                              ? dayjs(schedule.scheduled_start).format('HH:mm')
+                              ? dayjs.tz(schedule.scheduled_start).format('HH:mm')
                               : null}
                           </td>
                           <td>
                             {schedule.scheduled_end
-                              ? dayjs(schedule.scheduled_end).format('HH:mm')
+                              ? dayjs.tz(schedule.scheduled_end).format('HH:mm')
                               : null}
                           </td>
                           <td>
