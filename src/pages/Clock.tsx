@@ -3,6 +3,16 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import dayjs from 'dayjs';
 
+
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+dayjs.tz.setDefault('Asia/Tokyo');
+
+
 interface EmployeeInfo {
   id: number;
   first_name: string;
@@ -305,16 +315,16 @@ const Clock = () => {
                   >
                     <td>{schedule.employee_id}</td>
                     <td>{schedule.fullname}</td>
-                    <td>{dayjs(schedule.date).format('YYYY/MM/DD')}</td>
+                    <td>{dayjs.tz(schedule.date).format('YYYY/MM/DD')}</td>
                     <td>{schedule.available}</td>
                     <td>
                       {schedule.scheduled_start
-                        ? dayjs(schedule.scheduled_start).format('HH:mm')
+                        ? dayjs.tz(schedule.scheduled_start).format('HH:mm')
                         : null}
                     </td>
                     <td>
                       {schedule.scheduled_end
-                        ? dayjs(schedule.scheduled_end).format('HH:mm')
+                        ? dayjs.tz(schedule.scheduled_end).format('HH:mm')
                         : null}
                     </td>
                     <td>
