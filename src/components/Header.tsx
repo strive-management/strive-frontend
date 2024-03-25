@@ -7,7 +7,7 @@ export default function Header() {
     <>
       <nav>
       
-        <div className="fixed flex flex-row text-3xl top-0 z-10 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300">
+        <div className="fixed flex flex-row text-3xl top-0 z-20 h-20 w-full bg-white border-b-2 border-gray-400 dark:bg-[#212020] dark:text-gray-300">
           {/* <h1
             style={{ fontFamily: "'Lato', sans-serif" }}
             className="text-gray-300 text-xl place-content-center"
