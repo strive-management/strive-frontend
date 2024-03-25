@@ -1,25 +1,24 @@
-import React from "react";
-import logoLight from "../assets/1-white.svg";
-import logoDark from "../assets/strive1.svg";
-import BurgerMenu from "../components/ui/HamburgerMenu";
-import { Link, Outlet } from "react-router-dom";
-import kevint from "../assets/kevint.png";
-import kevinh from "../assets/kevinh.png";
-import harum from "../assets/harum.png";
-import mattk from "../assets/mattk.png";
-import githubWhite from "../assets/Icons/github-white.svg";
-import githubBlack from "../assets/Icons/github-black.svg";
-import linkedinWhite from "../assets/Icons/linkedin-white.svg";
-import linkedinBlack from "../assets/Icons/linkedin-black.svg";
+import React from 'react';
+import logoLight from '../assets/1-white.svg';
+import logoDark from '../assets/strive1.svg';
+import BurgerMenu from '../components/ui/HamburgerMenu';
+import { Link, Outlet } from 'react-router-dom';
+import kevint from '../assets/kevint.png';
+import kevinh from '../assets/kevinh.png';
+import harum from '../assets/harum.png';
+import mattk from '../assets/mattk.png';
+import githubWhite from '../assets/Icons/github-white.svg';
+import githubBlack from '../assets/Icons/github-black.svg';
+import linkedinWhite from '../assets/Icons/linkedin-white.svg';
+import linkedinBlack from '../assets/Icons/linkedin-black.svg';
 
-
-import WebFont from "webfontloader";
+import WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
     families: [
-      "Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900",
-      "Rubik:400,500,700",
+      'Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900',
+      'Rubik:400,500,700',
     ],
   },
 });
@@ -46,7 +45,7 @@ const Team: React.FC = () => {
                 </a>
               </div>
               <div
-                style={{ fontFamily: "'Rubik', sans-serif", fontSize: "large" }}
+                style={{ fontFamily: "'Rubik', sans-serif", fontSize: 'large' }}
                 className="sm:flex sm:place-items-center sm:flex-row sm:items-center"
               >
                 <ul className="gap-8 hidden sm:flex sm:space-x-20 sm:flex-row flex-col place-items-center">
@@ -60,7 +59,7 @@ const Team: React.FC = () => {
                 </div>
               </div>
               <div
-                style={{ fontFamily: "'Rubik', sans-serif", fontSize: "large" }}
+                style={{ fontFamily: "'Rubik', sans-serif", fontSize: 'large' }}
                 className="hidden sm:flex sm:flex-row sm:place-items-center"
               >
                 <div className="m-10 place-self-center sm:m-6">
@@ -89,7 +88,7 @@ const Team: React.FC = () => {
                 <h2 className="dark:text-white text-gray-700 text-3xl sm:text-4xl">
                   Matt K
                 </h2>
-                <br/>
+                <br />
                 <h3 className="dark:text-white text-gray-700 text-xl sm:text-xl">
                   Product Owner
                 </h3>
@@ -104,15 +103,15 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={githubBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={githubWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={githubBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={githubWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
 
                   <a
@@ -121,15 +120,15 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={linkedinBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={linkedinWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={linkedinBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={linkedinWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
                 </div>
               </div>
@@ -139,7 +138,7 @@ const Team: React.FC = () => {
                 <h2 className="dark:text-white text-gray-700 text-3xl sm:text-4xl">
                   Kevin H
                 </h2>
-                <br/>
+                <br />
                 <h3 className="dark:text-white text-gray-700 text-xl sm:text-xl">
                   Tech Lead
                 </h3>
@@ -154,15 +153,15 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={githubBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={githubWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={githubBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={githubWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
 
                   <a
@@ -171,24 +170,25 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={linkedinBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={linkedinWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={linkedinBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={linkedinWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
-                </div></div>
+                </div>
+              </div>
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
                 <img src={kevint} className="w-[200px] h-[200px]" />
                 <br />
                 <h2 className="dark:text-white text-gray-700 text-3xl sm:text-4xl">
                   Kevin T
                 </h2>
-                <br/>
+                <br />
                 <h3 className="dark:text-white text-gray-700 text-xl sm:text-xl">
                   Fullstack Engineer
                 </h3>
@@ -200,32 +200,32 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={githubBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={githubWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={githubBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={githubWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
 
                   <a
-                    href="https://www.linkedin.com/in/kevin-timsiline-69603b204/"
+                    href="https://www.linkedin.com/in/kevin-timsiline/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={linkedinBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={linkedinWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={linkedinBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={linkedinWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
                 </div>
               </div>
@@ -236,7 +236,7 @@ const Team: React.FC = () => {
                 <h2 className="dark:text-white text-gray-700 text-3xl sm:text-4xl">
                   Haru M
                 </h2>
-                <br/>
+                <br />
                 <h3 className="dark:text-white text-gray-700 text-xl sm:text-xl">
                   Fullstack Engineer
                 </h3>
@@ -248,15 +248,15 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={githubBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={githubWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={githubBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={githubWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
 
                   <a
@@ -265,15 +265,15 @@ const Team: React.FC = () => {
                     rel="noopener noreferrer"
                   >
                     <img
-                  src={linkedinBlack}
-                  alt="logo-dark"
-                  className="w-8 h-8 block dark:hidden"
-                />
-                <img
-                  src={linkedinWhite}
-                  alt="logo-light"
-                  className="w-8 h-8 hidden dark:block"
-                />
+                      src={linkedinBlack}
+                      alt="logo-dark"
+                      className="w-8 h-8 block dark:hidden"
+                    />
+                    <img
+                      src={linkedinWhite}
+                      alt="logo-light"
+                      className="w-8 h-8 hidden dark:block"
+                    />
                   </a>
                 </div>
               </div>
