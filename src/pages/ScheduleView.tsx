@@ -81,9 +81,9 @@ const ScheduleView = () => {
 
   return (
     <>
-      <div className='flex flex-col w-full overflow-auto'>
-        <div className='flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300'>
-          <div>View Schedule</div>
+      <div className='flex flex-col w-full pt-10 sm:pt-10 overflow-auto'>
+      <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 pt-20 w-full text-gray-600 dark:text-gray-300">
+          <div className="mt-0">View Schedule</div>
         </div>
         <div className='top-20 p-5 sm:p-10 mt-10 sm:mt-0'>
           <div className='flex flex-col p-5 sm:p-10 mt-0 border-2 border-gray-500 dark:border-gray-300 rounded-xl'>
@@ -161,7 +161,7 @@ const ScheduleView = () => {
                 </div>
               </div>
             </div>
-            <div className='flex flex-col pt-10 px-[120px] sm:flex-row gap-6 text-gray-700 dark:text-gray-300'>
+            <div className='flex flex-col pt-10 px-20 sm:flex-row gap-6 text-gray-700 dark:text-gray-300'>
               <h4>From</h4>
               <input
                 type='date'

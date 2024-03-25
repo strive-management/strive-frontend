@@ -187,210 +187,212 @@ export default function Admin() {
 
   return (
     <>
-      <div className="flex flex-col w-full">
-        <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300">
-          <div>Add Employee</div>
+      <div className="flex flex-col w-full pt-10 sm:pt-10 overflow-auto">
+        <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 pt-20 w-full text-gray-600 dark:text-gray-300">
+          <div className="mt-0">Add New Employee</div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
-        >
-          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
-            <label className="font-medium text-lg dark:text-gray-300">
-              Basic Information
-            </label>
-            <div>
+        <div className="mt-10">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col p-5 sm:p-10 w-full gap-6 overflow-auto rounded-xl md:grid md:grid-cols-2 lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto"
+          >
+            <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
+              <label className="font-medium text-lg dark:text-gray-300">
+                Basic Information
+              </label>
+              <div>
+                <Label text={""} />
+
+                <Input
+                  type={"text"}
+                  name="first_name"
+                  value={employeeInfo.first_name}
+                  onChange={handleChange}
+                  placeholder="First Name"
+                />
+              </div>
+              <div>
+                <Label text={""} />
+                <Input
+                  type={"text"}
+                  name="last_name"
+                  value={employeeInfo.last_name}
+                  onChange={handleChange}
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+              <div>
+                <Label text={""} />
+                <Input
+                  type={"email"}
+                  name="email"
+                  value={employeeInfo.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  required={true}
+                />
+              </div>
+              <div>
+                <Label text={""} />
+                <Input
+                  type={"tel"}
+                  name="phone_number"
+                  value={employeeInfo.phone_number}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                  required={true}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
+              <label className="font-medium text-lg dark:text-gray-300">
+                Address Information
+              </label>
+
               <Label text={""} />
 
               <Input
-                type={"text"}
-                name="first_name"
-                value={employeeInfo.first_name}
+                type={"number"}
+                name="zipcode"
+                value={employeeInfo.zipcode}
                 onChange={handleChange}
-                placeholder="First Name"
+                placeholder="Zip Code"
               />
+              <div>
+                <Input
+                  type={"text"}
+                  name="address_1"
+                  value={employeeInfo.address_1}
+                  onChange={handleChange}
+                  placeholder="Address line 1"
+                />
+              </div>
+              <div>
+                <Input
+                  type={"text"}
+                  name="address_2"
+                  value={employeeInfo.address_2}
+                  onChange={handleChange}
+                  placeholder="Address line 2"
+                />
+              </div>
+              <div>
+                <Label text={""} />
+                <Input
+                  type={"text"}
+                  name="city"
+                  value={employeeInfo.city}
+                  onChange={handleChange}
+                  placeholder="City"
+                />
+              </div>
+              <div>
+                <Label text={""} />
+                <Input
+                  type={"text"}
+                  name="country"
+                  value={employeeInfo.country}
+                  onChange={handleChange}
+                  placeholder="Country"
+                />
+              </div>
             </div>
-            <div>
-              <Label text={""} />
-              <Input
-                type={"text"}
-                name="last_name"
-                value={employeeInfo.last_name}
+            <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
+              <Label text={"Work Location"} />
+
+              <Select
+                name="location_name"
+                value={employeeInfo.location_name}
                 onChange={handleChange}
-                placeholder="Last Name"
-                required
+                options={options.locations.map((option) => ({
+                  id: option.id,
+                  name: option.location_name,
+                }))}
+                defaultOption="Select Location"
+                includeAddNew={true}
+                onAddNew={() => handleAddNew("locations")}
+                required={true}
               />
-            </div>
-            <div>
-              <Label text={""} />
-              <Input
-                type={"email"}
-                name="email"
-                value={employeeInfo.email}
+
+              <Label text={"Job"} />
+              <Select
+                name="job_title"
+                value={employeeInfo.job_title}
                 onChange={handleChange}
-                placeholder="Email"
+                options={options.jobs.map((option) => ({
+                  id: option.id,
+                  name: option.job_title, // Assuming your data source has 'department_name'
+                }))}
+                defaultOption="Select Job"
+                includeAddNew={true}
+                onAddNew={() => handleAddNew("jobs")}
+                required={true}
+              />
+
+              <Label text={"Department"} />
+              <Select
+                name="department_name"
+                value={employeeInfo.department_name}
+                onChange={handleChange}
+                options={options.departments.map((option) => ({
+                  id: option.id,
+                  name: option.department_name, // Assuming your data source has 'department_name'
+                }))}
+                defaultOption="Select Department"
+                includeAddNew={true}
+                onAddNew={() => handleAddNew("departments")}
                 required={true}
               />
             </div>
-            <div>
-              <Label text={""} />
-              <Input
-                type={"tel"}
-                name="phone_number"
-                value={employeeInfo.phone_number}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                required={true}
+            {showModal && (
+              <InputModal
+                type={modalType}
+                onSubmit={handleModalSubmit}
+                onClose={() => setShowModal(false)}
               />
+            )}
+            <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
+              <div className="">
+                <Label text={"Manager"} />
+
+                <Input
+                  type="text"
+                  name="manager_id"
+                  value={
+                    employeeInfo.manager_id !== null
+                      ? employeeInfo.manager_id.toString()
+                      : ""
+                  }
+                  onChange={handleChange}
+                  placeholder="Manager ID"
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 gap-2 rounded-2xl">
-            <label className="font-medium text-lg dark:text-gray-300">
-              Address Information
-            </label>
-
-            <Label text={""} />
-
-            <Input
-              type={"number"}
-              name="zipcode"
-              value={employeeInfo.zipcode}
-              onChange={handleChange}
-              placeholder="Zip Code"
+            <ConfirmationModal
+              isOpen={isConfModalOpen}
+              onClose={handleCloseModal}
+              message={confirmationMessage}
             />
-            <div>
-              <Input
-                type={"text"}
-                name="address_1"
-                value={employeeInfo.address_1}
-                onChange={handleChange}
-                placeholder="Address line 1"
-              />
-            </div>
-            <div>
-              <Input
-                type={"text"}
-                name="address_2"
-                value={employeeInfo.address_2}
-                onChange={handleChange}
-                placeholder="Address line 2"
-              />
-            </div>
-            <div>
-              <Label text={""} />
-              <Input
-                type={"text"}
-                name="city"
-                value={employeeInfo.city}
-                onChange={handleChange}
-                placeholder="City"
-              />
-            </div>
-            <div>
-              <Label text={""} />
-              <Input
-                type={"text"}
-                name="country"
-                value={employeeInfo.country}
-                onChange={handleChange}
-                placeholder="Country"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
-            <Label text={"Work Location"} />
+            <div className="flex flex-row border-2 justify-center border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
+              <button
+                type="submit"
+                className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+              >
+                Submit
+              </button>
 
-            <Select
-              name="location_name"
-              value={employeeInfo.location_name}
-              onChange={handleChange}
-              options={options.locations.map((option) => ({
-                id: option.id,
-                name: option.location_name,
-              }))}
-              defaultOption="Select Location"
-              includeAddNew={true}
-              onAddNew={() => handleAddNew("locations")}
-              required={true}
-            />
-
-            <Label text={"Job"} />
-            <Select
-              name="job_title"
-              value={employeeInfo.job_title}
-              onChange={handleChange}
-              options={options.jobs.map((option) => ({
-                id: option.id,
-                name: option.job_title, // Assuming your data source has 'department_name'
-              }))}
-              defaultOption="Select Job"
-              includeAddNew={true}
-              onAddNew={() => handleAddNew("jobs")}
-              required={true}
-            />
-
-            <Label text={"Department"} />
-            <Select
-              name="department_name"
-              value={employeeInfo.department_name}
-              onChange={handleChange}
-              options={options.departments.map((option) => ({
-                id: option.id,
-                name: option.department_name, // Assuming your data source has 'department_name'
-              }))}
-              defaultOption="Select Department"
-              includeAddNew={true}
-              onAddNew={() => handleAddNew("departments")}
-              required={true}
-            />
-          </div>
-          {showModal && (
-            <InputModal
-              type={modalType}
-              onSubmit={handleModalSubmit}
-              onClose={() => setShowModal(false)}
-            />
-          )}
-          <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
-            <div className="">
-              <Label text={"Manager"} />
-
-              <Input
-                type="text"
-                name="manager_id"
-                value={
-                  employeeInfo.manager_id !== null
-                    ? employeeInfo.manager_id.toString()
-                    : ""
-                }
-                onChange={handleChange}
-                placeholder="Manager ID"
-              />
+              <button
+                type="button"
+                onClick={resetForm}
+                className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
+              >
+                Clear Form
+              </button>
             </div>
-          </div>
-          <ConfirmationModal
-            isOpen={isConfModalOpen}
-            onClose={handleCloseModal}
-            message={confirmationMessage}
-          />
-          <div className="flex flex-row border-2 justify-center border-gray-500 dark:border-gray-300 p-6 gap-4 rounded-2xl">
-            <button
-              type="submit"
-              className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-            >
-              Submit
-            </button>
-
-            <button
-              type="button"
-              onClick={resetForm}
-              className="inline-block rounded bg-blue-300 hover:bg-blue-500 dark:bg-transparent dark:border-2 dark:border-blue-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-gray-600 dark:text-blue-400 shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:bg-blue-300 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-            >
-              Clear Form
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );
