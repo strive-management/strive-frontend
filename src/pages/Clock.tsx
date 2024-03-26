@@ -3,6 +3,16 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import dayjs from 'dayjs';
 
+
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone' // dependent on utc plugin
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+dayjs.tz.setDefault('Asia/Tokyo');
+
+
 interface EmployeeInfo {
   id: number;
   first_name: string;
@@ -152,25 +162,15 @@ const Clock = () => {
 
   return (
     <>
-      <div className='flex flex-col w-full place-items-center overflow-auto'>
-        <div className='flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 w-full text-gray-600 dark:text-gray-300'>
-          <div>Clock In / Out</div>
-        </div>
 
-        <div className='flex flex-col place-items-center top-20 p-5 mt-10 border-2 border-gray-500 dark:border-gray-300 rounded-xl'>
-          <div className='flex flex-col place-items-center'>
-            <div className='flex flex-col items-center gap-10'>
-              <div>
-                {click ? (
-                  <h1 className='text-md sm:text-3xl text-center font-bold py-3 border-5 border-black dark:text-gray-300'>
-                    Clock-IN
-                  </h1>
-                ) : (
-                  <h1 className='text-md sm:text-3xl  text-center font-bold py-3 border-5 border-black dark:text-gray-300'>
-                    Clock-OUT
-                  </h1>
-                )}
-              </div>
+      <div className='flex flex-col w-full pt-10 sm:pt-10 overflow-auto'>
+      <div className="flex flex-row items-center place-content-center text-3xl top-0 z-10 h-20 pt-20 w-full text-gray-600 dark:text-gray-300">
+          <div className="mt-0">Clock In / Clock Out</div>
+
+        </div>
+        <div className="p-5 sm:p-10 mt-10 sm:mt-10">
+          <div className="flex gap-10 flex-col justify-center border-2 p-6 border-gray-500 dark:border-gray-300 rounded-xl">
+            <div className="flex flex-col items-center gap-10 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className='flex flex-col border-1 w-[200px] h-[100px] sm:w-[400px] sm:h-[100px] justify-center items-center text-gray-600 dark:text-gray-300 bg-transparent rounded-xl'>
                 <p className=' font-extralight text-3xl sm:text-5xl relative dark:text-gray-50'>
                   <span>{hour}</span>
@@ -196,6 +196,7 @@ const Clock = () => {
                   Clock-OUT
                 </button>
               )}
+              <div className='flex'>
               <select
                 onChange={handleChange}
                 className='bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white'
@@ -210,10 +211,10 @@ const Clock = () => {
                   </option>
                 ))}
               </select>
+              </div>
             </div>
-          </div>
-          <div className='py-10'>
-            <table className='min-w-full text-left text-sm  font-light text-surface dark:text-white'>
+          <div className='py-10 overflow-x-auto'>
+            <table className='min-w-full text-left text-sm font-light text-surface dark:text-white'>
               <thead className='border-b-2 border-neutral-600 text-center font-medium dark:border-gray-300'>
                 <tr>
                   <th scope='col' className='px-6 py-4'>
@@ -250,16 +251,16 @@ const Clock = () => {
                   >
                     <td>{schedule.employee_id}</td>
                     <td>{schedule.fullname}</td>
-                    <td>{dayjs(schedule.date).format('YYYY/MM/DD')}</td>
+                    <td>{dayjs.tz(schedule.date).format('YYYY/MM/DD')}</td>
                     <td>{schedule.available}</td>
                     <td>
                       {schedule.scheduled_start
-                        ? dayjs(schedule.scheduled_start).format('HH:mm')
+                        ? dayjs.tz(schedule.scheduled_start).format('HH:mm')
                         : null}
                     </td>
                     <td>
                       {schedule.scheduled_end
-                        ? dayjs(schedule.scheduled_end).format('HH:mm')
+                        ? dayjs.tz(schedule.scheduled_end).format('HH:mm')
                         : null}
                     </td>
                     <td>
@@ -277,6 +278,7 @@ const Clock = () => {
                 ))}
               </tbody>
             </table>
+          </div>
           </div>
         </div>
       </div>

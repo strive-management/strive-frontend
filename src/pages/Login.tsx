@@ -127,13 +127,17 @@ export default function Login() {
             <button
               type="submit"
               onClick={handleLogin}
-              className="text-gray-700 px-2 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+
+              className="text-gray-700 text-sm px-8 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
+
             >
               Log In
             </button>
             <Link
               to="/"
-              className="text-gray-700 px-2 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+
+              className="text-gray-700 text-sm px-8 bg-gray-300 hover:bg-gray-400 dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
+
             >
               Go Back
             </Link>

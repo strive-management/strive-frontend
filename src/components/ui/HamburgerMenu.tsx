@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 import useOutsideClick from '../../hook/useOutsideClick';
 
 const BurgerMenu: React.FC = () => {
-  const [opened, { toggle, close }] = useDisclosure(false);
+  const [opened, { toggle }] = useDisclosure(false);
   const burgerRef = useRef<HTMLDivElement | null>(null);
   const colorScheme = useColorScheme();
 
   const handleLinkClick = () => {
-    close();
+    toggle();
   };
   useOutsideClick(burgerRef, () => {
-    close();
+    toggle();
   });
 
   return (
@@ -31,29 +31,33 @@ const BurgerMenu: React.FC = () => {
       {opened && (
         <div
           ref={burgerRef}
-          className="absolute z-0 left-0 right-0 mt-4 bg-white dark:bg-black p-5 sm:hidden"
+          className="absolute z-20 left-0 right-0 mt-4 bg-white dark:bg-black p-5 sm:hidden"
         >
           <div className="gap-8 flex flex-col place-items-center justify-items-center sm:hidden">
             <Link
               to="/"
+              onClick={handleLinkClick}
               className="text-gray-700 text-xl dark:text-gray-300 dark:hover:text-gray-400"
             >
               Home
             </Link>
             <Link
               to="/about"
+              onClick={handleLinkClick}
               className="text-gray-700 text-xl dark:text-gray-300 dark:hover:text-gray-400"
             >
               About
             </Link>
             <Link
               to="/team"
+              onClick={handleLinkClick}
               className="text-gray-700 text-xl dark:text-gray-300 dark:hover:text-gray-400"
             >
               Team Strive
             </Link>
             <Link
               to="/contact"
+              onClick={handleLinkClick}
               className="text-gray-700 text-xl dark:text-gray-300 dark:hover:text-gray-400"
             >
               Contact

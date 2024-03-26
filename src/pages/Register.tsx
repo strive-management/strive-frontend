@@ -157,22 +157,23 @@ export default function Register() {
               onChange={handleInputChange}
             />
           </div>
-          {/* <div className="mb-5">
-            <Label text={'Confirm password'} />
-            <Input type={'password'} placeholder="" />
-          </div> */}
+        
           <br />
           <div className="flex flex-row justify-evenly">
             <button
               onClick={handleSubmit}
               type="submit"
-              className="text-gray-700 px-2 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+
+              className="text-gray-700 text-sm px-8 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
+
             >
               Register
             </button>
             <Link
               to="/"
-              className="text-gray-700 px-2 text-sm bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 m-2 rounded-xl"
+
+              className="text-gray-700 text-sm px-8 bg-gray-300 hover:bg-gray-400 dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
+
             >
               Go Back
             </Link>
