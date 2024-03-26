@@ -33,7 +33,7 @@ const BurgerMenu: React.FC = () => {
           ref={burgerRef}
           className="absolute z-20 left-0 right-0 mt-4 bg-white dark:bg-black p-5 sm:hidden"
         >
-          <div className="gap-8 flex flex-col place-items-center justify-items-center sm:hidden">
+          <div className="gap-10 mt-6 flex flex-col place-items-center justify-items-center sm:hidden">
             <Link
               to="/"
               onClick={handleLinkClick}
@@ -54,13 +54,6 @@ const BurgerMenu: React.FC = () => {
               className="text-gray-700 text-xl dark:text-gray-300 dark:hover:text-gray-400"
             >
               Team Strive
-            </Link>
-            <Link
-              to="/contact"
-              onClick={handleLinkClick}
-              className="text-gray-700 text-xl dark:text-gray-300 dark:hover:text-gray-400"
-            >
-              Contact
             </Link>
 
             <div
