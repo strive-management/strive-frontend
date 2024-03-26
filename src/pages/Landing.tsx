@@ -54,7 +54,6 @@ const Landing: React.FC = () => {
                   <Link to="/">Home</Link>
                   <Link to="/about">About</Link>
                   <Link to="/team">Team Strive</Link>
-                  <Link to="/contact">Contact</Link>
                 </ul>
                 <div className="place-content-end">
                   <BurgerMenu />
@@ -122,7 +121,7 @@ const Landing: React.FC = () => {
           <div className="py-10 w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-8 auto-rows-[200px] font-rubik text-4xl">
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
-              <img
+                <img
                   src={fastBlack}
                   alt="logo-dark"
                   className="w-20 h-20 block dark:hidden"
@@ -148,7 +147,7 @@ const Landing: React.FC = () => {
                 <h1 className="text-3xl sm:text-4xl">Simple</h1>
               </div>
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
-              <img
+                <img
                   src={sunnyBlack}
                   alt="logo-dark"
                   className="w-20 h-20 block dark:hidden"
@@ -161,7 +160,7 @@ const Landing: React.FC = () => {
                 <h1 className="text-3xl sm:text-4xl">Efficient</h1>
               </div>
               <div className="flex flex-col py-8 w-full rounded-xl place-items-center">
-              <img
+                <img
                   src={lockBlack}
                   alt="logo-dark"
                   className="w-20 h-20 block dark:hidden"
@@ -183,16 +182,20 @@ const Landing: React.FC = () => {
           className=" sm:mx-auto flex w-full sm:max-w-[2000px] justify-center sm:justify-center relative text-gray-700 dark:text-gray-300 sm:p-10 flex-col sm:flex-row text-base h-40"
         >
           <div className="flex flex-col sm:flex-row sm:w-full sm:max-w-[2000px] relative sm:justify-between">
-            <h2 className="text-center text-xl">Strive Management Solutions</h2>
+            <h2 className="text-center text-xl sm:text-lg">
+              Strive Management Solutions
+            </h2>
+            <div className="m-2 sm:m-0"></div>
             <div
               style={{ fontFamily: "'Rubik', sans-serif" }}
               className="text-gray-700 dark:text-gray-300 flex flex-col sm:gap-2"
             >
-              <br />
-              <p className="text-center">
+              <p className="text-center text-md sm:text-lg">
                 Copyright &copy; <span id="year">2024</span>
               </p>
-              <p className="text-center">All Rights Reserved</p>
+              <p className="text-center text-md sm:text-lg">
+                All Rights Reserved
+              </p>
             </div>
           </div>
         </footer>

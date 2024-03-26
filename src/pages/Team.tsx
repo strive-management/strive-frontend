@@ -1,24 +1,24 @@
-import React from 'react';
-import logoLight from '../assets/1-white.svg';
-import logoDark from '../assets/strive1.svg';
-import BurgerMenu from '../components/ui/HamburgerMenu';
-import { Link, Outlet } from 'react-router-dom';
-import kevint from '../assets/kevint.png';
-import kevinh from '../assets/kevinh.png';
-import harum from '../assets/harum.png';
-import mattk from '../assets/mattk.png';
-import githubWhite from '../assets/Icons/github-white.svg';
-import githubBlack from '../assets/Icons/github-black.svg';
-import linkedinWhite from '../assets/Icons/linkedin-white.svg';
-import linkedinBlack from '../assets/Icons/linkedin-black.svg';
+import React from "react";
+import logoLight from "../assets/1-white.svg";
+import logoDark from "../assets/strive1.svg";
+import BurgerMenu from "../components/ui/HamburgerMenu";
+import { Link, Outlet } from "react-router-dom";
+import kevint from "../assets/websiteImages/KevinT.png";
+import kevinh from "../assets/websiteImages/KevinH.png";
+import harum from "../assets/websiteImages/HaruM.png";
+import mattk from "../assets/websiteImages/MattK.png";
+import githubWhite from "../assets/Icons/github-white.svg";
+import githubBlack from "../assets/Icons/github-black.svg";
+import linkedinWhite from "../assets/Icons/linkedin-white.svg";
+import linkedinBlack from "../assets/Icons/linkedin-black.svg";
 
-import WebFont from 'webfontloader';
+import WebFont from "webfontloader";
 
 WebFont.load({
   google: {
     families: [
-      'Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900',
-      'Rubik:400,500,700',
+      "Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900",
+      "Rubik:400,500,700",
     ],
   },
 });
@@ -45,21 +45,20 @@ const Team: React.FC = () => {
                 </a>
               </div>
               <div
-                style={{ fontFamily: "'Rubik', sans-serif", fontSize: 'large' }}
+                style={{ fontFamily: "'Rubik', sans-serif", fontSize: "large" }}
                 className="sm:flex sm:place-items-center sm:flex-row sm:items-center"
               >
                 <ul className="gap-8 hidden sm:flex sm:space-x-20 sm:flex-row flex-col place-items-center">
                   <Link to="/">Home</Link>
                   <Link to="/about">About</Link>
                   <Link to="/team">Team Strive</Link>
-                  <Link to="/contact">Contact</Link>
                 </ul>
                 <div className="place-content-end">
                   <BurgerMenu />
                 </div>
               </div>
               <div
-                style={{ fontFamily: "'Rubik', sans-serif", fontSize: 'large' }}
+                style={{ fontFamily: "'Rubik', sans-serif", fontSize: "large" }}
                 className="hidden sm:flex sm:flex-row sm:place-items-center"
               >
                 <div className="m-10 place-self-center sm:m-6">
@@ -76,10 +75,16 @@ const Team: React.FC = () => {
         </header>
         <Outlet />
         <main className="flex flex-col items-center justify-center py-10 mt-10 px-6 sm:px-[100px]">
-          <div className="flex flex-col py-10 w-full gap-10 items-center justify-center">
-            <h1 className="text-4xl dark:text-white text-gray-700">
-              Meet Team Strive
-            </h1>
+          <div className="flex flex-col py-10 w-full items-center justify-center">
+            <div
+              style={{ fontFamily: "'Rubik', sans-serif" }}
+              className="sm:px-8 py-8"
+            >
+              <h1 className="text-gray-700 font-bold dark:text-gray-300 text-4xl sm:text-5xl">
+                Team Strive
+              </h1>
+              <br />
+            </div>
             <br />
             <div className="flex flex-col sm:grid sm:grid-cols-2 place-items-center gap-8 font-rubik text-4xl">
               <div className="flex flex-col bg-white dark:bg-transparent p-8 w-full rounded-xl place-items-center border border-gray-700 dark:border-gray-300">
@@ -286,16 +291,20 @@ const Team: React.FC = () => {
           className=" sm:mx-auto flex w-full sm:max-w-[2000px] justify-center sm:justify-center relative text-gray-700 dark:text-gray-300 sm:p-10 flex-col sm:flex-row text-base h-40"
         >
           <div className="flex flex-col sm:flex-row sm:w-full sm:max-w-[2000px] relative sm:justify-between">
-            <h2 className="text-center text-xl">Strive Management Solutions</h2>
+            <h2 className="text-center text-xl sm:text-lg">
+              Strive Management Solutions
+            </h2>
+            <div className="m-2 sm:m-0"></div>
             <div
               style={{ fontFamily: "'Rubik', sans-serif" }}
               className="text-gray-700 dark:text-gray-300 flex flex-col sm:gap-2"
             >
-              <br />
-              <p className="text-center">
+              <p className="text-center text-md sm:text-lg">
                 Copyright &copy; <span id="year">2024</span>
               </p>
-              <p className="text-center">All Rights Reserved</p>
+              <p className="text-center text-md sm:text-lg">
+                All Rights Reserved
+              </p>
             </div>
           </div>
         </footer>

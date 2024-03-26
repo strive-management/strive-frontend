@@ -70,6 +70,25 @@ const Contact: React.FC = () => {
         </header>
         <Outlet />
         <main className="flex items-center justify-center min-h-screen px-6 sm:px-[100px]"></main>
+        <footer
+          style={{ fontFamily: "'Rubik', sans-serif" }}
+          id="footer"
+          className=" sm:mx-auto flex w-full sm:max-w-[2000px] justify-center sm:justify-center relative text-gray-700 dark:text-gray-300 sm:p-10 flex-col sm:flex-row text-base h-40"
+        >
+          <div className="flex flex-col sm:flex-row sm:w-full sm:max-w-[2000px] relative sm:justify-between">
+            <h2 className="text-center text-xl">Strive Management Solutions</h2>
+            <div
+              style={{ fontFamily: "'Rubik', sans-serif" }}
+              className="text-gray-700 dark:text-gray-300 flex flex-col sm:gap-2"
+            >
+              <br />
+              <p className="text-center">
+                Copyright &copy; <span id="year">2024</span>
+              </p>
+              <p className="text-center">All Rights Reserved</p>
+            </div>
+          </div>
+        </footer>
         </div>
         
     </>
