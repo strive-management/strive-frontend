@@ -68,7 +68,22 @@ const About: React.FC = () => {
           </nav>
         </header>
         <Outlet />
-        <main className="flex items-center justify-center min-h-screen px-6 sm:px-[100px]"></main>
+        <main className="flex mt-10 py-20 justify-start min-h-screen px-6 sm:px-[100px]">
+        <section id="hero" className="text-center">
+            <div
+              style={{ fontFamily: "'Rubik', sans-serif" }}
+              className="sm:px-8 py-8"
+            >
+              <h1 className="text-gray-700 font-bold dark:text-gray-300 text-xl sm:text-5xl">
+                Strive lets you manage your team from a simple, clean interface.
+              </h1>
+              <br />
+              </div>
+              
+              </section>
+
+
+        </main>
         </div>
         
     </>
