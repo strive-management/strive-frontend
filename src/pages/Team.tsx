@@ -170,7 +170,7 @@ const Team: React.FC = () => {
                   </a>
 
                   <a
-                    href="www.linkedin.com/in/kevin-h-9522b023b"
+                    href="https://www.linkedin.com/in/kevin-h-9522b023b/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
