@@ -145,8 +145,8 @@ export default function Login() {
               onChange={handleChange}
               placeholder=""
             />
-            {fieldError.email && (
-              <div className="text-red-500 text-sm">{fieldError.email}</div>
+            {fieldError.password && (
+              <div className="text-red-500 text-sm">{fieldError.password}</div>
             )}
           </div>
 
@@ -180,7 +180,6 @@ export default function Login() {
               Create an Account
             </Link>
           </div>
-          {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
 
