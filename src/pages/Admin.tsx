@@ -1,11 +1,11 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import Input from "../components/ui/Input";
-import Label from "../components/ui/Label";
-import axios from "axios";
-import Select from "../components/ui/Select";
-import InputModal from "../components/ui/InputModal";
-import ConfirmationModal from "../components/ConfirmationModal";
-import { useAuth } from "../context/AuthContext";
+import { ChangeEvent, useState, useEffect } from 'react';
+import Input from '../components/ui/Input';
+import Label from '../components/ui/Label';
+import axios from 'axios';
+import Select from '../components/ui/Select';
+import InputModal from '../components/ui/InputModal';
+import ConfirmationModal from '../components/ConfirmationModal';
+import { useAuth } from '../context/AuthContext';
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -27,7 +27,7 @@ interface EmployeeInfo {
 }
 interface Option {
   id: number;
-  [key: string]: string | number; // Allow any string or number property
+  [key: string]: string | number;
   user_id: string;
 }
 interface OptionsState {
@@ -41,39 +41,39 @@ export default function Admin() {
   const { currentUser } = useAuth();
 
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo>({
-    first_name: "",
-    last_name: "",
-    email: "",
+    first_name: '',
+    last_name: '',
+    email: '',
     user_id: `${currentUser?.uid}`,
-    phone_number: "",
-    job_title: "",
-    department_name: "",
-    city: "",
-    address_1: "",
-    address_2: "",
-    zipcode: "",
-    country: "",
-    location_name: "",
+    phone_number: '',
+    job_title: '',
+    department_name: '',
+    city: '',
+    address_1: '',
+    address_2: '',
+    zipcode: '',
+    country: '',
+    location_name: '',
     manager_id: null,
   });
 
   const resetForm = () => {
     setEmployeeInfo((prevState) => ({
       ...prevState,
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone_number: "",
-      job_title: "",
-      department_name: "",
-      city: "",
-      address_1: "",
-      address_2: "",
-      zipcode: "",
-      country: "",
-      location_name: "",
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone_number: '',
+      job_title: '',
+      department_name: '',
+      city: '',
+      address_1: '',
+      address_2: '',
+      zipcode: '',
+      country: '',
+      location_name: '',
       manager_id: null,
-      user_id: `${currentUser?.uid}`, // Preserves the current user_id
+      user_id: `${currentUser?.uid}`,
     }));
   };
 
@@ -83,10 +83,10 @@ export default function Admin() {
     locations: [],
   });
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState("");
+  const [modalType, setModalType] = useState('');
 
   const [isConfModalOpen, setIsConfModalOpen] = useState(false);
-  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [confirmationMessage, setConfirmationMessage] = useState('');
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -94,7 +94,7 @@ export default function Admin() {
     const { name, value } = e.target;
 
     const updatedValue =
-      name === "manager_id" ? (value === "" ? null : Number(value)) : value;
+      name === 'manager_id' ? (value === '' ? null : Number(value)) : value;
 
     setEmployeeInfo((prevState) => ({
       ...prevState,
@@ -108,14 +108,12 @@ export default function Admin() {
         ...employeeInfo,
         user_id: currentUser?.uid,
       });
-      console.log("Employee added successfully");
-      console.log(newUser);
-      setConfirmationMessage("Employee added successfully!");
-      // Optionally reset form or handle success further
+      console.log(newUser, 'Employee added successfully');
+      setConfirmationMessage('Employee added successfully!');
     } catch (error) {
-      console.error("Error adding employee: ", error);
-      setConfirmationMessage("Error. Please try again.");
-      // Handle error
+      console.error('Error adding employee: ', error);
+      setConfirmationMessage('Error. Please try again.');
+
       setIsConfModalOpen(true);
     }
     setIsConfModalOpen(true);
@@ -133,13 +131,13 @@ export default function Admin() {
     let payload;
 
     switch (type) {
-      case "locations":
+      case 'locations':
         payload = { location_name: newValue, user_id: currentUser?.uid };
         break;
-      case "jobs":
+      case 'jobs':
         payload = { job_title: newValue, user_id: currentUser?.uid };
         break;
-      case "departments":
+      case 'departments':
         payload = { department_name: newValue, user_id: currentUser?.uid };
         break;
       default:
@@ -179,7 +177,7 @@ export default function Admin() {
           locations: locationsResponse.data,
         });
       } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error('Error fetching data: ', error);
       }
     };
     fetchData();
@@ -202,10 +200,10 @@ export default function Admin() {
                 Basic Information
               </label>
               <div>
-                <Label text={""} />
+                <Label text={''} />
 
                 <Input
-                  type={"text"}
+                  type={'text'}
                   name="first_name"
                   value={employeeInfo.first_name}
                   onChange={handleChange}
@@ -213,9 +211,9 @@ export default function Admin() {
                 />
               </div>
               <div>
-                <Label text={""} />
+                <Label text={''} />
                 <Input
-                  type={"text"}
+                  type={'text'}
                   name="last_name"
                   value={employeeInfo.last_name}
                   onChange={handleChange}
@@ -224,9 +222,9 @@ export default function Admin() {
                 />
               </div>
               <div>
-                <Label text={""} />
+                <Label text={''} />
                 <Input
-                  type={"email"}
+                  type={'email'}
                   name="email"
                   value={employeeInfo.email}
                   onChange={handleChange}
@@ -235,9 +233,9 @@ export default function Admin() {
                 />
               </div>
               <div>
-                <Label text={""} />
+                <Label text={''} />
                 <Input
-                  type={"tel"}
+                  type={'tel'}
                   name="phone_number"
                   value={employeeInfo.phone_number}
                   onChange={handleChange}
@@ -251,10 +249,10 @@ export default function Admin() {
                 Address Information
               </label>
 
-              <Label text={""} />
+              <Label text={''} />
 
               <Input
-                type={"number"}
+                type={'number'}
                 name="zipcode"
                 value={employeeInfo.zipcode}
                 onChange={handleChange}
@@ -262,7 +260,7 @@ export default function Admin() {
               />
               <div>
                 <Input
-                  type={"text"}
+                  type={'text'}
                   name="address_1"
                   value={employeeInfo.address_1}
                   onChange={handleChange}
@@ -271,7 +269,7 @@ export default function Admin() {
               </div>
               <div>
                 <Input
-                  type={"text"}
+                  type={'text'}
                   name="address_2"
                   value={employeeInfo.address_2}
                   onChange={handleChange}
@@ -279,9 +277,9 @@ export default function Admin() {
                 />
               </div>
               <div>
-                <Label text={""} />
+                <Label text={''} />
                 <Input
-                  type={"text"}
+                  type={'text'}
                   name="city"
                   value={employeeInfo.city}
                   onChange={handleChange}
@@ -289,9 +287,9 @@ export default function Admin() {
                 />
               </div>
               <div>
-                <Label text={""} />
+                <Label text={''} />
                 <Input
-                  type={"text"}
+                  type={'text'}
                   name="country"
                   value={employeeInfo.country}
                   onChange={handleChange}
@@ -300,7 +298,7 @@ export default function Admin() {
               </div>
             </div>
             <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
-              <Label text={"Work Location"} />
+              <Label text={'Work Location*'} />
 
               <Select
                 name="location_name"
@@ -312,37 +310,37 @@ export default function Admin() {
                 }))}
                 defaultOption="Select Location"
                 includeAddNew={true}
-                onAddNew={() => handleAddNew("locations")}
+                onAddNew={() => handleAddNew('locations')}
                 required={true}
               />
 
-              <Label text={"Job"} />
+              <Label text={'Job*'} />
               <Select
                 name="job_title"
                 value={employeeInfo.job_title}
                 onChange={handleChange}
                 options={options.jobs.map((option) => ({
                   id: option.id,
-                  name: option.job_title, // Assuming your data source has 'department_name'
+                  name: option.job_title,
                 }))}
                 defaultOption="Select Job"
                 includeAddNew={true}
-                onAddNew={() => handleAddNew("jobs")}
+                onAddNew={() => handleAddNew('jobs')}
                 required={true}
               />
 
-              <Label text={"Department"} />
+              <Label text={'Department*'} />
               <Select
                 name="department_name"
                 value={employeeInfo.department_name}
                 onChange={handleChange}
                 options={options.departments.map((option) => ({
                   id: option.id,
-                  name: option.department_name, // Assuming your data source has 'department_name'
+                  name: option.department_name,
                 }))}
                 defaultOption="Select Department"
                 includeAddNew={true}
-                onAddNew={() => handleAddNew("departments")}
+                onAddNew={() => handleAddNew('departments')}
                 required={true}
               />
             </div>
@@ -355,7 +353,7 @@ export default function Admin() {
             )}
             <div className="flex flex-col border-2 border-gray-500 dark:border-gray-300 p-10 rounded-2xl">
               <div className="">
-                <Label text={"Manager"} />
+                <Label text={'Manager'} />
 
                 <Input
                   type="text"
@@ -363,7 +361,7 @@ export default function Admin() {
                   value={
                     employeeInfo.manager_id !== null
                       ? employeeInfo.manager_id.toString()
-                      : ""
+                      : ''
                   }
                   onChange={handleChange}
                   placeholder="Manager ID"
