@@ -16,6 +16,7 @@ export default function Login() {
   const navigate = useNavigate();
   const signinRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState('');
+  const [fieldError, setFieldError] = useState({ email: '', password: '' });
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -48,6 +49,26 @@ export default function Login() {
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setError('');
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(credentials.email)) {
+      setFieldError((prev) => ({
+        ...prev,
+        email: 'Please enter a valid email address.',
+      }));
+      return;
+    }
+    const pwdRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!pwdRegex.test(credentials.password)) {
+      setFieldError((prev) => ({
+        ...prev,
+        password:
+          'Password must be at least 6 characters long, contain at least one uppercase letter, one symbol, and one number.',
+      }));
+
+      return;
+    }
     try {
       axios.defaults.withCredentials = true;
 
@@ -109,6 +130,9 @@ export default function Login() {
               value={credentials.email}
               onChange={handleChange}
             />
+            {fieldError.email && (
+              <div className="text-red-500 text-sm">{fieldError.email}</div>
+            )}
           </div>
           <div className="mb-5">
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-300">
@@ -121,23 +145,22 @@ export default function Login() {
               onChange={handleChange}
               placeholder=""
             />
+            {fieldError.password && (
+              <div className="text-red-500 text-sm">{fieldError.password}</div>
+            )}
           </div>
 
           <div className="flex flex-row justify-evenly">
             <button
               type="submit"
               onClick={handleLogin}
-
               className="text-gray-700 text-sm px-8 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
-
             >
               Log In
             </button>
             <Link
               to="/"
-
               className="text-gray-700 text-sm px-8 bg-gray-300 hover:bg-gray-400 dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
-
             >
               Go Back
             </Link>
@@ -157,7 +180,6 @@ export default function Login() {
               Create an Account
             </Link>
           </div>
-          {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
 

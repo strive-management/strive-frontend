@@ -1,26 +1,25 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import logoLight from "../assets/1-white.svg";
-import logoDark from "../assets/strive1.svg";
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import logoLight from '../assets/1-white.svg';
+import logoDark from '../assets/strive1.svg';
+import fastBlack from '../assets/Icons/fast-black.svg';
+import fastWhite from '../assets/Icons/fast-white.svg';
+import lockBlack from '../assets/Icons/lock-black.svg';
+import lockWhite from '../assets/Icons/lock-white.svg';
+import sunnyBlack from '../assets/Icons/sunny-black.svg';
+import sunnyWhite from '../assets/Icons/sunny-white.svg';
+import celebrateBlack from '../assets/Icons/celebrate-black.svg';
+import celebrateWhite from '../assets/Icons/celebrate-white.svg';
 
-import celebrateBlack from "../assets/Icons/celebrate-black.svg";
-import celebrateWhite from "../assets/Icons/celebrate-white.svg";
-import fastBlack from "../assets/Icons/fast-black.svg";
-import fastWhite from "../assets/Icons/fast-white.svg";
-import lockBlack from "../assets/Icons/lock-black.svg";
-import lockWhite from "../assets/Icons/lock-white.svg";
-import sunnyBlack from "../assets/Icons/sunny-black.svg";
-import sunnyWhite from "../assets/Icons/sunny-white.svg";
+import BurgerMenu from '../components/ui/HamburgerMenu';
 
-import BurgerMenu from "../components/ui/HamburgerMenu";
-
-import WebFont from "webfontloader";
+import WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
     families: [
-      "Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900",
-      "Rubik:400,500,700",
+      'Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900',
+      'Rubik:400,500,700',
     ],
   },
 });
@@ -47,7 +46,7 @@ const Landing: React.FC = () => {
                 </a>
               </div>
               <div
-                style={{ fontFamily: "'Rubik', sans-serif", fontSize: "large" }}
+                style={{ fontFamily: "'Rubik', sans-serif", fontSize: 'large' }}
                 className="sm:flex sm:place-items-center sm:flex-row sm:items-center"
               >
                 <ul className="gap-8 hidden sm:flex sm:space-x-20 sm:flex-row flex-col place-items-center">
@@ -60,7 +59,7 @@ const Landing: React.FC = () => {
                 </div>
               </div>
               <div
-                style={{ fontFamily: "'Rubik', sans-serif", fontSize: "large" }}
+                style={{ fontFamily: "'Rubik', sans-serif", fontSize: 'large' }}
                 className="hidden sm:flex sm:flex-row sm:place-items-center"
               >
                 <div className="m-10 place-self-center sm:m-6">
@@ -108,7 +107,7 @@ const Landing: React.FC = () => {
 
         <section
           className=" flex justify-center py-16"
-          style={{ fontFamily: "'Rubik', sans-serif", fontSize: "30px" }}
+          style={{ fontFamily: "'Rubik', sans-serif", fontSize: '30px' }}
         >
           <div className="py-10 px-10 mx-6 max-w-[1400px] flex rounded-xl text-center justify-center text-gray-700 dark:text-gray-300">
             <h2 className="text-3xl sm:text-xl2">

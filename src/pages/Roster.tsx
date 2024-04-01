@@ -62,9 +62,7 @@ export default function Roster() {
     fetchBasicEmployeeData();
   }, []);
 
-  // const headers = Object.keys(employeeInformation[0] || {});
   const rows = employeeInformation.map((item) => Object.values(item));
-  // because the table creates the content using the object.values method you have to use zero to access the id number.Then you can delete the specific entry.
 
   async function handleDelete(
     e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -176,5 +174,3 @@ export default function Roster() {
     </div>
   );
 }
-
-// }
