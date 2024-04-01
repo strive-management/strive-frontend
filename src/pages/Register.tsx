@@ -26,6 +26,7 @@ export default function Register() {
   const navigate = useNavigate();
   const registerRef = useRef<HTMLDivElement | null>(null);
   const [error, setError] = useState('');
+  const [fieldError, setFieldError] = useState({ email: '', password: '' });
   const [registrationData, setRegistrationData] = useState<RegistrationData>({
     email: '',
     password: '',
@@ -41,6 +42,27 @@ export default function Register() {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setError('');
+    setFieldError({ email: '', password: '' });
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(registrationData.email)) {
+      setFieldError((prev) => ({
+        ...prev,
+        email: 'Please enter a valid email address.',
+      }));
+      return;
+    }
+    const pwdRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!pwdRegex.test(registrationData.password)) {
+      setFieldError((prev) => ({
+        ...prev,
+        password:
+          'Password must be at least 6 characters long, contain at least one uppercase letter, one symbol, and one number.',
+      }));
+
+      return;
+    }
 
     try {
       axios.defaults.withCredentials = true;
@@ -109,10 +131,6 @@ export default function Register() {
         ref={registerRef}
         className="flex flex-col items-center justify-center w-full px-6 py-8 mt-24 mx-auto md:h-screen lg:py-0"
       >
-        {/* <div>
-          <img className="w-40 block dark:hidden" src={logoLightMode} alt="" />
-          <img className="w-40 hidden dark:block" src={logoDarkMode} alt="" />
-        </div> */}
         <form className="w-11/12 flex flex-col sm:w-2/5 p-6 order-solid border-2 border-gray-600 dark:border-gray-200 rounded-xl">
           <h3 className="text-center mb-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-gray-300">
             Register
@@ -146,6 +164,9 @@ export default function Register() {
               value={registrationData.email}
               onChange={handleInputChange}
             />
+            {fieldError.email && (
+              <div className="text-red-500 text-sm">{fieldError.email}</div>
+            )}
           </div>
           <div className="mb-5">
             <Label text={'Password'} />
@@ -156,24 +177,23 @@ export default function Register() {
               value={registrationData.password}
               onChange={handleInputChange}
             />
+            {fieldError.password && (
+              <div className="text-red-500 text-sm">{fieldError.password}</div>
+            )}
           </div>
-        
+
           <br />
           <div className="flex flex-row justify-evenly">
             <button
               onClick={handleSubmit}
               type="submit"
-
               className="text-gray-700 text-sm px-8 bg-[#d3ebf9] hover:bg-[#92c9f9] dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
-
             >
               Register
             </button>
             <Link
               to="/"
-
               className="text-gray-700 text-sm px-8 bg-gray-300 hover:bg-gray-400 dark:text-white dark:border-gray-200 dark:bg-transparent dark:border-2 dark:hover:bg-gray-200 dark:hover:text-gray-700 sm:px-4 py-2 rounded-xl"
-
             >
               Go Back
             </Link>
@@ -187,8 +207,6 @@ export default function Register() {
               Log in
             </Link>
           </div>
-
-          {/* firebase error handling */}
 
           {error && <div className="text-red-500">{error}</div>}
 
