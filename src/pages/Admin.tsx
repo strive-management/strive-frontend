@@ -36,6 +36,14 @@ interface OptionsState {
   locations: Option[];
   [key: string]: Option[];
 }
+interface ValidationErrors {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  job_title?: string;
+  department_name?: string;
+  location_name?: string;
+}
 
 export default function Admin() {
   const { currentUser } = useAuth();
@@ -84,9 +92,36 @@ export default function Admin() {
   });
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('');
-
   const [isConfModalOpen, setIsConfModalOpen] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
+    {}
+  );
+
+  const validateForm = () => {
+    const errors: ValidationErrors = {};
+    if (!employeeInfo.first_name.trim())
+      errors.first_name = 'First name is required';
+    if (!employeeInfo.last_name.trim())
+      errors.last_name = 'Last name is required';
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!employeeInfo.email.trim()) {
+      errors.email = 'Email is required.';
+    } else if (!emailRegex.test(employeeInfo.email)) {
+      errors.email = 'Please enter a valid email address.';
+    }
+
+    if (!employeeInfo.job_title.trim())
+      errors.job_title = 'Job title is required.';
+    if (!employeeInfo.department_name.trim())
+      errors.department_name = 'Department is required.';
+    if (!employeeInfo.location_name.trim())
+      errors.location_name = 'Location is required.';
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -103,6 +138,10 @@ export default function Admin() {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const isFormValid = validateForm();
+    if (!isFormValid) return;
+
     try {
       const newUser = await axios.post(`${LOCALDB_URL}employees`, {
         ...employeeInfo,
@@ -209,6 +248,11 @@ export default function Admin() {
                   onChange={handleChange}
                   placeholder="First Name"
                 />
+                {validationErrors.first_name && (
+                  <div className="text-red-500 text-sm">
+                    {validationErrors.first_name}
+                  </div>
+                )}
               </div>
               <div>
                 <Label text={''} />
@@ -220,6 +264,11 @@ export default function Admin() {
                   placeholder="Last Name"
                   required
                 />
+                {validationErrors.last_name && (
+                  <div className="text-red-500 text-sm">
+                    {validationErrors.last_name}
+                  </div>
+                )}
               </div>
               <div>
                 <Label text={''} />
@@ -231,6 +280,11 @@ export default function Admin() {
                   placeholder="Email"
                   required={true}
                 />
+                {validationErrors.email && (
+                  <div className="text-red-500 text-sm">
+                    {validationErrors.email}
+                  </div>
+                )}
               </div>
               <div>
                 <Label text={''} />
@@ -313,6 +367,11 @@ export default function Admin() {
                 onAddNew={() => handleAddNew('locations')}
                 required={true}
               />
+              {validationErrors.location_name && (
+                <div className="text-red-500 text-sm">
+                  {validationErrors.location_name}
+                </div>
+              )}
 
               <Label text={'Job*'} />
               <Select
@@ -328,6 +387,11 @@ export default function Admin() {
                 onAddNew={() => handleAddNew('jobs')}
                 required={true}
               />
+              {validationErrors.job_title && (
+                <div className="text-red-500 text-sm">
+                  {validationErrors.job_title}
+                </div>
+              )}
 
               <Label text={'Department*'} />
               <Select
@@ -343,6 +407,11 @@ export default function Admin() {
                 onAddNew={() => handleAddNew('departments')}
                 required={true}
               />
+              {validationErrors.department_name && (
+                <div className="text-red-500 text-sm">
+                  {validationErrors.department_name}
+                </div>
+              )}
             </div>
             {showModal && (
               <InputModal
