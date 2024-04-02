@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, useRef } from "react";
 import axios from "axios";
-//import useOutsideClick from "../hook/useOutsideClick";
+import useOutsideClick from "../hook/useOutsideClick";
 
 const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
@@ -36,9 +36,9 @@ const EditModal: React.FC<EditModalProps> = ({ id, onClose }) => {
     }
   };
 
-  // useOutsideClick(modalRef, () => {
-  //   onClose();
-  // });
+  useOutsideClick(modalRef, () => {
+    onClose();
+  });
 
   return (
     <>
