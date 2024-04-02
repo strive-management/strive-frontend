@@ -41,20 +41,29 @@ const LOCALDB_URL = import.meta.env.VITE_LOCALDB_URL;
 
 export default function Schedule() {
   const { currentUser } = useAuth();
+  //This is what we use to modify the date to be ISO string
   const [date, setDate] = useState<string>('');
+  
   const [click, setClick] = useState<boolean>(false);
+  //This fetch grabs the names for the drop down menu
   const [employeeInfo, setEmployeeInfo] = useState<EmployeeInfo[]>();
+  //This is for delete modal
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  //This is for deleting employee schedule
   const [deletingItemId, setDeletingItemId] = useState<number | null>(null);
+
+  //This is all the employee schedule information
   const [scheduleInformation, setScheduleInformation] = useState<
     ScheduleInfo[]
   >([]);
+  //This is when choosing someone availability
   const [employeeScheduleInfo, setEmployeeScheduleInfo] = useState<
     ScheduleInfo[] | any
   >();
-
+  //This is what used for dropdown menu
   const [updatedEmployeeInfo, setUpdatedEmployeeInfo] =
     useState<EmployeeInfo[]>();
+  //This is for the Edit modal
   const [isEditScheduleModalOpen, setIsEditScheduleModalOpen] =
     useState<boolean>(false);
 
@@ -67,10 +76,13 @@ export default function Schedule() {
   const openEditScheduleModal = (id: number) => {
     id; // <---  Delete this. It's just so TS stops complaining.
     setIsEditScheduleModalOpen(true);
+
   };
   const closeEditScheduleModal = () => {
+    //Add the function here
     setIsEditScheduleModalOpen(false);
   };
+  //This is for editing the schedule.
 
   async function handleDelete(
     e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -89,7 +101,7 @@ export default function Schedule() {
         console.log(error);
       });
   }
-
+// This fetch grabs the names for the drop down menu. It has employee info that is the full set of names and updatedEmployeeInfo is what we edit each time we change the date setting. 
   useEffect(() => {
     const fetchNames = async () => {
       try {
@@ -120,7 +132,7 @@ export default function Schedule() {
   }, []);
 
   console.log('schedule information: ', scheduleInformation);
-
+// The below function updates the list of names based on the date selected. 
   useEffect(() => {
     setUpdatedEmployeeInfo(employeeInfo);
     const selectedDate = scheduleInformation.filter((schedule) => {
@@ -142,7 +154,7 @@ export default function Schedule() {
       available: click,
     });
   };
-
+  // This is for posting schedules only. 
   const postSchedule = async () => {
     try {
       const response = await axios.post(`${LOCALDB_URL}schedules`, {
@@ -239,10 +251,11 @@ export default function Schedule() {
                             </button>
                             {isEditScheduleModalOpen && (
                               <EditScheduleModal
-                                id={schedule.employee_id}
+                                id={schedule.id}
                                 isOpen={isEditScheduleModalOpen}
                                 onClose={closeEditScheduleModal}
                                 empName={schedule.fullname}
+                                date={schedule.date}
                               />
                             )}
                           </td>
